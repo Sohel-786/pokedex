@@ -66,6 +66,15 @@ function EqualLayout({ children }) {
           </li>
         </ul>
       </div>
+
+      <div className="flex justify-center items-center w-full">
+        <ul className="flex justify-center items-center h-[87px]">
+            <li className="bg-[#919191] h-full cursor-pointer w-[127.853px] relative after:h-[6px] after:content-[' '] after:absolute after:w-full after:bottom-[-6px] after:z-[1] after:bg-red-400 after:rounded-bl-lg">
+
+            </li>
+        </ul>
+      </div>
+
       {children}
       <Footer />
     </div>
