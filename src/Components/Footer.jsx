@@ -81,7 +81,7 @@ function Footer() {
             <ul className="flex">
               <li className="">
                 <div
-                  className="h-[33.9988px] w-[35px] mr-[6.4px] mb-[8px] cursor-pointer"
+                  className="h-[33.9988px] w-[35px] mr-[6.4px] mb-[8px] cursor-pointer hover:opacity-80"
                   style={{
                     backgroundImage: 'url("/footerIcon/social-icons.png")',
                     backgroundAttachment: "scroll",
@@ -91,7 +91,7 @@ function Footer() {
               
               <li className="">
                 <div
-                  className="h-[33.9988px] w-[35px] mr-[6.4px] mb-[8px] cursor-pointer"
+                  className="h-[33.9988px] w-[35px] mr-[6.4px] mb-[8px] cursor-pointer hover:opacity-80"
                   style={{
                     backgroundImage: 'url("/footerIcon/social-icons.png")',
                     backgroundAttachment: "scroll",
@@ -102,7 +102,7 @@ function Footer() {
 
               <li className="">
                 <div
-                  className="h-[33.9988px] w-[35px] mr-[6.4px] mb-[8px] cursor-pointer"
+                  className="h-[33.9988px] w-[35px] mr-[6.4px] mb-[8px] cursor-pointer hover:opacity-80"
                   style={{
                     backgroundImage: 'url("/footerIcon/social-icons.png")',
                     backgroundAttachment: "scroll",
@@ -113,7 +113,7 @@ function Footer() {
 
               <li className="">
                 <div
-                  className="h-[33.9988px] w-[35px] mr-[6.4px] mb-[8px] cursor-pointer"
+                  className="h-[33.9988px] w-[35px] mr-[6.4px] mb-[8px] cursor-pointer hover:opacity-80"
                   style={{
                     backgroundImage: 'url("/footerIcon/social-icons.png")',
                     backgroundAttachment: "scroll",
@@ -122,9 +122,9 @@ function Footer() {
                 ></div>
               </li>
 
-              <li className="mr-[6.4px] mb-[8px] z-20">
+              <li className="">
                 <div
-                  className="h-[33.9988px] w-[35px] cursor-pointer"
+                  className="h-[33.9988px] w-[35px] mr-[6.4px] mb-[8px] cursor-pointer hover:opacity-80"
                   style={{
                     backgroundImage: 'url("/footerIcon/social-icons.png")',
                     backgroundAttachment: "scroll",
