@@ -7,7 +7,8 @@ export default {
         EqualNav : 'rgb(102, 102, 102) 0px 0px 7px 1px'
       },
       fontFamily : {
-        roboto : "'Roboto', sans-serif"
+        roboto : "'Roboto', sans-serif",
+        openSans : "'Open Sans', sans-serif"
       }
     },
   },
