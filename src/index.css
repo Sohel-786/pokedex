@@ -10,3 +10,25 @@ body{
     background: url('/assets/blackbgImage.png');
     background-color: rgb(66, 66, 66);
 }
+
+.footerDivider::before {
+    background: url('/assets/footerleft.png');
+    height: 6px;
+    content: ' ';
+    position: absolute;
+    width: 12px;
+    bottom: 0;
+    left: -11px;
+    background-repeat: no-repeat;
+}
+
+.footerDivider::after {
+    background: url('/assets/footerRight.png');
+    height: 6px;
+    content: ' ';
+    position: absolute;
+    width: 12px;
+    bottom: 0;
+    right: -11px;
+    background-repeat: no-repeat;
+}

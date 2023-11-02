@@ -2,9 +2,7 @@ function Footer() {
   return (
     <div className="mt-5">
       <div className="max-w-[1024px] h-[36px] mx-auto">
-         <div className="w-[85.49%] bg-white h-[6px] relative">
-
-         </div>
+        <div className="w-[85.49%] bg-white h-[6px] relative ml-[7.2525%] footerDivider"></div>
       </div>
 
       <div
@@ -14,7 +12,6 @@ function Footer() {
         }}
       >
         <div className="flex max-w-[1024px] gap-5 justify-center">
-
           <div className="w-[27.46%] mt-7 float-left border-r-[2px] border-[#000]">
             <h1 className="mx-[8.800px] mb-[17.600px]">
               <img src="/assets/pokecompany.png" alt="pokecompany" />
