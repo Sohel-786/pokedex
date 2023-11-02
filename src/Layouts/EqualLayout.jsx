@@ -70,7 +70,7 @@ function EqualLayout({ children }) {
         </ul>
       </div>
 
-      <div className="flex justify-center items-center w-full border-b-[1.852px] mt-[2px]">
+      <div className="flex justify-center items-center w-full border-b-[1.852px] border-[#f0f0f0] pt-[2px] bg-[#FFF]">
         <ul className="flex justify-center items-center h-[90px] font-roboto">
 
             <li className="hover:bg-[#919191] flex flex-col cursor-pointer w-[127.853px] h-full relative after:h-[6px] after:content-[' '] after:absolute after:w-full after:bottom-[-6px] after:z-[1] after:bg-[#919191] after:rounded-bl-lg hover:text-white transition-colors duration-100 ease-in">

@@ -1,10 +1,14 @@
 function Footer() {
   return (
     <div className="mt-5">
-      <div></div>
+      <div className="max-w-[1024px] h-[36px] mx-auto">
+         <div className="w-[85.49%] bg-white h-[6px] relative">
+
+         </div>
+      </div>
 
       <div
-        className="bg-[#1f1f1f] text-white w-full flex justify-center"
+        className="bg-[#1f1f1f] text-white w-full flex justify-center pb-4"
         style={{
           userSelect: "none",
         }}
@@ -139,8 +143,8 @@ function Footer() {
               <div>
                 <img src="/assets/caru.png" alt="caru" />
               </div>
-              <ul className="font-roboto text-[11.008px]">
-                <li className="py-[5.504px]">
+              <ul className="font-roboto text-[11.008px] leading-[11.008px]">
+                <li className="py-[5.504px] pt-[8px]">
                   <a className="hover:underline" href="#">
                     Terms of Use
                   </a>
@@ -160,7 +164,7 @@ function Footer() {
                     Legal Info
                   </a>
                 </li>
-                <li className="py-[5.504px]">
+                <li className="py-[5.504px] pb-[8px]">
                   <a className="hover:underline" href="#">
                     Security
                   </a>
