@@ -5,6 +5,9 @@ export default {
     extend: {
       boxShadow : {
         EqualNav : 'rgb(102, 102, 102) 0px 0px 7px 1px'
+      },
+      fontFamily : {
+        roboto : "'Roboto', sans-serif"
       }
     },
   },
