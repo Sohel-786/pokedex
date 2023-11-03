@@ -9,7 +9,7 @@ function LandingPage() {
           backgroundImage: 'url("/assets/whitebgImage.png")',
         }}
       >
-        <div className="w-[77%] bg-white flex justify-between px-[14.5px] pt-[37px]">
+        <div className="w-[77%] bg-white flex justify-between px-[14.5px] pt-[37px] pb-[10px]">
           <div className="w-[66%] float-left">
             <div className="w-full cursor-pointer relative">
               <div className="w-full">
@@ -96,9 +96,9 @@ function LandingPage() {
             </div>
 
             <div className="w-full mt-[16px] flex rounded-[5px] overflow-hidden cursor-pointer">
-              <div className="w[40%]">
+              <div className="w-[40%]">
                 <img
-                  className="w-full rounded-[5px] block"
+                  className="w-full aspect-auto rounded-[5px] block"
                   src="/assets/pokemonCenter.png"
                   alt="PokemonGo"
                 />
