@@ -1,6 +1,6 @@
 function Footer() {
   return (
-    <div className="mt-5">
+    <div>
       <div className="max-w-[1024px] h-[36px] mx-auto">
         <div className="w-[85.49%] bg-white h-[6px] relative ml-[7.2525%] footerDivider"></div>
       </div>
