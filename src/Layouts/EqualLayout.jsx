@@ -6,8 +6,8 @@ import Game from "/icons/game.png"
 function EqualLayout({ children }) {
   return (
     <div>
-      <div className="flex items-center w-full border-b-[1.852px] border-[#dedede] bg-[#f5f5f5]">
-        <ul className="flex ml-32">
+      <div className="flex justify-center items-center w-full border-b-[1.852px] border-[#dedede] bg-[#f5f5f5]">
+        <ul className="flex relative left-[-28px]">
           <li className="mx-[10px] p-[10px] pt-[9px] pb-[8px] shadow-EqualNav">
             <a className="" href="">
               <img
