@@ -58,13 +58,13 @@ function Pokedex() {
               </div>
             </div>
 
-            <div className="max-w-[1024px] mb-[16px] mx-auto min-h-[23.9969px]">
-
-            </div>
+            <div className="max-w-[1024px] mb-[16px] mx-auto min-h-[23.9969px]"></div>
           </div>
-            <div className="bg-[#616161] w-[41.96%] flex justify-center items-center self-center relative h-4 advanceSearch">
-                <span className="text-white font-openSans font-semibold text-[15px] tracking-wide absolute top-[-16px]">Show Advanced Search</span>
-            </div>
+          <div className="bg-[#616161] w-[41.96%] flex justify-center items-center self-center relative h-4 advanceSearch">
+            <span className="text-white font-openSans font-semibold text-[15px] tracking-wide absolute top-[-16px]">
+              Show Advanced Search
+            </span>
+          </div>
         </div>
       </section>
     </EqualLayout>
