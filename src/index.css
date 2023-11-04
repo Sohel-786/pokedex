@@ -2,9 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-color {
-    color : #000000cc
-}
+/* color {
+    color : #616161
+} */
 
 body{
     background: url('/assets/blackbgImage.png');
@@ -31,4 +31,29 @@ body{
     bottom: 0;
     right: -11px;
     background-repeat: no-repeat;
+}
+
+.advanceSearch::before{
+    content: " ";
+    background: url('/assets/advancesearch.png') no-repeat;
+    background-size: 38px 18px;
+    height: 18px;
+    left: -36px;
+    position: absolute;
+    width: 38px;
+    top: -2px;
+    transform: scaleY(-1);
+}
+
+.advanceSearch::after{
+    content: " ";
+    background: url('/assets/advancesearch.png') no-repeat;
+    background-size: 38px 18px;
+    height: 18px;
+    right: -36px;
+    left: auto;
+    position: absolute;
+    width: 37.9977px;
+    top: -2px;
+    transform: rotate(180deg);
 }

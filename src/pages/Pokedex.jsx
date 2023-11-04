@@ -13,7 +13,7 @@ function Pokedex() {
           <h1 className="font-openSans text-[30px] text-[#919191] leading-[37.5px] mt-[25px] mb-[16px]">
             Pokédex
           </h1>
-          <div className="w-[1280px] mx-auto relative left-[-161.6px]">
+          <div className="w-[1280px] mx-auto relative left-[-161.6px] bg-[#616161] pb-4">
             <div className="w-full bg-[#313131] flex flex-col items-center">
               <div className="w-[77%] flex gap-2">
                 <div className="w-[45.96%] pl-[14.5px] pt-[32px]">
@@ -57,7 +57,14 @@ function Pokedex() {
                 </div>
               </div>
             </div>
+
+            <div className="max-w-[1024px] mb-[16px] mx-auto min-h-[23.9969px]">
+
+            </div>
           </div>
+            <div className="bg-[#616161] w-[41.96%] flex justify-center items-center self-center relative h-4 advanceSearch">
+                <span className="text-white font-openSans font-semibold text-[15px] tracking-wide absolute top-[-16px]">Show Advanced Search</span>
+            </div>
         </div>
       </section>
     </EqualLayout>
