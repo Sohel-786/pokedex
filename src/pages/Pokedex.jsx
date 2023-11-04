@@ -1,4 +1,5 @@
 import EqualLayout from "../Layouts/EqualLayout";
+import { FiChevronDown } from "react-icons/fi";
 
 function Pokedex() {
   return (
@@ -60,9 +61,15 @@ function Pokedex() {
 
             <div className="max-w-[1024px] mb-[16px] mx-auto min-h-[23.9969px]"></div>
           </div>
-          <div className="bg-[#616161] w-[41.96%] flex justify-center items-center self-center relative h-4 advanceSearch">
-            <span className="text-white font-openSans font-semibold text-[15px] tracking-wide absolute top-[-16px]">
+          <div className="bg-[#616161] w-[49.96%] flex justify-center items-center self-center relative h-4 advanceSearch cursor-pointer">
+            <span className="text-white w-full font-openSans text-[15px] tracking-wide absolute top-[-16px] flex justify-center items-center">
               Show Advanced Search
+              <div className="rounded-full w-[19.9974px] h-[19.9974px] bg-white ml-[10px] self-end flex justify-center">
+                <FiChevronDown
+                  size={"20px"}
+                  className="text-black relative top-[-5px]"
+                />
+              </div>
             </span>
           </div>
         </div>
