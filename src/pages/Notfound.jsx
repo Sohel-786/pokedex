@@ -4,10 +4,10 @@ function Notfound() {
   const navigate = useNavigate();
   return (
     <div
-    style={{
-        backgroundImage : 'url("/assets/blackbgImage.png")'
-    }}
-    className="h-screen w-full flex flex-col justify-center items-center"
+      style={{
+        backgroundImage: 'url("/assets/blackbgImage.png")',
+      }}
+      className="h-screen w-full flex flex-col justify-center items-center"
     >
       <h1 className="text-[200px] text-white font-semibold">404</h1>
       <p className="relative text-xl -top-36 font-bold bg-gray-300 text-orange-600 font-mono -rotate-12">

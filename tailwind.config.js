@@ -4,7 +4,7 @@ export default {
   theme: {
     extend: {
       boxShadow : {
-        EqualNav : 'rgb(102, 102, 102) 0px 0px 7px 1px'
+        EqualNav : '0 0 7px 1px #666666'
       },
       fontFamily : {
         roboto : "'Roboto', sans-serif",
