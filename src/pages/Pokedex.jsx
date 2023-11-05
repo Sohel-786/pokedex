@@ -1,6 +1,6 @@
 import EqualLayout from "../Layouts/EqualLayout";
 import { FiChevronDown } from "react-icons/fi";
-import { HiOutlineRefresh } from 'react-icons/hi';
+import { HiOutlineRefresh } from "react-icons/hi";
 
 function Pokedex() {
   return (
@@ -75,13 +75,13 @@ function Pokedex() {
           </div>
           <div className="w-full mt-8">
             <div className="">
-                <button className="flex justify-center items-center pt-[12.600px] pb-[11.340px] px-[21px] bg-[#30a7d7] text-white rounded-[5px] font-openSans text-[16.8px] w-[40.71%] font-semibold hover:bg-[#1b82b1] gap-[5px]">
-                 <HiOutlineRefresh size={'22.2px'}/> Surprise Me!
-                </button>
+              <button className="flex justify-center items-center pt-[12.600px] pb-[11.340px] px-[21px] bg-[#30a7d7] text-white rounded-[5px] font-openSans text-[16.8px] w-[40.71%] font-semibold hover:bg-[#1b82b1] gap-[5px]">
+                <HiOutlineRefresh size={"22.2px"} /> Surprise Me!
+              </button>
 
-                <div>
-                  <h3 className="my-[10px] mr-[15px]">Sort By</h3>
-                </div>
+              <div>
+                <h3 className="my-[10px] mr-[15px]">Sort By</h3>
+              </div>
             </div>
           </div>
         </div>
