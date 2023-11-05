@@ -77,9 +77,9 @@ function EqualLayout({ children }) {
               navigate("/home");
             }}
             style={{
-              backgroundColor: pathname === "/home" && "#919191",
-              color: pathname === "/home" && "white",
-              fontWeight: pathname === "/home" && "bold",
+              backgroundColor: (pathname === "/home" || pathname === "/") && "#919191",
+              color: (pathname === "/home" || pathname === "/") && "white",
+              fontWeight: (pathname === "/home" || pathname === "/") && "bold",
             }}
             className="hover:bg-[#919191] flex flex-col cursor-pointer w-[127.853px] h-full relative after:h-[6px] after:content-[' '] after:absolute after:w-full after:bottom-[-6px] after:z-[1] after:bg-[#919191] after:rounded-bl-lg hover:text-white transition-colors duration-100 ease-in"
           >

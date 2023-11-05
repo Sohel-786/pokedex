@@ -8,6 +8,7 @@ function App() {
     <div>
       <Routes>
         <Route path="/home" element={<LandingPage />} />
+        <Route path="/" element={<LandingPage />} />
         <Route path="/pokedex" element={<Pokedex />} />
         <Route path="*" element={<Notfound />} />
       </Routes>
