@@ -1,8 +1,11 @@
+import { useState } from "react";
 import EqualLayout from "../Layouts/EqualLayout";
 import { FiChevronDown } from "react-icons/fi";
 import { HiOutlineRefresh } from "react-icons/hi";
 
 function Pokedex() {
+  const [sortOrder, setSortOrder] = useState("Lowest Number (First)");
+
   return (
     <EqualLayout>
       <section
@@ -74,13 +77,26 @@ function Pokedex() {
             </span>
           </div>
           <div className="w-full mt-8">
-            <div className="">
+            <div className="flex items-center justify-between">
               <button className="flex justify-center items-center pt-[12.600px] pb-[11.340px] px-[21px] bg-[#30a7d7] text-white rounded-[5px] font-openSans text-[16.8px] w-[40.71%] font-semibold hover:bg-[#1b82b1] gap-[5px]">
                 <HiOutlineRefresh size={"22.2px"} /> Surprise Me!
               </button>
 
-              <div>
-                <h3 className="my-[10px] mr-[15px]">Sort By</h3>
+              <div className="flex items-center w-[46%]">
+                <h3 className="my-[7px] mr-[15px] text-[#a4a4a4] font-openSans text-xl leading-[25px]">
+                  Sort By
+                </h3>
+
+                <div className="pl-4 bg-[#313131] w-[78%] py-[6px] rounded-[5px] cursor-pointer">
+                  <h1 className="text-white font-roboto text-[16px] leading-[24px] flex items-center relative advanceSearchBtn">
+                    <img
+                      className="h-[28.9988px] aspect-auto mr-[12px]"
+                      src="/icons/pokeball.png"
+                      alt="pokeball"
+                    />{" "}
+                    {sortOrder}
+                  </h1>
+                </div>
               </div>
             </div>
           </div>

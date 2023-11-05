@@ -2,9 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-/* color {
-    color : #616161
-} */
+color {
+    color :  #313131
+}
 
 body{
     background: url('/assets/blackbgImage.png');
@@ -56,4 +56,19 @@ body{
     width: 37.9977px;
     top: -2px;
     transform: rotate(180deg);
+}
+
+.advanceSearchBtn::after{
+    content: ' ';
+    position: absolute;
+    right: 0px;
+    background-color: transparent;
+    width: 35px;
+    height: 40.9838px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.advanceSearchBtn:hover::after {
+    background-color: #282828;
 }
