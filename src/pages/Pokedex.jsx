@@ -1,11 +1,11 @@
 import { useState } from "react";
 import EqualLayout from "../Layouts/EqualLayout";
-import { FiChevronDown } from "react-icons/fi";
+import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 import { HiOutlineRefresh } from "react-icons/hi";
 
 function Pokedex() {
   const [sortOrder, setSortOrder] = useState("Lowest Number (First)");
-
+  const [searchArrow, setSearchArrow] = useState(false);
   return (
     <EqualLayout>
       <section
@@ -87,7 +87,12 @@ function Pokedex() {
                   Sort By
                 </h3>
 
-                <div className="pl-4 bg-[#313131] w-[78%] py-[6px] rounded-[5px] cursor-pointer">
+                <div
+                  onClick={() => {
+                    setSearchArrow(!searchArrow);
+                  }}
+                  className="pl-4 bg-[#313131] w-[78%] py-[6px] rounded-[5px] cursor-pointer"
+                >
                   <h1 className="text-white font-roboto text-[16px] leading-[24px] flex items-center relative advanceSearchBtn">
                     <img
                       className="h-[28.9988px] aspect-auto mr-[12px]"
@@ -95,6 +100,17 @@ function Pokedex() {
                       alt="pokeball"
                     />{" "}
                     {sortOrder}
+                    {searchArrow ? (
+                      <FiChevronUp
+                        size={"25px"}
+                        className="absolute right-[6px] z-[2]"
+                      />
+                    ) : (
+                      <FiChevronDown
+                        size={"25px"}
+                        className="absolute right-[6px] z-[2]"
+                      />
+                    )}
                   </h1>
                 </div>
               </div>
