@@ -3,72 +3,72 @@
 @tailwind utilities;
 
 color {
-    color :  #313131
+  color: #313131;
 }
 
-body{
-    background: url('/assets/blackbgImage.png');
-    background-color: rgb(66, 66, 66);
+body {
+  background: url("/assets/blackbgImage.png");
+  background-color: rgb(66, 66, 66);
 }
 
 .footerDivider::before {
-    background: url('/assets/footerleft.png');
-    height: 6px;
-    content: ' ';
-    position: absolute;
-    width: 12px;
-    bottom: 0;
-    left: -11px;
-    background-repeat: no-repeat;
+  background: url("/assets/footerleft.png");
+  height: 6px;
+  content: " ";
+  position: absolute;
+  width: 12px;
+  bottom: 0;
+  left: -11px;
+  background-repeat: no-repeat;
 }
 
 .footerDivider::after {
-    background: url('/assets/footerRight.png');
-    height: 6px;
-    content: ' ';
-    position: absolute;
-    width: 12px;
-    bottom: 0;
-    right: -11px;
-    background-repeat: no-repeat;
+  background: url("/assets/footerRight.png");
+  height: 6px;
+  content: " ";
+  position: absolute;
+  width: 12px;
+  bottom: 0;
+  right: -11px;
+  background-repeat: no-repeat;
 }
 
-.advanceSearch::before{
-    content: " ";
-    background: url('/assets/advancesearch.png') no-repeat;
-    background-size: 38px 18px;
-    height: 18px;
-    left: -36px;
-    position: absolute;
-    width: 38px;
-    top: -2px;
-    transform: scaleY(-1);
+.advanceSearch::before {
+  content: " ";
+  background: url("/assets/advancesearch.png") no-repeat;
+  background-size: 38px 18px;
+  height: 18px;
+  left: -36px;
+  position: absolute;
+  width: 38px;
+  top: -2px;
+  transform: scaleY(-1);
 }
 
-.advanceSearch::after{
-    content: " ";
-    background: url('/assets/advancesearch.png') no-repeat;
-    background-size: 38px 18px;
-    height: 18px;
-    right: -36px;
-    left: auto;
-    position: absolute;
-    width: 37.9977px;
-    top: -2px;
-    transform: rotate(180deg);
+.advanceSearch::after {
+  content: " ";
+  background: url("/assets/advancesearch.png") no-repeat;
+  background-size: 38px 18px;
+  height: 18px;
+  right: -36px;
+  left: auto;
+  position: absolute;
+  width: 37.9977px;
+  top: -2px;
+  transform: rotate(180deg);
 }
 
-.advanceSearchBtn::after{
-    content: ' ';
-    position: absolute;
-    right: 0px;
-    background-color: transparent;
-    width: 35px;
-    height: 40.9838px;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
+.advanceSearchBtn::after {
+  content: " ";
+  position: absolute;
+  right: 0px;
+  background-color: transparent;
+  width: 35px;
+  height: 40.9838px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
 }
 
 .advanceSearchBtn:hover::after {
-    background-color: #282828;
+  background-color: #282828;
 }
