@@ -10,9 +10,9 @@ import { getAllpokemonData } from "./redux/slices/pokeSlice";
 function App() {
   const dispatch = useDispatch();
 
-  useEffect(()=>{
-      dispatch(getAllpokemonData());
-  }, [])
+  useEffect(() => {
+    dispatch(getAllpokemonData());
+  }, []);
 
   return (
     <div>

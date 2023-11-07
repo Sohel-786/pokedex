@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const initialState = {
-    pokemonData : []
+  pokemonData: [],
 };
 
 export const getAllpokemonData = createAsyncThunk("/pokemon/all", async () => {
@@ -13,7 +13,7 @@ export const getAllpokemonData = createAsyncThunk("/pokemon/all", async () => {
         limit: 1010,
       },
     });
-    
+
     const allPokemon = (res?.data?.results).map(async (el) => {
       const data = await getPokemon(el.url);
       return data;

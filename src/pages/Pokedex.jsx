@@ -117,9 +117,7 @@ function Pokedex() {
             </div>
           </div>
 
-          <div className="">
-              
-          </div>
+          <div className=""></div>
         </div>
       </section>
     </EqualLayout>
