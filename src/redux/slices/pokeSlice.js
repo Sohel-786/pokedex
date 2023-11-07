@@ -1,8 +1,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { useDispatch } from "react-redux";
 
-const initialState = [];
+const initialState = {
+    pokemonData : []
+};
 
 export const getAllpokemonData = createAsyncThunk("/pokemon/all", async () => {
   try {
@@ -12,25 +13,24 @@ export const getAllpokemonData = createAsyncThunk("/pokemon/all", async () => {
         limit: 1010,
       },
     });
-
-    const dispatch = useDispatch();
-    const allPokemon = [];
-    (res?.data?.results).forEach(async (el) => {
-      const data = await dispatch(getPokemon);
-      allPokemon.push(data);
+    
+    const allPokemon = (res?.data?.results).map(async (el) => {
+      const data = await getPokemon(el.url);
+      return data;
     });
-    console.log(allPokemon);
-    return allPokemon;
+
+    const result = await Promise.all(allPokemon);
+    return result;
   } catch (e) {
     console.log(e);
   }
 });
 
-const getPokemon = createAsyncThunk("/pokemon/one", async (url) => {
+const getPokemon = async (url) => {
   try {
     const res = await axios.get(url);
-    let url = res?.data?.sprites?.other?.dream_world.front_default;
-    let url2 = res?.data?.sprites?.other?.official - artwork.front_default;
+    let url1 = res?.data?.sprites?.other?.dream_world.front_default;
+    let url2 = res?.data?.sprites?.other?.["official-artwork"].front_default;
     let types = (res?.data?.types).map((el) => {
       return el.type.name;
     });
@@ -45,15 +45,14 @@ const getPokemon = createAsyncThunk("/pokemon/one", async (url) => {
           : (res?.data?.id).length === 3
           ? "#0" + res.data.id
           : "#" + res.data.id,
-      img: url ? url : url2,
+      img: url1 ? url1 : url2,
       types,
     };
-
     return pokemon;
   } catch (e) {
     console.log(e);
   }
-});
+};
 
 const pokeSlice = createSlice({
   name: "pokedex",
@@ -61,8 +60,7 @@ const pokeSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(getAllpokemonData.fulfilled, (state, action) => {
-      console.log(action);
-      state = [...action.payload];
+      state.pokemonData = action?.payload;
     });
   },
 });

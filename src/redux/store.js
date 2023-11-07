@@ -3,8 +3,10 @@ import pokeReducer from './slices/pokeSlice';
 
 const store = configureStore({
     reducer: {
-      pokedex : pokeReducer
+       pokedex : pokeReducer
     },
+    middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({ serializableCheck: false }),
     devTools : true
 })
 

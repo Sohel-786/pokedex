@@ -8,11 +8,10 @@ import { useDispatch } from "react-redux";
 import { getAllpokemonData } from "./redux/slices/pokeSlice";
 
 function App() {
-
   const dispatch = useDispatch();
 
   useEffect(()=>{
-      dispatch(getAllpokemonData);
+      dispatch(getAllpokemonData());
   }, [])
 
   return (
