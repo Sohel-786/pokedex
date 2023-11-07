@@ -16,10 +16,10 @@ export const getAllpokemonData = createAsyncThunk("/pokemon/all", async () => {
     const dispatch = useDispatch();
     const allPokemon = [];
     (res?.data?.results).forEach(async (el) => {
-        const data = await dispatch(getPokemon);
-        allPokemon.push(data);
+      const data = await dispatch(getPokemon);
+      allPokemon.push(data);
     });
-    console.log(allPokemon)
+    console.log(allPokemon);
     return allPokemon;
   } catch (e) {
     console.log(e);
@@ -30,12 +30,12 @@ const getPokemon = createAsyncThunk("/pokemon/one", async (url) => {
   try {
     const res = await axios.get(url);
     let url = res?.data?.sprites?.other?.dream_world.front_default;
-    let url2 = res?.data?.sprites?.other?.official-artwork.front_default;
+    let url2 = res?.data?.sprites?.other?.official - artwork.front_default;
     let types = (res?.data?.types).map((el) => {
-        return el.type.name;
-    })
+      return el.type.name;
+    });
     const pokemon = {
-      id : res?.data?.id,
+      id: res?.data?.id,
       name: res?.data?.name,
       number:
         (res?.data?.id).length === 1
@@ -46,7 +46,7 @@ const getPokemon = createAsyncThunk("/pokemon/one", async (url) => {
           ? "#0" + res.data.id
           : "#" + res.data.id,
       img: url ? url : url2,
-      types
+      types,
     };
 
     return pokemon;
@@ -59,12 +59,12 @@ const pokeSlice = createSlice({
   name: "pokedex",
   initialState,
   reducers: {},
-  extraReducers : (builder) => {
+  extraReducers: (builder) => {
     builder.addCase(getAllpokemonData.fulfilled, (state, action) => {
-        console.log(action);
-        state = [...action.payload]
-    })
-  }
+      console.log(action);
+      state = [...action.payload];
+    });
+  },
 });
 
 export default pokeSlice.reducer;
