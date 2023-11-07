@@ -3,8 +3,14 @@ import LandingPage from "./pages/LandingPage";
 import Notfound from "./pages/Notfound";
 import Pokedex from "./pages/Pokedex";
 import PokemonCard from "./Components/PokemonCard";
+import { useEffect } from "react";
 
 function App() {
+
+  useEffect(()=>{
+    
+  }, [])
+
   return (
     <div>
       <Routes>
