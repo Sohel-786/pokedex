@@ -4,11 +4,15 @@ import Notfound from "./pages/Notfound";
 import Pokedex from "./pages/Pokedex";
 import PokemonCard from "./Components/PokemonCard";
 import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { getAllpokemonData } from "./redux/slices/pokeSlice";
 
 function App() {
 
+  const dispatch = useDispatch();
+
   useEffect(()=>{
-    
+      dispatch(getAllpokemonData);
   }, [])
 
   return (

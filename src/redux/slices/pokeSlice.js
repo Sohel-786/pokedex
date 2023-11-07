@@ -2,10 +2,9 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 
-const dispatch = useDispatch();
 const initialState = [];
 
-const getAllpokemonData = createAsyncThunk("/pokemon/all", async () => {
+export const getAllpokemonData = createAsyncThunk("/pokemon/all", async () => {
   try {
     const res = await axios.get("https://pokeapi.co/api/v2/pokemon", {
       params: {
@@ -14,12 +13,13 @@ const getAllpokemonData = createAsyncThunk("/pokemon/all", async () => {
       },
     });
 
+    const dispatch = useDispatch();
     const allPokemon = [];
     (res?.data?.results).forEach(async (el) => {
         const data = await dispatch(getPokemon);
         allPokemon.push(data);
     });
-
+    console.log(allPokemon)
     return allPokemon;
   } catch (e) {
     console.log(e);
