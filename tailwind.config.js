@@ -12,6 +12,9 @@ export default {
       },
       animation : {
         loading : 'spin 0.5s linear infinite'
+      },
+      backgroundImage : {
+        pokedetails : 'url("/assets/pokedetails.png")'
       }
     },
   },
