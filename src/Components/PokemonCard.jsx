@@ -1,12 +1,12 @@
 import PokemonType from "./PokemonType";
 import { nanoid } from "nanoid";
 
-function PokemonCard({url, name, number, abilities}) {
+function PokemonCard({url, name, number, types}) {
   return (
-    <li className="mx-[6.83449px] mb-[50px] text-left w-[205.174px]">
-      <div className="w-full bg-[#F2F2F2] rounded-[5px] ">
+    <li className="mx-[6.83449px] mb-[50px] text-left w-[23%]">
+      <div className="w-full bg-[#F2F2F2] rounded-[5px] h-[205px] flex justify-center">
         <img
-          className="w-full aspect-auto"
+          className="w-[90%] aspect-auto max-h-[95%]"
           src={url}
           alt={name}
         />
@@ -18,7 +18,7 @@ function PokemonCard({url, name, number, abilities}) {
         Bulbasaur
       </h1>
       <ul className="flex flex-wrap">
-        {abilities.map((el) => {
+        {types.map((el) => {
           return (
             <PokemonType
               key={nanoid(4)}

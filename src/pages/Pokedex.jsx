@@ -3,6 +3,8 @@ import EqualLayout from "../Layouts/EqualLayout";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 import { HiOutlineRefresh } from "react-icons/hi";
 import { useSelector } from "react-redux";
+import PokemonCard from "../Components/PokemonCard";
+import { nanoid } from "nanoid";
 
 function Pokedex() {
   const [sortOrder, setSortOrder] = useState("Lowest Number (First)");
@@ -18,8 +20,6 @@ function Pokedex() {
   useEffect(() => {
     getPokemons();
   }, [pokemonData]);
-
-  var id;
 
   function getPokemons() {
 
@@ -140,7 +140,13 @@ function Pokedex() {
             </div>
           </div>
 
-          <div className=""></div>
+          <ul className="flex flex-wrap w-full">
+            {
+              pokemons.map((el) => {
+                return <PokemonCard key={nanoid(4)} url={el.img} name={el.name} number={el.number} types={el.types} />
+              })
+            }
+          </ul>
         </div>
       </section>
     </EqualLayout>

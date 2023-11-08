@@ -20,7 +20,6 @@ function App() {
         <Route path="/home" element={<LandingPage />} />
         <Route path="/" element={<LandingPage />} />
         <Route path="/pokedex" element={<Pokedex />} />
-        <Route path="/demo" element={<PokemonCard />} />
         <Route path="*" element={<Notfound />} />
       </Routes>
     </div>
