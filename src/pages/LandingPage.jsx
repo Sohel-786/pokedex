@@ -3,13 +3,7 @@ import EqualLayout from "../Layouts/EqualLayout";
 function LandingPage() {
   return (
     <EqualLayout>
-      <section
-        className="min-h-[300px] max-w-[1280px] mx-auto bg-white flex flex-col items-center"
-        style={{
-          backgroundImage: 'url("/assets/whitebgImage.png")',
-        }}
-      >
-        <div className="w-[77%] bg-white flex justify-between px-[14.5px] pt-[37px] pb-[10px]">
+        <section className="w-[77%] bg-white flex justify-between px-[14.5px] pt-[37px] pb-[10px]">
           <div className="w-[66%] float-left">
             <div className="w-full cursor-pointer relative">
               <div className="w-full">
@@ -110,8 +104,7 @@ function LandingPage() {
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
     </EqualLayout>
   );
 }

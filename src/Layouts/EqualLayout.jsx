@@ -77,7 +77,8 @@ function EqualLayout({ children }) {
               navigate("/home");
             }}
             style={{
-              backgroundColor: (pathname === "/home" || pathname === "/") && "#919191",
+              backgroundColor:
+                (pathname === "/home" || pathname === "/") && "#919191",
               color: (pathname === "/home" || pathname === "/") && "white",
               fontWeight: (pathname === "/home" || pathname === "/") && "bold",
             }}
@@ -181,8 +182,14 @@ function EqualLayout({ children }) {
           </li>
         </ul>
       </div>
-
-      {children}
+      <section
+        className="min-h-[300px] max-w-[1280px] mx-auto bg-white flex flex-col items-center"
+        style={{
+          backgroundImage: 'url("/assets/whitebgImage.png")',
+        }}
+      >
+        {children}
+      </section>
       <Footer />
     </div>
   );
