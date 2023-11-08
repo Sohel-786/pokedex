@@ -17,14 +17,12 @@ function PokemonCard({url, name, number, types}) {
       <h1 className="mt-[11.600px] mb-[5px] text-[#313131] text-[23.2px] leading-[29px] font-openSans bg-white font-bold">
         Bulbasaur
       </h1>
-      <ul className="flex flex-wrap">
+      <ul className="flex flex-wrap text-[12px] leading-[18px]">
         {types.map((el) => {
           return (
             <PokemonType
               key={nanoid(4)}
               type={el}
-              leading={"18px"}
-              fontSize={"11px"}
             />
           );
         })}
