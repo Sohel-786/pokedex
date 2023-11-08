@@ -9,6 +9,9 @@ export default {
       fontFamily : {
         roboto : "'Roboto', sans-serif",
         openSans : "'Open Sans', sans-serif"
+      },
+      animation : {
+        loading : 'spin 0.5s linear infinite'
       }
     },
   },

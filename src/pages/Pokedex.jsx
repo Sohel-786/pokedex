@@ -5,6 +5,7 @@ import { HiOutlineRefresh } from "react-icons/hi";
 import { useSelector } from "react-redux";
 import PokemonCard from "../Components/PokemonCard";
 import { nanoid } from "nanoid";
+import Loading from "../Components/Loading";
 
 function Pokedex() {
   const [sortOrder, setSortOrder] = useState("Lowest Number (First)");
@@ -22,10 +23,7 @@ function Pokedex() {
   }, [pokemonData]);
 
   function getPokemons() {
-
-    setPokemons([
-      ...pokemonData.slice(0, 12),
-    ]);
+    setPokemons([...pokemonData.slice(0, 12)]);
   }
 
   return (
@@ -140,11 +138,23 @@ function Pokedex() {
           </div>
 
           <ul className="flex flex-wrap w-full my-4">
-            {
-              pokemons.map((el) => {
-                return <PokemonCard key={nanoid(4)} url={el.img} name={el.name} number={el.number} types={el.types} />
-              })
-            }
+            {pokemons.length !== 0 ? (
+              <>
+                {pokemons.map((el) => {
+                  return (
+                    <PokemonCard
+                      key={nanoid(4)}
+                      url={el.img}
+                      name={el.name}
+                      number={el.number}
+                      types={el.types}
+                    />
+                  );
+                })}
+              </>
+            ) : (
+              <Loading />
+            )}
           </ul>
         </div>
       </section>
