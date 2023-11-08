@@ -6,7 +6,7 @@ function PokemonDetails() {
   return (
     <EqualLayout>
       <section className="w-[77%] bg-white flex flex-col justify-between px-[14.5px] pb-[10px]">
-        <div className="pt-[90px] relative w-[1280px] flex mx-auto left-[-161.6px]">
+        <div className="pt-[90px] relative max-w-[1280px] w-[100vw] flex mx-auto left-[-161.6px]">
           <div className="w-[50%] bg-[#a4a4a4] hover:bg-[#30a7d7] transition-colors duration-300 ease-in-out cursor-pointer border-r-[3.7037px] border-white flex justify-end">
             <div className="pt-4 pb-16 w-full max-w-[448px] flex items-center">
               <div className="w-[26px] h-[26px] rounded-full bg-white text-[#616161] mx-[15.600px] my-[5.200px] flex justify-center items-center text-center">

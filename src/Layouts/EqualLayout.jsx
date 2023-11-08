@@ -183,7 +183,7 @@ function EqualLayout({ children }) {
         </ul>
       </div>
       <section
-        className="min-h-[300px] max-w-[1280px] mx-auto bg-white flex flex-col items-center"
+        className="min-h-[300px] max-w-[1280px] overflow-hidden mx-auto bg-white flex flex-col items-center"
         style={{
           backgroundImage: 'url("/assets/whitebgImage.png")',
         }}

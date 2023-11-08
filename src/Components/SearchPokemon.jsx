@@ -3,7 +3,7 @@ import { FiChevronDown } from "react-icons/fi";
 function SearchPokemon(){
     return (
         <>
-        <div className="max-w-[1280px] mx-auto relative left-[-161.6px] bg-[#616161] pb-4">
+        <div className="max-w-[1280px] w-[100vw] mx-auto relative left-[-161.6px] bg-[#616161] pb-4">
             <div className="w-full bg-[#313131] flex flex-col items-center">
               <div className="w-[77%] flex gap-2">
                 <div className="w-[45.96%] pl-[14.5px] pt-[32px]">
