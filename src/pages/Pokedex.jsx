@@ -29,7 +29,7 @@ function Pokedex() {
 
   return (
     <EqualLayout>
-        <section className="w-[77%] bg-white flex flex-col justify-between px-[14.5px] pb-[10px]">
+        <section className="w-[77%] bg-white flex flex-col justify-between px-[14.5px] pb-[10px] relative">
           <h1 className="font-openSans text-[30px] text-[#919191] leading-[37.5px] mt-[25px] mb-[16px]">
             Pokédex
           </h1>
