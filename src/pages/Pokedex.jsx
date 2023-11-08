@@ -1,11 +1,34 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import EqualLayout from "../Layouts/EqualLayout";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 import { HiOutlineRefresh } from "react-icons/hi";
+import { useSelector } from "react-redux";
 
 function Pokedex() {
   const [sortOrder, setSortOrder] = useState("Lowest Number (First)");
   const [searchArrow, setSearchArrow] = useState(false);
+  const [offsetLimit, setOffsetLimit] = useState({
+    offset: 12,
+    positionLimit: 24,
+  });
+  const [pokemons, setPokemons] = useState([]);
+
+  const { pokemonData } = useSelector((s) => s.pokedex);
+
+  useEffect(() => {
+    getPokemons();
+  }, [pokemonData]);
+
+  var id;
+
+  function getPokemons() {
+
+    setPokemons([
+      ...pokemons,
+      ...pokemonData.slice(0, 12),
+    ]);
+  }
+
   return (
     <EqualLayout>
       <section
