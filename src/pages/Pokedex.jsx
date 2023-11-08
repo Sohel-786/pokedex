@@ -24,7 +24,6 @@ function Pokedex() {
   function getPokemons() {
 
     setPokemons([
-      ...pokemons,
       ...pokemonData.slice(0, 12),
     ]);
   }
@@ -99,9 +98,9 @@ function Pokedex() {
               </div>
             </span>
           </div>
-          <div className="w-full mt-8">
+          <div className="w-full my-8">
             <div className="flex items-center justify-between">
-              <button className="flex justify-center items-center pt-[12.600px] pb-[11.340px] px-[21px] bg-[#30a7d7] text-white rounded-[5px] font-openSans text-[16.8px] w-[40.71%] font-semibold hover:bg-[#1b82b1] gap-[5px]">
+              <button className="flex justify-center items-center pt-[10.600px] pb-[9.340px] px-[21px] bg-[#30a7d7] text-white rounded-[5px] font-openSans text-[16.8px] w-[40.71%] font-semibold hover:bg-[#1b82b1] gap-[5px]">
                 <HiOutlineRefresh size={"22.2px"} /> Surprise Me!
               </button>
 
@@ -140,7 +139,7 @@ function Pokedex() {
             </div>
           </div>
 
-          <ul className="flex flex-wrap w-full">
+          <ul className="flex flex-wrap w-full my-4">
             {
               pokemons.map((el) => {
                 return <PokemonCard key={nanoid(4)} url={el.img} name={el.name} number={el.number} types={el.types} />
