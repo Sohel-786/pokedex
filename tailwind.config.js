@@ -11,11 +11,18 @@ export default {
         openSans : "'Open Sans', sans-serif"
       },
       animation : {
-        loading : 'spin 0.5s linear infinite'
+        loading : 'spin 0.5s linear infinite',
+        height : 'height 2s ease-in-out 1 forwards'
+      },
+      keyframes : {
+        height : {
+          '0%' : { transform: 'scaleY(0)'},
+          '100%' : {transform: 'scaleY(1)'}
+        }
       },
       backgroundImage : {
         pokedetails : 'url("/assets/pokedetails.png")'
-      }
+      },
     },
   },
   plugins: [],
