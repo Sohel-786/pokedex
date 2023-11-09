@@ -12,7 +12,7 @@ export default {
       },
       animation : {
         loading : 'spin 0.5s linear infinite',
-        height : 'height 2s ease-in-out 1 forwards'
+        height : 'height 1s ease-in-out 1 forwards'
       },
       keyframes : {
         height : {
