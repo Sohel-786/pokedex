@@ -4,11 +4,18 @@ function StatsLi({ data_value, name }) {
     const [isVisible, setIsVisible] = useState(false);
 
     useEffect(() => {
+      
+      if(window.innerHeight > 1200){
+        setIsVisible(true)
+      }
       const toggleVisibility = () => {
-        console.log(window.scrollY)
-        window.scrollY > 400 ? setIsVisible(true) : setIsVisible(false);
+        window.scrollY > 400 && setIsVisible(true);
       };
-  
+      const toggleVisibility2 = () => {
+        window.innerHeight > 1200 && setIsVisible(true);
+      };
+      
+      window.addEventListener('resize', toggleVisibility2);
       window.addEventListener("scroll", toggleVisibility);
       return () => window.removeEventListener("scroll", toggleVisibility);
     }, []);
