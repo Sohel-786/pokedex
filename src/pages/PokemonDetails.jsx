@@ -97,15 +97,31 @@ function PokemonDetails() {
           </div>
 
           <div className="w-[49%] flex flex-col">
-              <p className="my-[9px] text-[#212121] text-lg leading-[27px] tracking-wide font-medium" style={{ fontFamily : 'sans-serif' }} >When the bulb on its back grows large, it appears to lose the ability to stand on its hind legs.</p>
+            <p
+              className="my-[9px] text-[#212121] text-lg leading-[27px] tracking-wide font-medium"
+              style={{ fontFamily: "sans-serif" }}
+            >
+              When the bulb on its back grows large, it appears to lose the
+              ability to stand on its hind legs.
+            </p>
 
-              <div className="w-full rounded-[10px] bg-[#30a7d7] text-white grid grid-cols-2" style={{
-                fontFamily : 'sans-serif'
-              }}>
-                <div className="ml-[20px] mt-[20px] mb-[25px]">
-
+            <div
+              className="w-full rounded-[10px] bg-[#30a7d7] text-white grid grid-cols-2 text-[17px] leading-[17px]"
+              style={{
+                fontFamily: "sans-serif",
+              }}
+            >
+              <div className="ml-[20px] mt-[20px] mb-[25px] flex flex-col gap-[20px]">
+                <div className="flex flex-col gap-[15px]">
+                  <p>Height</p>
+                  <h1>7' 30"</h1>
+                </div>
+                <div className="flex flex-col gap-[15px]">
+                  <p>Weight</p>
+                  <h1>463.0 lbs</h1>
                 </div>
               </div>
+            </div>
           </div>
         </div>
         <SearchPokemon />
