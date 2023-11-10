@@ -3,9 +3,9 @@ import axios from "axios";
 
 const initialState = {
   pokemonData: [],
-  male : [],
-  female : [],
-  both : []
+  male: [],
+  female: [],
+  both: [],
 };
 
 export const getAllpokemonData = createAsyncThunk("/pokemon/all", async () => {
@@ -24,23 +24,31 @@ export const getAllpokemonData = createAsyncThunk("/pokemon/all", async () => {
 
     const result = await Promise.all(allPokemon);
 
-    var { data : datamale } = await axios.get('https://pokeapi.co/api/v2/gender/male');
-    var { data : datafemale } = await axios.get('https://pokeapi.co/api/v2/gender/female');
+    var { data: datamale } = await axios.get(
+      "https://pokeapi.co/api/v2/gender/male"
+    );
+    var { data: datafemale } = await axios.get(
+      "https://pokeapi.co/api/v2/gender/female"
+    );
 
-    datamale = (datamale.pokemon_species_details).map((el) => el.pokemon_species.name);
-    datafemale = (datafemale.pokemon_species_details).map((el) => el.pokemon_species.name);
+    datamale = datamale.pokemon_species_details.map(
+      (el) => el.pokemon_species.name
+    );
+    datafemale = datafemale.pokemon_species_details.map(
+      (el) => el.pokemon_species.name
+    );
 
     const both = datafemale.filter((el) => {
-        if(datamale.includes(el)){
-            return el;
-        }
+      if (datamale.includes(el)) {
+        return el;
+      }
     });
 
     return {
       result,
-      male : datamale,
-      female : datafemale,
-      both
+      male: datamale,
+      female: datafemale,
+      both,
     };
   } catch (e) {
     console.log(e);
@@ -81,7 +89,7 @@ const pokeSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(getAllpokemonData.fulfilled, (state, action) => {
-      console.log(action)
+      console.log(action);
       state.pokemonData = action?.payload?.result;
       state.male = action?.payload?.male;
       state.female = action?.payload?.female;
