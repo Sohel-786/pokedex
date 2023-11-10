@@ -2,8 +2,13 @@ import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
 import EqualLayout from "../Layouts/EqualLayout";
 import SearchPokemon from "../Components/SearchPokemon";
 import StatsLi from "../Components/StatsLi";
+import { IoMaleSharp, IoFemaleSharp  } from 'react-icons/io5';
+import { useSelector } from "react-redux";
 
 function PokemonDetails() {
+
+  const { both, male, female } = useSelector((s) => s?.pokedex);
+
   return (
     <EqualLayout>
       <section className="w-[77%] bg-white flex flex-col justify-between px-[14.5px] pb-[10px]">
@@ -114,11 +119,19 @@ function PokemonDetails() {
               <div className="ml-[20px] mt-[20px] mb-[25px] flex flex-col gap-[20px]">
                 <div className="flex flex-col gap-[15px]">
                   <p>Height</p>
-                  <h1>7' 30"</h1>
+                  <h1 className="text-black text-[20px] leading-5">7' 30"</h1>
                 </div>
                 <div className="flex flex-col gap-[15px]">
                   <p>Weight</p>
-                  <h1>463.0 lbs</h1>
+                  <h1 className="text-black text-[20px] leading-5">463.0 lbs</h1>
+                </div>
+                <div className="flex flex-col gap-[15px]">
+                  <p>Gender</p>
+                  <div className="flex items-center gap-[12.500px] text-black text-[25px] leading-5">
+                      {
+                        both.includes('bulbasaur') ? <> <IoMaleSharp/> <IoFemaleSharp /> </> : male.includes('bulbasaur') ? <> <IoMaleSharp /> </> : female.includes('bulbasaur') ? <> <IoFemaleSharp /> </> : <p>Unknown</p>
+                      }
+                  </div>
                 </div>
               </div>
             </div>
