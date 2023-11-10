@@ -5,7 +5,7 @@ function StatsLi({ data_value, name }) {
 
     useEffect(() => {
       
-      if(window.innerHeight > 1200){
+      if(window.innerHeight > 1100){
         setIsVisible(true)
       }
       const toggleVisibility = () => {

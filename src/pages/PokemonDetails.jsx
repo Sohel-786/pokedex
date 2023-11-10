@@ -53,7 +53,7 @@ function PokemonDetails() {
 
         <div className="w-full mx-auto pt-4 pb-[50px]"></div>
 
-        <div className="w-full py-4 flex">
+        <div className="w-full py-4 flex justify-between">
           <div className="w-[49%] flex flex-col">
             <div className="w-full rounded-[5px] bg-[#F2F2F2] ">
               <img
@@ -94,6 +94,18 @@ function PokemonDetails() {
                 </li>
               </ul>
             </div>
+          </div>
+
+          <div className="w-[49%] flex flex-col">
+              <p className="my-[9px] text-[#212121] text-lg leading-[27px] tracking-wide font-medium" style={{ fontFamily : 'sans-serif' }} >When the bulb on its back grows large, it appears to lose the ability to stand on its hind legs.</p>
+
+              <div className="w-full rounded-[10px] bg-[#30a7d7] text-white grid grid-cols-2" style={{
+                fontFamily : 'sans-serif'
+              }}>
+                <div className="ml-[20px] mt-[20px] mb-[25px]">
+
+                </div>
+              </div>
           </div>
         </div>
         <SearchPokemon />
