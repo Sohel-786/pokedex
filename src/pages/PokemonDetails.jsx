@@ -53,8 +53,14 @@ function PokemonDetails() {
         break;
       }
     }
+    
+    const { data : evolutionInfo } = await axios.get(species.evolution_chain.url);
+    const evolution = {
+      main : evolutionInfo?.chain?.species?.name,
+      data : evolutionInfo?.chain?.evolves_to.length === 1 ? { one : evolutionInfo?.chain?.evolves_to[0].species.name , two : evolutionInfo?.chain?.evolves_to[0].evolves_to.length === 1 ? evolutionInfo?.chain?.evolves_to[0].evolves_to[0]?.species?.name }
 
-
+    }
+    
 
     const images = {
       svg : data?.sprites?.other?.dream_world?.front_default,
