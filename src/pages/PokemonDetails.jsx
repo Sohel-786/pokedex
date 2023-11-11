@@ -199,7 +199,9 @@ function PokemonDetails() {
                 <div className="flex flex-col gap-[15px]">
                   <p>Gender</p>
                   <div className="flex items-center gap-[12.500px] text-black text-[25px] leading-5">
-                    {both.includes("bulbasaur") ? (
+                    {
+                      both.length === 0 ? <p className="text-black text-[20px] leading-5">wait..</p> : <>
+                        {both.includes("bulbasaur") ? (
                       <>
                         {" "}
                         <IoMaleSharp /> <IoFemaleSharp />{" "}
@@ -215,8 +217,10 @@ function PokemonDetails() {
                         <IoFemaleSharp />{" "}
                       </>
                     ) : (
-                      <p>Unknown</p>
+                      <p className="text-black text-[20px] leading-5">Unknown</p>
                     )}
+                      </>
+                    }
                   </div>
                 </div>
               </div>

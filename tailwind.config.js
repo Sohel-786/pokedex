@@ -21,7 +21,8 @@ export default {
         }
       },
       backgroundImage : {
-        pokedetails : 'url("/assets/pokedetails.png")'
+        pokedetails : 'url("/assets/pokedetails.png")',
+        pokeEvo : 'url("/assets/pokeEvo.png")'
       },
     },
   },
