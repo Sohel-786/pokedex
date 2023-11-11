@@ -23,9 +23,10 @@ function PokemonDetails() {
       const { name, url } = el.ability;
       const { data } = await axios.get(url);
       var effect;
+
       (data.effect_entries).map((el) => {
         if(el.language.name === 'en'){
-          effect = (el.effect).replace("/n", " ");
+          effect = (el.effect).replaceAll("\n", " ");
         }
       })
       
@@ -36,8 +37,39 @@ function PokemonDetails() {
       }
     });
 
+    var desc;
+    const { data : species } = await axios.get(el.species.url);
+    for(let i = 0; i < species.flavor_text_entries.length ; i++){
+      if(species?.flavor_text_entries[i]?.language?.name === 'en'){
+        desc = (species.flavor_text_entries[i]?.flavor_text).replaceAll('\n', " ");
+        break;
+      }
+    }
+
+    var category;
+    for(let i = 0; i < species.genera.length ; i++){
+      if(species?.genera[i]?.language?.name === 'en'){
+        category = species.genera[i]?.genus;
+        break;
+      }
+    }
+
+
+
+    const images = {
+      svg : data?.sprites?.other?.dream_world?.front_default,
+      official : data?.sprites?.other?.['official-artwork']?.front_default
+    }
+
     return {
-      
+      abilities,
+      height : data.height,
+      id : data.id,
+      name : data.name,
+      weight : data.weight,
+      images,
+      desc,
+      category
     }
   }
 
