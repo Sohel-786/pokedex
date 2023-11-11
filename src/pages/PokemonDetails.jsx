@@ -4,9 +4,42 @@ import SearchPokemon from "../Components/SearchPokemon";
 import StatsLi from "../Components/StatsLi";
 import { IoMaleSharp, IoFemaleSharp } from "react-icons/io5";
 import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import axios from "axios";
+import { useParams } from "react-router-dom";
 
 function PokemonDetails() {
   const { both, male, female } = useSelector((s) => s?.pokedex);
+  const { id } = useParams();
+
+  useEffect(() => {});
+
+  async function handlePokemonInfo() {
+    const { data: info } = await axios.get(
+      `https://pokeapi.co/api/v2/pokemon/${id}`
+    );
+
+    const abilities = info.abilities.map(async (el) => {
+      const { name, url } = el.ability;
+      const { data } = await axios.get(url);
+      var effect;
+      (data.effect_entries).map((el) => {
+        if(el.language.name === 'en'){
+          effect = (el.effect).replace("/n", " ");
+        }
+      })
+      
+      return {
+          name,
+          effect,
+          hidden : el.is_hidden
+      }
+    });
+
+    return {
+      
+    }
+  }
 
   return (
     <EqualLayout>
