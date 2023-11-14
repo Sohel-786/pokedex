@@ -41,7 +41,7 @@ function PokemonDetails() {
     });
 
     var desc;
-    const { data: species } = await axios.get(el.species.url);
+    const { data: species } = await axios.get(info.species.url);
     for (let i = 0; i < species.flavor_text_entries.length; i++) {
       if (species?.flavor_text_entries[i]?.language?.name === "en") {
         desc = (species.flavor_text_entries[i]?.flavor_text).replaceAll(
@@ -59,6 +59,33 @@ function PokemonDetails() {
         break;
       }
     }
+
+    var type_data = {};
+    info.types.forEach(async (el) => {
+      const typeInfo = axios.get(el.type.url);
+      var double = [],
+        zero = [],
+        half = [];
+
+      typeInfo.damage_relations.double_damage_from
+        .forEach((el) => {
+          double.push(el.name);
+        })(typeInfo.damage_relations.half_damage_from)
+        .forEach((el) => {
+          half.push(el.name);
+        })(typeInfo.damage_relations.no_damage_from)
+        .forEach((el) => {
+          zero.push(el.name);
+        });
+
+      type_data[`${el.type.name}`] = {
+        defense: {
+          half,
+          double,
+          zero,
+        },
+      };
+    });
 
     const { data: evolutionInfo } = await axios.get(
       species.evolution_chain.url
@@ -78,6 +105,7 @@ function PokemonDetails() {
       images,
       desc,
       category,
+      type_data,
     };
   }
 
@@ -240,7 +268,10 @@ function PokemonDetails() {
                 <div className="flex flex-col gap-[15px]">
                   <p>Abilities</p>
                   {["Overgrow"].map((el) => (
-                    <h1 key={nanoid(5)} className="text-black text-[20px] leading-5 flex gap-[9.375px] items-center">
+                    <h1
+                      key={nanoid(5)}
+                      className="text-black text-[20px] leading-5 flex gap-[9.375px] items-center"
+                    >
                       {el}{" "}
                       <FaCircleQuestion
                         size={"15.9954px"}
@@ -253,7 +284,7 @@ function PokemonDetails() {
             </div>
 
             <p
-              className="mt-[1.25em] text-[#212121] text-[125%] leading-[125%] float-left"
+              className="mt-[1.25em] text-[#212121] text-[125%] leading-[125%] float-left tracking-wide"
               style={{
                 fontFamily: "sans-serif",
               }}
@@ -261,11 +292,35 @@ function PokemonDetails() {
               Type
             </p>
 
-            <div className="w-[85%] mt-[8px] flex gap-1 text-[16px] leading-8">
-              {
-                ['grass', 'poison'].map((el) => <PokemonType key={nanoid(4)} type={el} rounded={'5px'}/>)
-              }
-              
+            <div className="w-full mt-[8px] flex flex-wrap gap-1 text-[16px] leading-8">
+              {["grass", "poison", "flying"].map((el) => (
+                <PokemonType
+                  key={nanoid(4)}
+                  width={"32%"}
+                  type={el}
+                  rounded={"5px"}
+                />
+              ))}
+            </div>
+
+            <h1
+              className="mt-[25px] mb-[10px] text-[#212121] text-[125%] leading-[125%] tracking-wide"
+              style={{
+                fontFamily: "sans-serif",
+              }}
+            >
+              Weaknesses
+            </h1>
+
+            <div className="w-full mt-[8px] flex flex-wrap gap-1 gap-y-2 text-[16px] leading-8">
+              {["fire", "psychic", "flying", 'ice'].map((el) => (
+                <PokemonType
+                  key={nanoid(4)}
+                  width={"32%"}
+                  type={el}
+                  rounded={"5px"}
+                />
+              ))}
             </div>
           </div>
         </div>

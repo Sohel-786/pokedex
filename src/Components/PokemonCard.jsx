@@ -16,7 +16,7 @@ function PokemonCard({ url, name, number, types }) {
       </h1>
       <ul className="flex flex-wrap text-[12px] leading-[18px]">
         {types.map((el) => {
-          return <PokemonType key={nanoid(4)} type={el} rounded={"3px"} />;
+          return <PokemonType key={nanoid(4)} width={'38.4375%'} type={el} rounded={"3px"} />;
         })}
       </ul>
     </li>
