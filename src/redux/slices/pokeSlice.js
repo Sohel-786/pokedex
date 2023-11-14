@@ -89,7 +89,6 @@ const pokeSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(getAllpokemonData.fulfilled, (state, action) => {
-      console.log(action);
       state.pokemonData = action?.payload?.result;
       state.male = action?.payload?.male;
       state.female = action?.payload?.female;

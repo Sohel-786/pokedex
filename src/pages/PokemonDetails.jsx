@@ -7,6 +7,9 @@ import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import { FaCircleQuestion } from "react-icons/fa6";
+import PokemonType from "../Components/PokemonType";
+import { nanoid } from "nanoid";
 
 function PokemonDetails() {
   const { both, male, female } = useSelector((s) => s?.pokedex);
@@ -180,7 +183,7 @@ function PokemonDetails() {
             </p>
 
             <div
-              className="w-full rounded-[10px] bg-[#30a7d7] text-white grid grid-cols-2 text-[17px] leading-[17px]"
+              className="w-full rounded-[10px] bg-[#30a7d7] text-white grid grid-cols-2 text-[17px] leading-[17px] mt-5"
               style={{
                 fontFamily: "sans-serif",
               }}
@@ -199,33 +202,70 @@ function PokemonDetails() {
                 <div className="flex flex-col gap-[15px]">
                   <p>Gender</p>
                   <div className="flex items-center gap-[12.500px] text-black text-[25px] leading-5">
-                    {
-                      both.length === 0 ? <p className="text-black text-[20px] leading-5">wait..</p> : <>
-                        {both.includes("bulbasaur") ? (
-                      <>
-                        {" "}
-                        <IoMaleSharp /> <IoFemaleSharp />{" "}
-                      </>
-                    ) : male.includes("bulbasaur") ? (
-                      <>
-                        {" "}
-                        <IoMaleSharp />{" "}
-                      </>
-                    ) : female.includes("bulbasaur") ? (
-                      <>
-                        {" "}
-                        <IoFemaleSharp />{" "}
-                      </>
+                    {both.length === 0 ? (
+                      <p className="text-black text-[20px] leading-5">wait..</p>
                     ) : (
-                      <p className="text-black text-[20px] leading-5">Unknown</p>
-                    )}
+                      <>
+                        {both.includes("bulbasaur") ? (
+                          <>
+                            {" "}
+                            <IoMaleSharp /> <IoFemaleSharp />{" "}
+                          </>
+                        ) : male.includes("bulbasaur") ? (
+                          <>
+                            {" "}
+                            <IoMaleSharp />{" "}
+                          </>
+                        ) : female.includes("bulbasaur") ? (
+                          <>
+                            {" "}
+                            <IoFemaleSharp />{" "}
+                          </>
+                        ) : (
+                          <p className="text-black text-[20px] leading-5">
+                            Unknown
+                          </p>
+                        )}
                       </>
-                    }
+                    )}
                   </div>
                 </div>
               </div>
 
-              <div></div>
+              <div className="ml-[20px] mt-[20px] mb-[25px] flex flex-col gap-[20px]">
+                <div className="flex flex-col gap-[15px]">
+                  <p>Category</p>
+                  <h1 className="text-black text-[20px] leading-5">Seed</h1>
+                </div>
+                <div className="flex flex-col gap-[15px]">
+                  <p>Abilities</p>
+                  {["Overgrow"].map((el) => (
+                    <h1 key={nanoid(5)} className="text-black text-[20px] leading-5 flex gap-[9.375px] items-center">
+                      {el}{" "}
+                      <FaCircleQuestion
+                        size={"15.9954px"}
+                        className="text-white mt-[3.125px]"
+                      />
+                    </h1>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <p
+              className="mt-[1.25em] text-[#212121] text-[125%] leading-[125%] float-left"
+              style={{
+                fontFamily: "sans-serif",
+              }}
+            >
+              Type
+            </p>
+
+            <div className="w-[85%] mt-[8px] flex gap-1 text-[16px] leading-8">
+              {
+                ['grass', 'poison'].map((el) => <PokemonType key={nanoid(4)} type={el} rounded={'5px'}/>)
+              }
+              
             </div>
           </div>
         </div>

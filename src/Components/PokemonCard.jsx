@@ -23,6 +23,7 @@ function PokemonCard({url, name, number, types}) {
             <PokemonType
               key={nanoid(4)}
               type={el}
+              rounded={'3px'}
             />
           );
         })}
