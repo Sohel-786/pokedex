@@ -8,7 +8,7 @@ function Weakness({ typesData }) {
 
     Object.keys(typesData).map((el) => {
       let defense = typesData[el].defense;
-  
+
       Object.entries(defense).forEach(([key, value]) => {
         switch (key) {
           case "double":
@@ -31,7 +31,7 @@ function Weakness({ typesData }) {
         }
       });
     });
-  
+
     const weaknessFinal = [];
     Object.entries(weaknessData).forEach(([key, value]) => {
       if (value >= 2) {
@@ -40,19 +40,15 @@ function Weakness({ typesData }) {
     });
 
     setWeakness(weaknessFinal);
-  }, [])
-  
+  }, []);
 
-  return <>
-        {weakness.map((el) => (
-                <PokemonType
-                  key={nanoid(4)}
-                  width={"32%"}
-                  type={el}
-                  rounded={"5px"}
-                />
-              ))}
-  </>;
+  return (
+    <>
+      {weakness.map((el) => (
+        <PokemonType key={nanoid(4)} width={"32%"} type={el} rounded={"5px"} />
+      ))}
+    </>
+  );
 }
 
 export default Weakness;

@@ -313,7 +313,7 @@ function PokemonDetails() {
             </h1>
 
             <div className="w-full mt-[8px] flex flex-wrap gap-1 gap-y-2 text-[16px] leading-8">
-              {["fire", "psychic", "flying", 'ice'].map((el) => (
+              {["fire", "psychic", "flying", "ice"].map((el) => (
                 <PokemonType
                   key={nanoid(4)}
                   width={"32%"}
