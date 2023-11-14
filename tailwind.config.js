@@ -4,7 +4,8 @@ export default {
   theme: {
     extend: {
       boxShadow : {
-        EqualNav : '0 0 7px 1px #666666'
+        EqualNav : '0 0 7px 1px #666666',
+        evo : '0 4px 4px 0px #212121'
       },
       fontFamily : {
         roboto : "'Roboto', sans-serif",
@@ -17,6 +18,7 @@ export default {
       keyframes : {
         height : {
           '0%' : { transform: 'scaleY(0)'},
+          '70%' : { transform: 'scaleY(1.10)'},
           '100%' : {transform: 'scaleY(1)'}
         }
       },

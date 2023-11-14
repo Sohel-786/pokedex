@@ -10,6 +10,7 @@ import { useParams } from "react-router-dom";
 import { FaCircleQuestion } from "react-icons/fa6";
 import PokemonType from "../Components/PokemonType";
 import { nanoid } from "nanoid";
+import EvolutionChain from "../Components/EvolutionChain";
 
 function PokemonDetails() {
   const { both, male, female } = useSelector((s) => s?.pokedex);
@@ -324,6 +325,8 @@ function PokemonDetails() {
             </div>
           </div>
         </div>
+
+        <EvolutionChain />
         <SearchPokemon />
       </section>
     </EqualLayout>
