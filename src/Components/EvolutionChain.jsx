@@ -68,7 +68,9 @@ function EvolutionChain({ chain }) {
           <h3 className="font-roboto text-white ml-[22px] mt-[22px] text-[137.5%] leading-[125%]">
             Evolutions
           </h3>
-          <ul className="flex w-full justify-center list-none">{finalList.length > 1 && <>{finalList.map((el) => el)}</>}</ul>
+          <ul className="flex w-full justify-center list-none ">
+            {finalList.length > 1 && <>{finalList.map((el) => el)}</>}
+          </ul>
         </div>
       )}
     </>
