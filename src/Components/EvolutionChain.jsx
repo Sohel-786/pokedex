@@ -1,13 +1,15 @@
 import { useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { nanoid } from "nanoid";
 import PokemonType from "./PokemonType";
 
 function EvolutionChain({ chain }) {
   const { pokemonData } = useSelector((s) => s.pokedex);
+  const [finalList, setFinalList] = useState([]);
 
   const list = [];
   function handleEvoChain(chain) {
+    console.log("check");
     var temp;
     for (let i = 0; i < pokemonData.length; i++) {
       if (pokemonData[i].name === chain.species.name) {
@@ -17,7 +19,7 @@ function EvolutionChain({ chain }) {
     }
 
     list.push(
-      <li className="w-[20.2%] relative my-[2em] float-left">
+      <li key={nanoid(4)} className="w-[20.2%] relative my-[2em] float-left">
         <img
           src={temp?.img}
           alt={temp?.name}
@@ -56,6 +58,7 @@ function EvolutionChain({ chain }) {
 
   useEffect(() => {
     handleEvoChain(chain);
+    setFinalList(list);
   }, [pokemonData]);
 
   return (
@@ -65,12 +68,7 @@ function EvolutionChain({ chain }) {
           <h3 className="font-roboto text-white ml-[22px] mt-[22px] text-[137.5%] leading-[125%]">
             Evolutions
           </h3>
-
-          {list.length > 1 && <>
-            {
-              list.map((el) => el)
-            }
-          </>}
+          <ul className="flex w-full justify-center list-none">{finalList.length > 1 && <>{finalList.map((el) => el)}</>}</ul>
         </div>
       )}
     </>
