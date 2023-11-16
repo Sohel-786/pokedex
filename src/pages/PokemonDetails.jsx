@@ -103,6 +103,10 @@ function PokemonDetails() {
       official: info?.sprites?.other?.["official-artwork"]?.front_default,
     };
 
+    const stats = info.stats.map((el) => {
+      return [ el.stat.name , el.base_stat ]
+    })
+
     setAllDetails({
       abilities,
       height: info.height,
@@ -114,6 +118,7 @@ function PokemonDetails() {
       category,
       type_data,
       chain: evolutionInfo.chain,
+      stats
     });
   }
 
@@ -124,6 +129,7 @@ function PokemonDetails() {
           <div className="pt-[90px] bg-white relative max-w-[1280px] w-[100vw] flex mx-auto left-[-161.6px]">
             <div
               onClick={() => {
+                setAllDetails(null);
                 if (allDetails.id === 1) {
                   navigate(`/pokedex/${1010}`);
                 } else {
@@ -151,6 +157,7 @@ function PokemonDetails() {
             </div>
             <div
               onClick={() => {
+                setAllDetails(null);
                 if (allDetails.id === 1010) {
                   navigate(`/pokedex/${1}`);
                 } else {
@@ -214,24 +221,20 @@ function PokemonDetails() {
                 </h1>
 
                 <ul className="relative w-full list-none font-roboto font-bold tracking-wide">
-                  <li className="mb-[20px] ml-[31.157px] mr-[6.713px] w-[12.95%] float-left">
-                    <StatsLi data_value={3} name={"HP"} />
-                  </li>
-                  <li className="mb-[20px] mr-[6.713px] w-[12.95%] float-left">
-                    <StatsLi data_value={3} name={"Attack"} />
-                  </li>
-                  <li className="mb-[20px] mr-[6.713px] w-[12.95%] float-left">
-                    <StatsLi data_value={3} name={"Defense"} />
-                  </li>
-                  <li className="mb-[20px] mr-[6.713px] w-[12.95%] float-left">
-                    <StatsLi data_value={4} name={"Special Attack"} />
-                  </li>
-                  <li className="mb-[20px] mr-[6.713px] w-[12.95%] float-left">
-                    <StatsLi data_value={4} name={"Special Defense"} />
-                  </li>
-                  <li className="mb-[20px] mr-[6.713px] w-[12.95%] float-left">
-                    <StatsLi data_value={3} name={"Speed"} />
-                  </li>
+                  {
+                    allDetails.stats.map(([key, value], i) => {
+                      if(i === 0){
+                        return <li key={nanoid(5)} className="mb-[20px] ml-[31.157px] mr-[6.713px] w-[12.95%] float-left">
+                              <StatsLi data_value={value/15} name={key} />
+                      </li>
+                      }else{
+                        return  <li key={nanoid(5)} className="mb-[20px] mr-[6.713px] w-[12.95%] float-left">
+                        <StatsLi data_value={Math.floor(value/15)} name={key} />
+                      </li>
+                      }
+
+                    })
+                  }
                 </ul>
               </div>
             </div>

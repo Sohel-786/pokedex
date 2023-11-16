@@ -16,7 +16,6 @@ function EvolutionChain({ chain }) {
       }
     }
 
-    console.log(temp);
     list.push(
       <li className="w-[20.2%] relative my-[2em] float-left">
         <img
@@ -67,7 +66,11 @@ function EvolutionChain({ chain }) {
             Evolutions
           </h3>
 
-          {list.length > 1 && list}
+          {list.length > 1 && <>
+            {
+              list.map((el) => el)
+            }
+          </>}
         </div>
       )}
     </>
