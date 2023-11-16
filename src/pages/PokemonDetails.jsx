@@ -6,7 +6,7 @@ import { IoMaleSharp, IoFemaleSharp } from "react-icons/io5";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { FaCircleQuestion } from "react-icons/fa6";
 import PokemonType from "../Components/PokemonType";
 import { nanoid } from "nanoid";
@@ -17,12 +17,13 @@ import Loading from "../Components/Loading";
 function PokemonDetails() {
   const { both, male, female, pokemonData } = useSelector((s) => s?.pokedex);
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const [allDetails, setAllDetails] = useState();
 
   useEffect(() => {
     handlePokemonInfo(id);
-  }, [both]);
+  }, [both, id]);
 
   async function handlePokemonInfo(id) {
     const { data: info } = await axios.get(
@@ -121,7 +122,16 @@ function PokemonDetails() {
       {allDetails ? (
         <section className="w-[77%] bg-white flex flex-col justify-between px-[14.5px] pb-[10px]">
           <div className="pt-[90px] bg-white relative max-w-[1280px] w-[100vw] flex mx-auto left-[-161.6px]">
-            <div className="w-[50%] bg-[#a4a4a4] hover:bg-[#30a7d7] transition-colors duration-300 ease-in-out cursor-pointer border-r-[3.7037px] border-white flex justify-end">
+            <div
+              onClick={() => {
+                if (allDetails.id === 1) {
+                  navigate(`/pokedex/${1010}`);
+                } else {
+                  navigate(`/pokedex/${allDetails.id - 1}`);
+                }
+              }}
+              className="w-[50%] bg-[#a4a4a4] hover:bg-[#30a7d7] transition-colors duration-300 ease-in-out cursor-pointer border-r-[3.7037px] border-white flex justify-end"
+            >
               <div className="pt-4 pb-16 w-full max-w-[448px] flex items-center">
                 <div className="w-[26px] h-[26px] rounded-full bg-white text-[#616161] mx-[15.600px] my-[5.200px] flex justify-center items-center text-center">
                   <FaAngleLeft size={"13px"} />
@@ -139,7 +149,16 @@ function PokemonDetails() {
                 </span>
               </div>
             </div>
-            <div className="w-[50%] bg-[#a4a4a4] hover:bg-[#30a7d7] transition-colors duration-300 ease-in-out cursor-pointer flex justify-end">
+            <div
+              onClick={() => {
+                if (allDetails.id === 1010) {
+                  navigate(`/pokedex/${1}`);
+                } else {
+                  navigate(`/pokedex/${allDetails.id + 1}`);
+                }
+              }}
+              className="w-[50%] bg-[#a4a4a4] hover:bg-[#30a7d7] transition-colors duration-300 ease-in-out cursor-pointer flex justify-end"
+            >
               <div className="pt-4 pb-16 w-full max-w-[448px] flex items-center">
                 <span className="mx-[12px] capitalize text-[#616161] leading-[38.88px] font-bold font-sans text-[24px]">
                   {allDetails.id === 1010
@@ -178,7 +197,7 @@ function PokemonDetails() {
             <div className="w-[49%] flex flex-col">
               <div className="w-full rounded-[5px] bg-[#F2F2F2] ">
                 <img
-                  src="https://assets.pokemon.com/assets/cms2/img/pokedex/full/001.png"
+                  src={allDetails.images.official}
                   alt="demo"
                   className="w-full pb-[30px]"
                 />
