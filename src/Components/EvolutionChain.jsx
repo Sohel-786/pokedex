@@ -1,17 +1,19 @@
 import { useSelector } from "react-redux";
 import PokemonType from "./PokemonType";
+import { useEffect } from "react";
 
 function EvolutionChain({ chain }) {
   const { pokemonData } = useSelector((s) => s.pokedex);
-  var temp;
-  for (let i = 0; i < pokemonData.length; i++) {
-    if (pokemonData[i].name === chain.species.name) {
-      temp = pokemonData[i];
-      break;
-    }
-  }
+
   const list = [];
   function handleEvoChain(chain) {
+    var temp;
+    for (let i = 0; i < pokemonData.length; i++) {
+      if (pokemonData[i].name === chain.species.name) {
+        temp = pokemonData[i];
+        break;
+      }
+    }
     list.push(
       <li className="w-[20.2%] relative my-[2em] float-left">
         <img
@@ -41,13 +43,25 @@ function EvolutionChain({ chain }) {
         </ul>
       </li>
     );
+
+    if(chain?.evolves_to.length > 0){
+      for(let i =0; i < chain?.evolves_to.length; i++){
+        handleEvoChain(chain.evolves_to[i]);
+      }
+    }
   }
+
+  useEffect(() => {
+    handleEvoChain(chain);
+  }, []);
 
   return (
     <div className="w-full my-4 rounded-[5px] relative before:content-[''] before:absolute before:bg-pokeEvo before:bg-no-repeat before:h-[2em] before:w-[2em] before:z-[3] before:left-[-1px] before:bottom-[-1px] before:rotate-[-90deg] bg-evoContainer min-h-[400px]">
       <h3 className="font-roboto text-white ml-[22px] mt-[22px] text-[137.5%] leading-[125%]">
         Evolutions
       </h3>
+
+      {list}
     </div>
   );
 }

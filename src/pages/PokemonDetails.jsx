@@ -4,7 +4,7 @@ import SearchPokemon from "../Components/SearchPokemon";
 import StatsLi from "../Components/StatsLi";
 import { IoMaleSharp, IoFemaleSharp } from "react-icons/io5";
 import { useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { FaCircleQuestion } from "react-icons/fa6";
@@ -16,14 +16,18 @@ function PokemonDetails() {
   const { both, male, female } = useSelector((s) => s?.pokedex);
   const { id } = useParams();
 
-  useEffect(() => {});
+  const { allDetails, setAllDetails } = useState({});
 
-  async function handlePokemonInfo() {
+  useEffect(() => {
+    handlePokemonInfo(id)
+  }, [both]);
+
+  async function handlePokemonInfo(id) {
     const { data: info } = await axios.get(
       `https://pokeapi.co/api/v2/pokemon/${id}`
     );
-
-    const abilities = info.abilities.map(async (el) => {
+    var abilities = [];
+    info.abilities.map(async (el) => {
       const { name, url } = el.ability;
       const { data } = await axios.get(url);
       var effect;
@@ -34,11 +38,11 @@ function PokemonDetails() {
         }
       });
 
-      return {
+      abilities.push({
         name,
         effect,
         hidden: el.is_hidden,
-      };
+      })
     });
 
     var desc;
@@ -62,20 +66,18 @@ function PokemonDetails() {
     }
 
     var type_data = {};
-    info.types.forEach(async (el) => {
-      const typeInfo = axios.get(el.type.url);
+    info.types.forEach(async(el) => {
+      const {data : typeInfo} = await axios.get(el.type.url);
       var double = [],
         zero = [],
         half = [];
-
-      typeInfo.damage_relations.double_damage_from
-        .forEach((el) => {
+      console.log(typeInfo)
+      (typeInfo["damage_relations"].double_damage_from).forEach((el) => {
           double.push(el.name);
-        })(typeInfo.damage_relations.half_damage_from)
-        .forEach((el) => {
+        });
+        (typeInfo["damage_relations"].half_damage_from).forEach((el) => {
           half.push(el.name);
-        })(typeInfo.damage_relations.no_damage_from)
-        .forEach((el) => {
+        })(typeInfo["damage_relations"].no_damage_from).forEach((el) => {
           zero.push(el.name);
         });
 
@@ -88,26 +90,27 @@ function PokemonDetails() {
       };
     });
 
-    const { data: evolutionInfo } = await axios.get(
+    const { info: evolutionInfo } = await axios.get(
       species.evolution_chain.url
     );
 
     const images = {
-      svg: data?.sprites?.other?.dream_world?.front_default,
-      official: data?.sprites?.other?.["official-artwork"]?.front_default,
+      svg: info?.sprites?.other?.dream_world?.front_default,
+      official: info?.sprites?.other?.["official-artwork"]?.front_default,
     };
 
-    return {
+    setAllDetails({
       abilities,
-      height: data.height,
-      id: data.id,
-      name: data.name,
-      weight: data.weight,
+      height: info.height,
+      id: info.id,
+      name: info.name,
+      weight: info.weight,
       images,
       desc,
       category,
       type_data,
-    };
+      chain : evolutionInfo.chain
+    })
   }
 
   return (
