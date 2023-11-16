@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import PokemonType from "./PokemonType";
+import { nanoid } from "nanoid";
 
 function Weakness({ typesData }) {
   const [weakness, setWeakness] = useState([]);

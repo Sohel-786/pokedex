@@ -67,11 +67,11 @@ const getPokemon = async (url) => {
       id: res?.data?.id,
       name: res?.data?.name,
       number:
-        (res?.data?.id).length === 1
+        ((res?.data?.id).toString()).length === 1
           ? "#000" + res.data.id
-          : (res?.data?.id).length === 2
+          : ((res?.data?.id).toString()).length === 2
           ? "#00" + res.data.id
-          : (res?.data?.id).length === 3
+          : ((res?.data?.id).toString()).length === 3
           ? "#0" + res.data.id
           : "#" + res.data.id,
       img: url1 ? url1 : url2,

@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
-import PokemonType from "./PokemonType";
 import { useEffect } from "react";
+import { nanoid } from "nanoid";
+import PokemonType from "./PokemonType";
 
 function EvolutionChain({ chain }) {
   const { pokemonData } = useSelector((s) => s.pokedex);
@@ -14,6 +15,8 @@ function EvolutionChain({ chain }) {
         break;
       }
     }
+
+    console.log(temp);
     list.push(
       <li className="w-[20.2%] relative my-[2em] float-left">
         <img
@@ -30,7 +33,7 @@ function EvolutionChain({ chain }) {
           {temp?.name + " " + temp?.number}
         </h3>
         <ul className="w-full list-none text-[75%] leading-[12px] flex">
-          {(temp?.types).map((el) => {
+          { temp?.types && (temp?.types).map((el) => {
             return (
               <PokemonType
                 key={nanoid(4)}
@@ -44,8 +47,8 @@ function EvolutionChain({ chain }) {
       </li>
     );
 
-    if(chain?.evolves_to.length > 0){
-      for(let i =0; i < chain?.evolves_to.length; i++){
+    if (chain?.evolves_to.length > 0) {
+      for (let i = 0; i < chain?.evolves_to.length; i++) {
         handleEvoChain(chain.evolves_to[i]);
       }
     }
@@ -53,16 +56,20 @@ function EvolutionChain({ chain }) {
 
   useEffect(() => {
     handleEvoChain(chain);
-  }, []);
+  }, [pokemonData]);
 
   return (
-    <div className="w-full my-4 rounded-[5px] relative before:content-[''] before:absolute before:bg-pokeEvo before:bg-no-repeat before:h-[2em] before:w-[2em] before:z-[3] before:left-[-1px] before:bottom-[-1px] before:rotate-[-90deg] bg-evoContainer min-h-[400px]">
-      <h3 className="font-roboto text-white ml-[22px] mt-[22px] text-[137.5%] leading-[125%]">
-        Evolutions
-      </h3>
+    <>
+      {pokemonData && (
+        <div className="w-full my-4 rounded-[5px] relative before:content-[''] before:absolute before:bg-pokeEvo before:bg-no-repeat before:h-[2em] before:w-[2em] before:z-[3] before:left-[-1px] before:bottom-[-1px] before:rotate-[-90deg] bg-evoContainer min-h-[400px]">
+          <h3 className="font-roboto text-white ml-[22px] mt-[22px] text-[137.5%] leading-[125%]">
+            Evolutions
+          </h3>
 
-      {list}
-    </div>
+          {list.length > 1 && list}
+        </div>
+      )}
+    </>
   );
 }
 
