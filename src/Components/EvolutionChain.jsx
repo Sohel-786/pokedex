@@ -33,16 +33,17 @@ function EvolutionChain({ chain }) {
           {temp?.name + " " + temp?.number}
         </h3>
         <ul className="w-full list-none text-[75%] leading-[12px] flex">
-          { temp?.types && (temp?.types).map((el) => {
-            return (
-              <PokemonType
-                key={nanoid(4)}
-                width={"48.4375%"}
-                type={el}
-                rounded={"5px"}
-              />
-            );
-          })}
+          {temp?.types &&
+            (temp?.types).map((el) => {
+              return (
+                <PokemonType
+                  key={nanoid(4)}
+                  width={"48.4375%"}
+                  type={el}
+                  rounded={"5px"}
+                />
+              );
+            })}
         </ul>
       </li>
     );

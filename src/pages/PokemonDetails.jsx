@@ -18,7 +18,7 @@ function PokemonDetails() {
   const { both, male, female, pokemonData } = useSelector((s) => s?.pokedex);
   const { id } = useParams();
 
-  const [ allDetails, setAllDetails ] = useState();
+  const [allDetails, setAllDetails] = useState();
 
   useEffect(() => {
     handlePokemonInfo(id);
