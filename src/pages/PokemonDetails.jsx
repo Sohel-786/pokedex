@@ -104,8 +104,8 @@ function PokemonDetails() {
     };
 
     const stats = info.stats.map((el) => {
-      return [ el.stat.name , el.base_stat ]
-    })
+      return [el.stat.name, el.base_stat];
+    });
 
     setAllDetails({
       abilities,
@@ -118,7 +118,7 @@ function PokemonDetails() {
       category,
       type_data,
       chain: evolutionInfo.chain,
-      stats
+      stats,
     });
   }
 
@@ -202,7 +202,7 @@ function PokemonDetails() {
 
           <div className="w-full py-4 flex justify-between">
             <div className="w-[49%] flex flex-col">
-              <div className="w-full rounded-[5px] bg-[#F2F2F2] ">
+              <div className="w-full rounded-[5px] bg-[#F2F2F2] h-[457.089px]">
                 <img
                   src={allDetails.images.official}
                   alt="demo"
@@ -221,20 +221,30 @@ function PokemonDetails() {
                 </h1>
 
                 <ul className="relative w-full list-none font-roboto font-bold tracking-wide">
-                  {
-                    allDetails.stats.map(([key, value], i) => {
-                      if(i === 0){
-                        return <li key={nanoid(5)} className="mb-[20px] ml-[31.157px] mr-[6.713px] w-[12.95%] float-left">
-                              <StatsLi data_value={value/15} name={key} />
-                      </li>
-                      }else{
-                        return  <li key={nanoid(5)} className="mb-[20px] mr-[6.713px] w-[12.95%] float-left">
-                        <StatsLi data_value={Math.floor(value/15)} name={key} />
-                      </li>
-                      }
-
-                    })
-                  }
+                  {allDetails.stats.map(([key, value], i) => {
+                    if (i === 0) {
+                      return (
+                        <li
+                          key={nanoid(5)}
+                          className="mb-[20px] ml-[31.157px] mr-[6.713px] w-[12.95%] float-left"
+                        >
+                          <StatsLi data_value={value / 15} name={key} />
+                        </li>
+                      );
+                    } else {
+                      return (
+                        <li
+                          key={nanoid(5)}
+                          className="mb-[20px] mr-[6.713px] w-[12.95%] float-left"
+                        >
+                          <StatsLi
+                            data_value={Math.floor(value / 15)}
+                            name={key}
+                          />
+                        </li>
+                      );
+                    }
+                  })}
                 </ul>
               </div>
             </div>
@@ -360,12 +370,14 @@ function PokemonDetails() {
               </div>
             </div>
           </div>
-          
+
           <EvolutionChain chain={allDetails.chain} />
           <SearchPokemon />
         </section>
       ) : (
-        <Loading />
+        <div className="pt-[200px]">
+          <Loading />
+        </div>
       )}
     </EqualLayout>
   );

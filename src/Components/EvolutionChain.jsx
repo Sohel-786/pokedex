@@ -3,10 +3,12 @@ import { useEffect, useState } from "react";
 import { nanoid } from "nanoid";
 import PokemonType from "./PokemonType";
 import { RiArrowRightSLine } from "react-icons/ri";
+import { useNavigate } from "react-router-dom";
 
 function EvolutionChain({ chain }) {
   const { pokemonData } = useSelector((s) => s.pokedex);
   const [finalList, setFinalList] = useState([]);
+  const navigate = useNavigate();
 
   const list = [];
   function handleEvoChain(chain) {
@@ -19,13 +21,19 @@ function EvolutionChain({ chain }) {
     }
     console.log(temp)
     list.push(
-      <li key={nanoid(4)} className="w-[20.2%] relative my-[2em] float-left">
+      <li onClick={() => {
+        window.scrollTo({
+          top: 250,
+          behavior: "smooth",
+        })
+        navigate(`/pokedex/${temp?.id}`)
+      }} key={nanoid(4)} className="w-[20.2%] relative my-[2em] float-left cursor-pointer">
         <div className="rounded-[50%] bg-[#616161] shadow-evo border-[5px] border-white mx-auto w-full h-[175px] flex justify-center items-center">
 
         <img
           src={temp?.img}
           alt={temp?.name}
-          className="w-[83%] h-[83%]"
+          className="w-[83%] h-[83%] hover:scale-125 transition-all duration-300 ease-in-out"
         />
         </div>
         <h3
