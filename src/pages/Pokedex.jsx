@@ -16,6 +16,7 @@ function Pokedex() {
     positionLimit: 24,
   });
   const [pokemons, setPokemons] = useState([]);
+  const [requestMade, setRequestMade] = useState(false);
 
   const { pokemonData } = useSelector((s) => s.pokedex);
 
@@ -27,6 +28,9 @@ function Pokedex() {
     setPokemons([...pokemonData.slice(0, 12)]);
   }
 
+  function handleAddPoke(){
+      
+  }
   return (
     <EqualLayout>
       <section className="w-[77%] bg-white flex flex-col justify-between px-[14.5px] pb-[10px]">
@@ -90,9 +94,37 @@ function Pokedex() {
                   />
                 );
               })}
+              {requestMade ? (
+                <Loading />
+              ) : (
+                <button
+                  onClick={() => {
+                    setRequestMade(true);
+
+                    setPokemons([
+                      ...pokemons,
+                      ...pokemonData.slice(
+                        offsetLimit.offset,
+                        offsetLimit.positionLimit
+                      ),
+                    ]);
+
+                    setOffsetLimit({
+                      offset: offsetLimit.offset + 12,
+                      positionLimit: offsetLimit.positionLimit + 12,
+                    });
+
+                  }}
+                  className="pt-[12px] pb-[10.800px] px-[20px] bg-[#30a7d7] text-white rounded-[5px] font-openSans text-[16px] leading-[20px] font-semibold hover:bg-[#1b82b1] mx-auto my-5 mt-10"
+                >
+                  Load more Pokémon
+                </button>
+              )}
             </>
           ) : (
-            <Loading />
+            <div className="min-h-[50vh] w-full flex justify-center">
+              <Loading />
+            </div>
           )}
         </ul>
       </section>
