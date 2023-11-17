@@ -109,7 +109,12 @@ function PokemonDetails() {
 
     setAllDetails({
       abilities,
-      height: info.height/3.048,
+      height: [
+        Math.floor(info.height / 3.048),
+        Math.round(
+          Number(((info.height / 3.048) % 1).toString().substring(1)) * 12
+        ),
+      ],
       id: info.id,
       name: info.name,
       weight: info.weight,
@@ -145,13 +150,13 @@ function PokemonDetails() {
                 <span className="text-[24px] leading-[38.88px] text-white font-bold font-sans tracking-wide">
                   {allDetails.id === 1
                     ? "#" + 1010
-                    : pokemonData[allDetails.id - 1]?.number}
+                    : pokemonData[allDetails.id - 2]?.number}
                 </span>
 
                 <span className="mx-[12px] text-[#616161] leading-[38.88px] font-bold font-sans text-[24px] capitalize">
                   {allDetails.id === 1
                     ? pokemonData[1009]?.name
-                    : pokemonData[allDetails.id - 1]?.name}
+                    : pokemonData[allDetails.id - 2]?.name}
                 </span>
               </div>
             </div>
@@ -254,7 +259,7 @@ function PokemonDetails() {
                 className="my-[9px] text-[#212121] text-lg leading-[27px] tracking-wide font-medium"
                 style={{ fontFamily: "sans-serif" }}
               >
-                {allDetails.desc}
+                {allDetails.desc ? allDetails.desc : "Ecology under analysis."}
               </p>
 
               <div
@@ -267,13 +272,24 @@ function PokemonDetails() {
                   <div className="flex flex-col gap-[15px]">
                     <p>Height</p>
                     <h1 className="text-black text-[20px] leading-5">
-                      {Math.floor(allDetails.height) + "'" + " " + ((allDetails.height % 1).toFixed(2)).substring(2) + '"'}
+                      {allDetails.height[0] +
+                        "'" +
+                        " " +
+                        (allDetails.height[1].toString().length === 1
+                          ? "0"
+                          : "") +
+                        allDetails.height[1] +
+                        '"'}
                     </h1>
                   </div>
                   <div className="flex flex-col gap-[15px]">
                     <p>Weight</p>
                     <h1 className="text-black text-[20px] leading-5">
-                      {(allDetails.weight/4.536).toFixed(2) + " " + "lbs"}
+                      {(allDetails.weight
+                        ? (allDetails.weight / 4.536).toFixed(2)
+                        : "????") +
+                        " " +
+                        "lbs"}
                     </h1>
                   </div>
                   <div className="flex flex-col gap-[15px]">

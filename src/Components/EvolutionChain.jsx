@@ -19,22 +19,25 @@ function EvolutionChain({ chain }) {
         break;
       }
     }
-    console.log(temp)
-    list.push(
-      <li onClick={() => {
-        window.scrollTo({
-          top: 250,
-          behavior: "smooth",
-        })
-        navigate(`/pokedex/${temp?.id}`)
-      }} key={nanoid(4)} className="w-[20.2%] relative my-[2em] float-left cursor-pointer">
-        <div className="rounded-[50%] bg-[#616161] shadow-evo border-[5px] border-white mx-auto w-full h-[175px] flex justify-center items-center">
 
-        <img
-          src={temp?.img}
-          alt={temp?.name}
-          className="w-[83%] h-[83%] hover:scale-125 transition-all duration-300 ease-in-out"
-        />
+    list.push(
+      <li
+        onClick={() => {
+          window.scrollTo({
+            top: 250,
+            behavior: "smooth",
+          });
+          navigate(`/pokedex/${temp?.id}`);
+        }}
+        key={nanoid(4)}
+        className="w-[20.2%] relative my-[2em] float-left cursor-pointer"
+      >
+        <div className="rounded-[50%] bg-[#616161] shadow-evo border-[5px] border-white mx-auto w-full h-[175px] flex justify-center items-center">
+          <img
+            src={temp?.img}
+            alt={temp?.name}
+            className="w-[83%] h-[83%] hover:scale-125 transition-all duration-300 ease-in-out"
+          />
         </div>
         <h3
           className="capitalize text-white text-center text-[125%] leading-[125%] w-full my-[15px]"
@@ -42,7 +45,8 @@ function EvolutionChain({ chain }) {
             fontFamily: "sans-serif",
           }}
         >
-          {temp?.name + " "} <span className="text-[#a4acaf]">{temp?.number}</span>
+          {temp?.name + " "}{" "}
+          <span className="text-[#a4acaf]">{temp?.number}</span>
         </h3>
         <ul className="w-full list-none text-[75%] leading-[18px] flex gap-1 justify-center">
           {temp?.types &&
@@ -63,9 +67,10 @@ function EvolutionChain({ chain }) {
     if (chain?.evolves_to.length > 0) {
       list.push(
         <li className="flex justify-center items-center my-[2em] mb-[5em] relative">
-          <RiArrowRightSLine  size={'100px'} className="text-white" />
+          <RiArrowRightSLine size={"100px"} className="text-white" />
         </li>
-      )
+      );
+
       for (let i = 0; i < chain?.evolves_to.length; i++) {
         handleEvoChain(chain.evolves_to[i]);
       }
@@ -85,7 +90,7 @@ function EvolutionChain({ chain }) {
             Evolutions
           </h3>
           <ul className="flex w-full justify-center list-none gap-2 flex-wrap">
-            {finalList.length > 0 && <>{finalList.map((el) => el)}</>}
+            {finalList.length > 0 && <>{...finalList}</>}
           </ul>
         </div>
       )}
