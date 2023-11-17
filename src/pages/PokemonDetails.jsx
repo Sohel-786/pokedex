@@ -360,7 +360,7 @@ function PokemonDetails() {
               </div>
             </div>
           </div>
-
+          
           <EvolutionChain chain={allDetails.chain} />
           <SearchPokemon />
         </section>

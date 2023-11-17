@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { nanoid } from "nanoid";
 import PokemonType from "./PokemonType";
+import { RiArrowRightSLine } from "react-icons/ri";
 
 function EvolutionChain({ chain }) {
   const { pokemonData } = useSelector((s) => s.pokedex);
@@ -9,7 +10,6 @@ function EvolutionChain({ chain }) {
 
   const list = [];
   function handleEvoChain(chain) {
-    console.log("check");
     var temp;
     for (let i = 0; i < pokemonData.length; i++) {
       if (pokemonData[i].name === chain.species.name) {
@@ -17,23 +17,26 @@ function EvolutionChain({ chain }) {
         break;
       }
     }
-
+    console.log(temp)
     list.push(
       <li key={nanoid(4)} className="w-[20.2%] relative my-[2em] float-left">
+        <div className="rounded-[50%] bg-[#616161] shadow-evo border-[5px] border-white mx-auto w-full h-[175px] flex justify-center items-center">
+
         <img
           src={temp?.img}
           alt={temp?.name}
-          className="rounded-[50%] bg-[#616161] shadow-evo border-[5px] border-white mx-auto max-w-[150px] w-full block"
+          className="w-[83%] h-[83%]"
         />
+        </div>
         <h3
           className="capitalize text-white text-center text-[125%] leading-[125%] w-full my-[15px]"
           style={{
             fontFamily: "sans-serif",
           }}
         >
-          {temp?.name + " " + temp?.number}
+          {temp?.name + " "} <span className="text-[#a4acaf]">{temp?.number}</span>
         </h3>
-        <ul className="w-full list-none text-[75%] leading-[12px] flex">
+        <ul className="w-full list-none text-[75%] leading-[18px] flex gap-1 justify-center">
           {temp?.types &&
             (temp?.types).map((el) => {
               return (
@@ -50,6 +53,11 @@ function EvolutionChain({ chain }) {
     );
 
     if (chain?.evolves_to.length > 0) {
+      list.push(
+        <li className="flex justify-center items-center my-[2em] mb-[5em] relative">
+          <RiArrowRightSLine  size={'100px'} className="text-white" />
+        </li>
+      )
       for (let i = 0; i < chain?.evolves_to.length; i++) {
         handleEvoChain(chain.evolves_to[i]);
       }
@@ -58,18 +66,18 @@ function EvolutionChain({ chain }) {
 
   useEffect(() => {
     handleEvoChain(chain);
-    setFinalList(list);
+    setFinalList([...list]);
   }, [pokemonData]);
 
   return (
     <>
       {pokemonData && (
-        <div className="w-full my-4 rounded-[5px] relative before:content-[''] before:absolute before:bg-pokeEvo before:bg-no-repeat before:h-[2em] before:w-[2em] before:z-[3] before:left-[-1px] before:bottom-[-1px] before:rotate-[-90deg] bg-evoContainer min-h-[400px]">
+        <div className="w-full my-4 rounded-[5px] relative before:content-[''] before:absolute before:bg-pokeEvo before:bg-no-repeat before:h-[2em] before:w-[2em] before:z-[3] before:left-[-1px] before:bottom-[-1px] before:rotate-[-90deg] bg-evoContainer">
           <h3 className="font-roboto text-white ml-[22px] mt-[22px] text-[137.5%] leading-[125%]">
             Evolutions
           </h3>
-          <ul className="flex w-full justify-center list-none ">
-            {finalList.length > 1 && <>{finalList.map((el) => el)}</>}
+          <ul className="flex w-full justify-center list-none gap-2 flex-wrap">
+            {finalList.length > 0 && <>{finalList.map((el) => el)}</>}
           </ul>
         </div>
       )}
