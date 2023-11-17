@@ -100,9 +100,9 @@ function EqualLayout({ children }) {
               navigate("/pokedex");
             }}
             style={{
-              backgroundColor: pathname === "/pokedex" && "#ff0000c9",
-              color: pathname === "/pokedex" && "white",
-              fontWeight: pathname === "/pokedex" && "bold",
+              backgroundColor: (pathname === "/pokedex" || pathname.substring(0,8) === "/pokedex") && "#ff0000c9",
+              color: (pathname === "/pokedex" || pathname.substring(0,9) === "/pokedex") && "white",
+              fontWeight: (pathname === "/pokedex" || pathname.substring(0,9) === "/pokedex") && "bold",
             }}
             className="hover:bg-[#ff0000c9] flex flex-col cursor-pointer w-[127.853px] h-full relative after:h-[6px] after:content-[' '] after:absolute after:w-full after:bottom-[-6px] after:z-[1] after:bg-[#ff0000c9] hover:text-white transition-colors duration-100 ease-in"
           >

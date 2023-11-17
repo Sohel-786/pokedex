@@ -2,9 +2,10 @@ function PokemonType({ type, rounded , width}) {
   if (type === "grass") {
     return (
       <li
-        className={`list-none mr-[2.969px] font-sans text-center text-black bg-gradient-to-tr from-[#9bcc50] to-green-500 rounded-[${rounded}]`}
+        className={`list-none mr-[2.969px] font-sans text-center text-black bg-gradient-to-tr from-[#9bcc50] to-green-500`}
         style={{
-          width : width
+          width : width,
+          borderRadius : rounded
         }}
       >
         Grass
@@ -13,9 +14,10 @@ function PokemonType({ type, rounded , width}) {
   } else if (type === "poison") {
     return (
       <li
-        className={`list-none mr-[2.969px] font-sans text-center text-white bg-gradient-to-tr from-[#b97fc9] to-purple-500 rounded-[${rounded}]`}
+        className={`list-none mr-[2.969px] font-sans text-center text-white bg-gradient-to-tr from-[#b97fc9] to-purple-500`}
         style={{
-          width : width
+           width : width,
+          borderRadius : rounded
         }}
       >
         Poison
@@ -24,9 +26,10 @@ function PokemonType({ type, rounded , width}) {
   } else if (type === "fire") {
     return (
       <li
-        className={`list-none mr-[2.969px] font-sans text-center text-white bg-gradient-to-tr from-[#fd7d24] to-orange-600 rounded-[${rounded}]`}
+        className={`list-none mr-[2.969px] font-sans text-center text-white bg-gradient-to-tr from-[#fd7d24] to-orange-600`}
         style={{
-          width : width
+           width : width,
+          borderRadius : rounded
         }}
       >
         Fire
@@ -35,9 +38,10 @@ function PokemonType({ type, rounded , width}) {
   } else if (type === "flying") {
     return (
       <li
-        className={`list-none mr-[2.969px] font-sans text-center text-black bg-gradient-to-b from-[#3dc7ef] from-50% to-[#bdb9b8] to-50% rounded-[${rounded}]`}
+        className={`list-none mr-[2.969px] font-sans text-center text-black bg-gradient-to-b from-[#3dc7ef] from-50% to-[#bdb9b8] to-50%`}
         style={{
-          width : width
+           width : width,
+          borderRadius : rounded
         }}
       >
         Flying
@@ -46,9 +50,10 @@ function PokemonType({ type, rounded , width}) {
   } else if (type === "water") {
     return (
       <li
-        className={`list-none mr-[2.969px] font-sans text-center text-white bg-gradient-to-tr from-[#4592c4] to-sky-600 rounded-[${rounded}]`}
+        className={`list-none mr-[2.969px] font-sans text-center text-white bg-gradient-to-tr from-[#4592c4] to-sky-600`}
         style={{
-          width : width
+           width : width,
+          borderRadius : rounded
         }}
       >
         Water
@@ -57,9 +62,10 @@ function PokemonType({ type, rounded , width}) {
   } else if (type === "bug") {
     return (
       <li
-        className={`list-none mr-[2.969px] font-sans text-center text-white bg-gradient-to-tr from-[#729f3f] to-green-600 rounded-[${rounded}]`}
+        className={`list-none mr-[2.969px] font-sans text-center text-white bg-gradient-to-tr from-[#729f3f] to-green-600`}
         style={{
-          width : width
+           width : width,
+          borderRadius : rounded
         }}
       >
         Bug
@@ -68,9 +74,10 @@ function PokemonType({ type, rounded , width}) {
   } else if (type === "normal") {
     return (
       <li
-        className={`list-none mr-[2.969px] font-sans text-center text-black bg-gradient-to-tr from-[#a4acaf] to-gray-500 rounded-[${rounded}]`}
+        className={`list-none mr-[2.969px] font-sans text-center text-black bg-gradient-to-tr from-[#a4acaf] to-gray-500`}
         style={{
-          width : width
+           width : width,
+          borderRadius : rounded
         }}
       >
         Normal
@@ -79,9 +86,10 @@ function PokemonType({ type, rounded , width}) {
   } else if (type === "electric") {
     return (
       <li
-        className={`list-none mr-[2.969px] font-sans text-center text-black bg-gradient-to-tr from-[#eed535] to-yellow-500 rounded-[${rounded}]`}
+        className={`list-none mr-[2.969px] font-sans text-center text-black bg-gradient-to-tr from-[#eed535] to-yellow-500`}
         style={{
-          width : width
+           width : width,
+          borderRadius : rounded
         }}
       >
         Electric
@@ -90,9 +98,10 @@ function PokemonType({ type, rounded , width}) {
   } else if (type === "ground") {
     return (
       <li
-        className={`list-none mr-[2.969px] font-sans text-center text-black bg-gradient-to-b from-[#f7de3f] from-50% to-[#ab9842] to-50% rounded-[${rounded}]`}
+        className={`list-none mr-[2.969px] font-sans text-center text-black bg-gradient-to-b from-[#f7de3f] from-50% to-[#ab9842] to-50%`}
         style={{
-          width : width
+           width : width,
+          borderRadius : rounded
         }}
       >
         Ground
@@ -101,9 +110,10 @@ function PokemonType({ type, rounded , width}) {
   } else if (type === "fairy") {
     return (
       <li
-        className={`list-none mr-[2.969px] font-sans text-center text-black bg-gradient-to-tr from-[#fdb9e9] to-pink-400 rounded-[${rounded}]`}
+        className={`list-none mr-[2.969px] font-sans text-center text-black bg-gradient-to-tr from-[#fdb9e9] to-pink-400`}
         style={{
-          width : width
+           width : width,
+          borderRadius : rounded
         }}
       >
         Fairy
@@ -112,9 +122,10 @@ function PokemonType({ type, rounded , width}) {
   } else if (type === "fighting") {
     return (
       <li
-        className={`list-none mr-[2.969px] font-sans text-center text-white bg-gradient-to-tr from-[#d56723] to-orange-400 rounded-[${rounded}]`}
+        className={`list-none mr-[2.969px] font-sans text-center text-white bg-gradient-to-tr from-[#d56723] to-orange-400`}
         style={{
-          width : width
+           width : width,
+          borderRadius : rounded
         }}
       >
         Fighting
@@ -123,9 +134,10 @@ function PokemonType({ type, rounded , width}) {
   } else if (type === "psychic") {
     return (
       <li
-        className={`list-none mr-[2.969px] font-sans text-center text-white bg-[#f366b9] rounded-[${rounded}]`}
+        className={`list-none mr-[2.969px] font-sans text-center text-white bg-[#f366b9]`}
         style={{
-          width : width
+           width : width,
+          borderRadius : rounded
         }}
       >
         Psychic
@@ -134,9 +146,10 @@ function PokemonType({ type, rounded , width}) {
   } else if (type === "rock") {
     return (
       <li
-        className={`list-none mr-[2.969px] font-sans text-center text-white bg-gradient-to-tr from-stone-500 to-stone-700 rounded-[${rounded}]`}
+        className={`list-none mr-[2.969px] font-sans text-center text-white bg-gradient-to-tr from-stone-500 to-stone-700`}
         style={{
-          width : width
+           width : width,
+          borderRadius : rounded
         }}
       >
         Rock
@@ -145,9 +158,10 @@ function PokemonType({ type, rounded , width}) {
   } else if (type === "steel") {
     return (
       <li
-        className={`list-none mr-[2.969px] font-sans text-center text-black bg-[#9eb7b8] rounded-[${rounded}]`}
+        className={`list-none mr-[2.969px] font-sans text-center text-black bg-[#9eb7b8]`}
         style={{
-          width : width
+           width : width,
+          borderRadius : rounded
         }}
       >
         Steel
@@ -156,9 +170,10 @@ function PokemonType({ type, rounded , width}) {
   } else if (type === "ice") {
     return (
       <li
-        className={`list-none mr-[2.969px] font-sans text-center text-black bg-gradient-to-tr from-[#51c4e7] to-blue-500 rounded-[${rounded}]`}
+        className={`list-none mr-[2.969px] font-sans text-center text-black bg-gradient-to-tr from-[#51c4e7] to-blue-500`}
         style={{
-          width : width
+           width : width,
+          borderRadius : rounded
         }}
       >
         Ice
@@ -167,9 +182,10 @@ function PokemonType({ type, rounded , width}) {
   } else if (type === "ghost") {
     return (
       <li
-        className={`list-none mr-[2.969px] font-sans text-center text-white bg-gradient-to-tr from-[#7b62a3] to-purple-600 rounded-[${rounded}]`}
+        className={`list-none mr-[2.969px] font-sans text-center text-white bg-gradient-to-tr from-[#7b62a3] to-purple-600`}
         style={{
-          width : width
+           width : width,
+          borderRadius : rounded
         }}
       >
         Ghost
@@ -178,9 +194,10 @@ function PokemonType({ type, rounded , width}) {
   } else if (type === "dragon") {
     return (
       <li
-        className={`list-none mr-[2.969px] font-sans text-center text-white bg-gradient-to-b from-[#53a4cf] from-50% to-[#f16e57] to-50% rounded-[${rounded}]`}
+        className={`list-none mr-[2.969px] font-sans text-center text-white bg-gradient-to-b from-[#53a4cf] from-50% to-[#f16e57] to-50%`}
         style={{
-          width : width
+           width : width,
+          borderRadius : rounded
         }}
       >
         Dragon
@@ -189,9 +206,10 @@ function PokemonType({ type, rounded , width}) {
   } else if (type === "dark") {
     return (
       <li
-        className={`list-none mr-[2.969px] font-sans text-center text-white bg-gradient-to-b from-[#707070] from-50% to-[#242424] to-50% rounded-[${rounded}]`}
+        className={`list-none mr-[2.969px] font-sans text-center text-white bg-gradient-to-b from-[#707070] from-50% to-[#242424] to-50%`}
         style={{
-          width : width
+           width : width,
+          borderRadius : rounded
         }}
       >
         Dark
