@@ -109,7 +109,7 @@ function PokemonDetails() {
 
     setAllDetails({
       abilities,
-      height: info.height,
+      height: info.height/3.048,
       id: info.id,
       name: info.name,
       weight: info.weight,
@@ -267,13 +267,13 @@ function PokemonDetails() {
                   <div className="flex flex-col gap-[15px]">
                     <p>Height</p>
                     <h1 className="text-black text-[20px] leading-5">
-                      {allDetails.height}
+                      {Math.floor(allDetails.height) + "'" + " " + ((allDetails.height % 1).toFixed(2)).substring(2) + '"'}
                     </h1>
                   </div>
                   <div className="flex flex-col gap-[15px]">
                     <p>Weight</p>
                     <h1 className="text-black text-[20px] leading-5">
-                      {allDetails.weight}
+                      {(allDetails.weight/4.536).toFixed(2) + " " + "lbs"}
                     </h1>
                   </div>
                   <div className="flex flex-col gap-[15px]">
