@@ -14,7 +14,7 @@ export default {
       animation: {
         loading: "spin 0.5s linear infinite",
         height: "height 1s ease-in-out 1 forwards",
-        pokeBounce: "pokecardBounce 0.3s ease-in-out 1",
+        pokeBounce: "pokecardBounce 0.4s ease-in-out 1",
       },
       keyframes: {
         height: {

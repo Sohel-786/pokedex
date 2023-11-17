@@ -86,6 +86,7 @@ function Pokedex() {
                     name={el.name}
                     number={el.number}
                     types={el.types}
+                    id={el.id}
                   />
                 );
               })}

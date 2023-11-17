@@ -3,10 +3,21 @@ import Pikachu from "/icons/pikachu.png";
 import Pokeball from "/icons/pokeball.png";
 import Game from "/icons/game.png";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 function EqualLayout({ children }) {
   const pathname = useLocation().pathname;
   const navigate = useNavigate();
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const toggleVisibility = () => {
+      window.scrollY > 110 ? setIsVisible(true) : setIsVisible(false);
+    };
+
+    window.addEventListener("scroll", toggleVisibility);
+    return () => window.removeEventListener("scroll", toggleVisibility);
+  });
 
   return (
     <div>
@@ -70,10 +81,20 @@ function EqualLayout({ children }) {
         </ul>
       </div>
 
-      <div className="flex justify-center items-center w-full border-b-[1.852px] border-[#f0f0f0] pt-[2px] bg-[#FFF]">
+      <div
+        style={{
+          position: isVisible ? "sticky" : "static",
+          top: "-41px",
+        }}
+        className="flex z-50 justify-center items-center w-full pt-[2px] bg-[#FFF]"
+      >
         <ul className="flex justify-center items-center h-[90px] font-roboto">
           <li
             onClick={() => {
+              window.scrollTo({
+                top: 0,
+                behavior: "smooth",
+              });
               navigate("/home");
             }}
             style={{
@@ -86,6 +107,9 @@ function EqualLayout({ children }) {
           >
             <span className="h-[30.9977px] flex justify-center items-center w-full mt-[15px]">
               <img
+                style={{
+                  display: isVisible && "none",
+                }}
                 className="h-full aspect-auto"
                 src={Pikachu}
                 alt="pikachuNav"
@@ -97,17 +121,33 @@ function EqualLayout({ children }) {
 
           <li
             onClick={() => {
+              window.scrollTo({
+                top: 0,
+                behavior: "smooth",
+              });
               navigate("/pokedex");
             }}
             style={{
-              backgroundColor: (pathname === "/pokedex" || pathname.substring(0,8) === "/pokedex") && "#ff0000c9",
-              color: (pathname === "/pokedex" || pathname.substring(0,9) === "/pokedex") && "white",
-              fontWeight: (pathname === "/pokedex" || pathname.substring(0,9) === "/pokedex") && "bold",
+              backgroundColor:
+                (pathname === "/pokedex" ||
+                  pathname.substring(0, 8) === "/pokedex") &&
+                "#ff0000c9",
+              color:
+                (pathname === "/pokedex" ||
+                  pathname.substring(0, 8) === "/pokedex") &&
+                "white",
+              fontWeight:
+                (pathname === "/pokedex" ||
+                  pathname.substring(0, 8) === "/pokedex") &&
+                "bold",
             }}
             className="hover:bg-[#ff0000c9] flex flex-col cursor-pointer w-[127.853px] h-full relative after:h-[6px] after:content-[' '] after:absolute after:w-full after:bottom-[-6px] after:z-[1] after:bg-[#ff0000c9] hover:text-white transition-colors duration-100 ease-in"
           >
             <span className="h-[30.9977px] flex justify-center items-center w-full mt-[15px]">
               <img
+                style={{
+                  display: isVisible && "none",
+                }}
                 className="h-full aspect-auto"
                 src={Pokeball}
                 alt="pikachuNav"
@@ -119,7 +159,14 @@ function EqualLayout({ children }) {
 
           <li className="hover:bg-[#f98955] flex flex-col cursor-pointer w-[127.853px] h-full relative after:h-[6px] after:content-[' '] after:absolute after:w-full after:bottom-[-6px] after:z-[1] after:bg-[#f98955] hover:text-white transition-colors duration-100 ease-in">
             <span className="h-[30.9977px] flex justify-center items-center w-full mt-[15px]">
-              <img className="h-full aspect-auto" src={Game} alt="pikachuNav" />
+              <img
+                style={{
+                  display: isVisible && "none",
+                }}
+                className="h-full aspect-auto"
+                src={Game}
+                alt="pikachuNav"
+              />
             </span>
 
             <span className="my-[5px] text-sm leading-[14.5px] w-full text-center">
@@ -130,6 +177,9 @@ function EqualLayout({ children }) {
           <li className="hover:bg-[#a915ff] flex flex-col cursor-pointer w-[127.853px] h-full relative after:h-[6px] after:content-[' '] after:absolute after:w-full after:bottom-[-6px] after:z-[1] after:bg-[#a915ff] hover:text-white transition-colors duration-100 ease-in">
             <span className="h-[30.9977px] flex justify-center items-center w-full mt-[15px]">
               <img
+                style={{
+                  display: isVisible && "none",
+                }}
                 className="h-full aspect-auto"
                 src={"/icons/pokecard.svg"}
                 alt="pikachuNav"
@@ -144,6 +194,9 @@ function EqualLayout({ children }) {
           <li className="hover:bg-[#4dad5b] flex flex-col cursor-pointer w-[127.853px] h-full relative after:h-[6px] after:content-[' '] after:absolute after:w-full after:bottom-[-6px] after:z-[1] after:bg-[#4dad5b] hover:text-white transition-colors duration-100 ease-in">
             <span className="h-[30.9977px] flex justify-center items-center w-full mt-[15px]">
               <img
+                style={{
+                  display: isVisible && "none",
+                }}
                 className="h-full aspect-auto"
                 src={"/icons/pokemonTv.svg"}
                 alt="pikachuNav"
@@ -158,6 +211,9 @@ function EqualLayout({ children }) {
           <li className="hover:bg-[#30a7d7] flex flex-col cursor-pointer w-[127.853px] h-full relative after:h-[6px] after:content-[' '] after:absolute after:w-full after:bottom-[-6px] after:z-[1] after:bg-[#30a7d7] hover:text-white transition-colors duration-100 ease-in">
             <span className="h-[30.9977px] flex justify-center items-center w-full mt-[15px]">
               <img
+                style={{
+                  display: isVisible && "none",
+                }}
                 className="h-full aspect-auto"
                 src={"/icons/trophy.svg"}
                 alt="pikachuNav"
@@ -172,6 +228,9 @@ function EqualLayout({ children }) {
           <li className="hover:bg-[#1b53ba] flex flex-col cursor-pointer w-[127.853px] h-full relative after:h-[6px] after:content-[' '] after:absolute after:w-full after:bottom-[-6px] after:z-[1] after:bg-[#1b53ba] after:rounded-br-lg hover:text-white transition-colors duration-100 ease-in">
             <span className="h-[30.9977px] flex justify-center items-center w-full mt-[15px]">
               <img
+                style={{
+                  display: isVisible && "none",
+                }}
                 className="h-full aspect-auto"
                 src={"/icons/news.svg"}
                 alt="pikachuNav"
@@ -182,8 +241,9 @@ function EqualLayout({ children }) {
           </li>
         </ul>
       </div>
+
       <section
-        className="min-h-[300px] max-w-[1280px] overflow-hidden mx-auto bg-white flex flex-col items-center"
+        className="min-h-[300px] border-t-[1.852px] border-[#f0f0f0] max-w-[1280px] overflow-hidden mx-auto bg-white flex flex-col items-center"
         style={{
           backgroundImage: 'url("/assets/whitebgImage.png")',
         }}
