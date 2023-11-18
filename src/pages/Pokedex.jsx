@@ -21,16 +21,41 @@ function Pokedex() {
   const { pokemonData } = useSelector((s) => s.pokedex);
 
   useEffect(() => {
-    getPokemons();
+      getPokemons();
   }, [pokemonData]);
+
+  useEffect(() => {
+    if (requestMade) {
+      window.addEventListener("scroll", handleAddPoke);
+    }
+    return () => window.removeEventListener("scroll", handleAddPoke);
+
+  }, [requestMade]);
 
   function getPokemons() {
     setPokemons([...pokemonData.slice(0, 12)]);
   }
 
-  function handleAddPoke(){
+  function handleAddPoke() {
+    const w = Math.floor(window.innerHeight + window.scrollY) - 400;
+    const d = Math.max(document.body.scrollHeight, document.body.offsetHeight, document.documentElement.clientHeight, document.documentElement.scrollHeight, document.documentElement.offsetHeight) - 400;
+
+    console.log(w , d)
+
+    if( w === d || (w-1) === d || (w+1) === d){
+      console.log('done')
+      setPokemons([
+        ...pokemons,
+        ...pokemonData.slice(offsetLimit.offset, offsetLimit.positionLimit),
+      ]);
       
+      setOffsetLimit({
+        offset: offsetLimit.offset + 12,
+        positionLimit: offsetLimit.positionLimit + 12,
+      });
+    }
   }
+
   return (
     <EqualLayout>
       <section className="w-[77%] bg-white flex flex-col justify-between px-[14.5px] pb-[10px]">
@@ -99,8 +124,6 @@ function Pokedex() {
               ) : (
                 <button
                   onClick={() => {
-                    setRequestMade(true);
-
                     setPokemons([
                       ...pokemons,
                       ...pokemonData.slice(
@@ -114,6 +137,7 @@ function Pokedex() {
                       positionLimit: offsetLimit.positionLimit + 12,
                     });
 
+                    setRequestMade(true);
                   }}
                   className="pt-[12px] pb-[10.800px] px-[20px] bg-[#30a7d7] text-white rounded-[5px] font-openSans text-[16px] leading-[20px] font-semibold hover:bg-[#1b82b1] mx-auto my-5 mt-10"
                 >
