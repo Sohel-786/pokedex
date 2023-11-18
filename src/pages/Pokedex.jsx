@@ -48,7 +48,7 @@ function Pokedex() {
 
     console.log(w, d);
 
-    if (w - 400 === d - 400 || w - 399 === d - 400 || w - 401 === d - 400) {
+    if (w === d || (w-1) === d || (w+1) === d) {
       setShowLoading(true);
 
       console.log("done");
@@ -58,6 +58,7 @@ function Pokedex() {
       ]);
 
       setOffsetLimit({
+        ...offsetLimit,
         offset: offsetLimit.offset + 12,
         positionLimit: offsetLimit.positionLimit + 12,
       });
@@ -128,25 +129,27 @@ function Pokedex() {
                   />
                 );
               })}
-              {requestMade ? (
-                showLoading && <Loading />
-              ) : (
+              {
+              // requestMade ? (
+              //   showLoading && <Loading />
+              // ) : 
+              (
                 <button
                   onClick={() => {
-                    // setPokemons([
-                    //   ...pokemons,
-                    //   ...pokemonData.slice(
-                    //     offsetLimit.offset,
-                    //     offsetLimit.positionLimit
-                    //   ),
-                    // ]);
+                    setPokemons([
+                      ...pokemons,
+                      ...pokemonData.slice(
+                        offsetLimit.offset,
+                        offsetLimit.positionLimit
+                      ),
+                    ]);
 
-                    // setOffsetLimit({
-                    //   offset: offsetLimit.offset + 12,
-                    //   positionLimit: offsetLimit.positionLimit + 12,
-                    // });
+                    setOffsetLimit({
+                      offset: offsetLimit.offset + 12,
+                      positionLimit: offsetLimit.positionLimit + 12,
+                    });
 
-                    setRequestMade(true);
+                    // setRequestMade(true);
                   }}
                   className="pt-[12px] pb-[10.800px] px-[20px] bg-[#30a7d7] text-white rounded-[5px] font-openSans text-[16px] leading-[20px] font-semibold hover:bg-[#1b82b1] mx-auto my-5 mt-10"
                 >
