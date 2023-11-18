@@ -11,6 +11,7 @@ import SearchPokemon from "../Components/SearchPokemon";
 function Pokedex() {
   const [sortOrder, setSortOrder] = useState("Lowest Number (First)");
   const [searchArrow, setSearchArrow] = useState(false);
+  const [showLoading, setShowLoading] = useState(false);
   const [offsetLimit, setOffsetLimit] = useState({
     offset: 12,
     positionLimit: 24,
@@ -21,7 +22,7 @@ function Pokedex() {
   const { pokemonData } = useSelector((s) => s.pokedex);
 
   useEffect(() => {
-      getPokemons();
+    getPokemons();
   }, [pokemonData]);
 
   useEffect(() => {
@@ -29,7 +30,6 @@ function Pokedex() {
       window.addEventListener("scroll", handleAddPoke);
     }
     return () => window.removeEventListener("scroll", handleAddPoke);
-
   }, [requestMade]);
 
   function getPokemons() {
@@ -37,22 +37,31 @@ function Pokedex() {
   }
 
   function handleAddPoke() {
-    const w = Math.floor(window.innerHeight + window.scrollY) - 400;
-    const d = Math.max(document.body.scrollHeight, document.body.offsetHeight, document.documentElement.clientHeight, document.documentElement.scrollHeight, document.documentElement.offsetHeight) - 400;
+    const w = Math.floor(window.innerHeight + window.scrollY);
+    const d = Math.max(
+      document.body.scrollHeight,
+      document.body.offsetHeight,
+      document.documentElement.clientHeight,
+      document.documentElement.scrollHeight,
+      document.documentElement.offsetHeight
+    );
 
-    console.log(w , d)
+    console.log(w, d);
 
-    if( w === d || (w-1) === d || (w+1) === d){
-      console.log('done')
+    if (w - 400 === d - 400 || w - 399 === d - 400 || w - 401 === d - 400) {
+      setShowLoading(true);
+
+      console.log("done");
       setPokemons([
         ...pokemons,
         ...pokemonData.slice(offsetLimit.offset, offsetLimit.positionLimit),
       ]);
-      
+
       setOffsetLimit({
         offset: offsetLimit.offset + 12,
         positionLimit: offsetLimit.positionLimit + 12,
       });
+      setShowLoading(false);
     }
   }
 
@@ -120,22 +129,22 @@ function Pokedex() {
                 );
               })}
               {requestMade ? (
-                <Loading />
+                showLoading && <Loading />
               ) : (
                 <button
                   onClick={() => {
-                    setPokemons([
-                      ...pokemons,
-                      ...pokemonData.slice(
-                        offsetLimit.offset,
-                        offsetLimit.positionLimit
-                      ),
-                    ]);
+                    // setPokemons([
+                    //   ...pokemons,
+                    //   ...pokemonData.slice(
+                    //     offsetLimit.offset,
+                    //     offsetLimit.positionLimit
+                    //   ),
+                    // ]);
 
-                    setOffsetLimit({
-                      offset: offsetLimit.offset + 12,
-                      positionLimit: offsetLimit.positionLimit + 12,
-                    });
+                    // setOffsetLimit({
+                    //   offset: offsetLimit.offset + 12,
+                    //   positionLimit: offsetLimit.positionLimit + 12,
+                    // });
 
                     setRequestMade(true);
                   }}

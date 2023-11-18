@@ -65,7 +65,7 @@ const getPokemon = async (url) => {
     });
     const pokemon = {
       id: res?.data?.id,
-      name: res?.data?.name,
+      name: res?.data?.species?.name,
       number:
         ((res?.data?.id).toString()).length === 1
           ? "#000" + res.data.id
