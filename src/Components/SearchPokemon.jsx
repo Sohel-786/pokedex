@@ -3,7 +3,7 @@ import { useState } from "react";
 import { FiChevronDown } from "react-icons/fi";
 import { useSelector } from "react-redux";
 
-function SearchPokemon({fn}) {
+function SearchPokemon({ fn }) {
   const [searchConditions, setsearchConditions] = useState({
     search: "",
     type: [],
@@ -17,7 +17,8 @@ function SearchPokemon({fn}) {
   });
 
   const [options, setOptions] = useState();
-  const [showOptions, SetshowOptions] = useState(true);
+  const [showOptions, setShowOptions] = useState(true);
+  const [showAdvance, setShowAdvance] = useState(false);
 
   const { pokemonData } = useSelector((s) => s.pokedex);
 
@@ -34,7 +35,7 @@ function SearchPokemon({fn}) {
         });
 
         if (name === "search") {
-          SetshowOptions(true)
+          setShowOptions(true);
           if (!Number(value) && value.length > 0) {
             const options = [];
             let i = 0;
@@ -42,8 +43,12 @@ function SearchPokemon({fn}) {
               if (
                 pokemonData[i].name.includes(value) ||
                 pokemonData[i].name.includes(value.toLowerCase()) ||
-                pokemonData[i].name.includes(value.toUpperCase(value.toLowerCase())) ||
-                pokemonData[i].name.includes(value[0].toUpperCase() + value.slice(1))
+                pokemonData[i].name.includes(
+                  value.toUpperCase(value.toLowerCase())
+                ) ||
+                pokemonData[i].name.includes(
+                  value[0].toUpperCase() + value.slice(1)
+                )
               ) {
                 options.push(pokemonData[i]);
               }
@@ -86,7 +91,10 @@ function SearchPokemon({fn}) {
                 </span>
                 <div
                   onClick={() => {
-                    fn([...options])
+                    if (options.length === 1) {
+                      fn([...options]);
+                    } else {
+                    }
                   }}
                   className="bg-[#ee6b2f] hover:bg-[#da471b] py-[12.600px] px-[21px] inline-block rounded-[5px] w-[12.95%] h-12"
                   style={{
@@ -97,22 +105,23 @@ function SearchPokemon({fn}) {
                 ></div>
 
                 <div className="w-[79.3%] absolute z-30 bg-white top-[61px] left-[2px]">
-                  {(options && showOptions) && (
+                  {options && showOptions && (
                     <>
                       <ul className="w-full list-none flex flex-col">
-                        {(options.slice(0,5)).map((el) => {
+                        {options.slice(0, 5).map((el) => {
                           return (
                             <li
                               onClick={() => {
                                 const input =
                                   document.getElementById("searchIt");
-                                input.value = el.name[0].toUpperCase() + el.name.slice(1);
+                                input.value =
+                                  el.name[0].toUpperCase() + el.name.slice(1);
                                 setsearchConditions({
                                   ...searchConditions,
                                   search: el.name,
                                 });
-                                setOptions([el])
-                                SetshowOptions(false);
+                                setOptions([el]);
+                                setShowOptions(false);
                               }}
                               key={nanoid(4)}
                               className="p-[10px] text-[#999999] text-[16px] leading-4 capitalize cursor-pointer hover:bg-[#1b53ba] hover:text-[#c9c9c9]"
@@ -145,9 +154,28 @@ function SearchPokemon({fn}) {
           </div>
         </div>
 
-        <div className="max-w-[1024px] mb-[16px] mx-auto min-h-[23.9969px]"></div>
+        <div className="max-w-[1024px] mb-[16px] mx-auto min-h-[23.9969px]">
+          {showAdvance && (
+            <div className="w-[77%] mx-auto mt-4 flex flex-wrap">
+              <section className="flex flex-col">
+                <div className="flex text-white">
+                  <h1
+                    className="text-[26.8px] leading-[33.5px]"
+                    style={{
+                      fontFamily: "sans-serif",
+                    }}
+                  >
+                    Type & Weakness
+                  </h1>
+                </div>
+              </section>
+            </div>
+          )}
+        </div>
       </div>
-      <div className="bg-[#616161] w-[49.96%] flex justify-center items-center self-center relative h-4 advanceSearch cursor-pointer">
+      <div onClick={() => {
+        setShowAdvance(!showAdvance);
+      }} className="bg-[#616161] w-[49.96%] flex justify-center items-center self-center relative h-4 advanceSearch cursor-pointer">
         <span className="text-white w-full font-openSans text-[15px] tracking-wide absolute top-[-16px] flex justify-center items-center">
           Show Advanced Search
           <div className="rounded-full w-[19.9974px] h-[19.9974px] bg-white ml-[10px] self-end flex justify-center">
