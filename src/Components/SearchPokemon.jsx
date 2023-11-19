@@ -256,11 +256,19 @@ function SearchPokemon({ fn }) {
                   </h1>
 
                   <div className="mt-[10px] mb-[5px] flex items-center">
-                    <input value={1} type="number" className="border-none rounded-[5px] py-2 px-2 text-black w-[75px]" />
+                    <input
+                      value={1}
+                      type="number"
+                      className="border-none rounded-[5px] py-2 px-2 text-black w-[75px]"
+                    />
 
                     <span className="px-[15px] text-white">-</span>
 
-                    <input value={1010} type="number" className="border-none rounded-[5px] py-2 px-2 text-black w-[75px]" />
+                    <input
+                      value={1010}
+                      type="number"
+                      className="border-none rounded-[5px] py-2 px-2 text-black w-[75px]"
+                    />
                   </div>
                 </div>
               </section>
