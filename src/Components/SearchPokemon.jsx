@@ -3,6 +3,7 @@ import { useState } from "react";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 import { useSelector } from "react-redux";
 import AnimateHeight from "react-animate-height";
+import PokemonType from "./PokemonType";
 
 function SearchPokemon({ fn }) {
   const [searchConditions, setsearchConditions] = useState({
@@ -154,24 +155,96 @@ function SearchPokemon({ fn }) {
             </div>
           </div>
         </div>
-            
+
         <div className="max-w-[1024px] mx-auto pt-[40px]">
-            <AnimateHeight className="w-full" height={showAdvance ? 'auto' : 0} duration={100} easing="ease-out">
-              <div className="w-[77%] mx-auto mt-1 flex flex-wrap mb-[16px] border-[2px] border-red-700">
-                <section className="flex flex-col">
-                  <div className="flex text-white">
-                    <h1
-                      className="text-[26.8px] leading-[33.5px]"
-                      style={{
-                        fontFamily: "sans-serif",
-                      }}
-                    >
-                      Type & Weakness
-                    </h1>
+          <AnimateHeight
+            className="w-full"
+            height={showAdvance ? "auto" : 0}
+            duration={100}
+            easing="ease-out"
+          >
+            <div className="w-[87%] mx-auto mt-3 flex flex-wrap mb-[16px] px-2">
+              <section className="flex flex-col w-[53%]">
+                <div
+                  className="flex text-white w-full items-center gap-[34px]"
+                  style={{
+                    fontFamily: "sans-serif",
+                  }}
+                >
+                  <h1 className="text-[26.8px] leading-[33.5px] w-[50.22%]">
+                    Type & Weakness
+                  </h1>
+                  <p className="text-[14.4px] leading-[14.4px] mr-4 mt-1">
+                    <span className="font-semibold">T</span> = Type &nbsp;{" "}
+                    <span className="font-semibold">W</span> = Weakness
+                  </p>
+                </div>
+
+                <div className="mt-8 w-full flex">
+                  <div className="w-[50%] flex flex-col gap-y-[8px]">
+                    {[
+                      "bug",
+                      "dragon",
+                      "fairy",
+                      "fire",
+                      "ghost",
+                      "ground",
+                      "normal",
+                      "psychic",
+                      "steel",
+                    ].map((el) => {
+                      return (
+                        <div key={nanoid(5)} className="flex gap-[12px] w-full leading-[28px] text-[16px]">
+                          <div className="w-[50%] border-2 border-[#a4a4a4] rounded-[5px]  overflow-hidden">
+                            <PokemonType
+                              type={el}
+                              width={"100%"}
+                            />
+                          </div>
+
+                          <span className="bg-[#F2F2F2] leading-[30px] cursor-pointer text-center font-bold w-[28px] h-[28px] text-[#313131] rounded-full">T</span>
+                          <span className="bg-[#F2F2F2] leading-[30px] cursor-pointer text-center font-bold w-[28px] h-[28px] text-[#313131] rounded-full">W</span>
+                        </div>
+                      );
+                    })}
                   </div>
-                </section>
-              </div>
-            </AnimateHeight>
+                  <div className="w-[50%] flex flex-col gap-y-[8px]">
+                    {[
+                      "dark",
+                      "electric",
+                      "fighting",
+                      "flying",
+                      "grass",
+                      "ice",
+                      "poison",
+                      "rock",
+                      "water",
+                    ].map((el) => {
+                      return (
+                        <div key={nanoid(5)} className="flex gap-[12px] w-full leading-[28px] text-[16px] justify-end">
+                          <div className="w-[50%] border-2 border-[#a4a4a4] rounded-[5px]  overflow-hidden">
+                            <PokemonType
+                              type={el}
+                              width={"100%"}
+                            />
+                          </div>
+
+                          <span className="bg-[#F2F2F2] leading-[30px] cursor-pointer text-center font-bold w-[28px] h-[28px] text-[#313131] rounded-full">T</span>
+                          <span className="bg-[#F2F2F2] leading-[30px] cursor-pointer text-center font-bold w-[28px] h-[28px] text-[#313131] rounded-full">W</span>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                <div className="w-full mt-10 flex" style={{
+                  fontFamily : "sans-serif"
+                }}>
+                    <h1 className="text-white text-[26.8px] leading-[33.5px]">Number Range</h1>
+                </div>
+              </section>
+            </div>
+          </AnimateHeight>
         </div>
       </div>
       <div
