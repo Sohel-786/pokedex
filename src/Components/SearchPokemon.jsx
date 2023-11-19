@@ -1,6 +1,32 @@
+import { useState } from "react";
 import { FiChevronDown } from "react-icons/fi";
 
 function SearchPokemon(){
+    const [ searchConditions, setsearchConditions ] = useState({
+      nameOrnumber : '',
+      type : [],
+      weakness : [],
+      height : null,
+      weight : null,
+      Range : {
+        from : '',
+        to : ''
+      }
+    })
+
+    function debounce(time){
+      var timer;
+
+      return (e) => {
+        clearTimeout(timer)
+        timer = setTimeout(() => {
+          console.log(e.target.value)
+        }, time)
+      }
+    }
+
+    var handleChange = debounce(300);
+
     return (
         <>
         <div className="max-w-[1280px] w-[100vw] mx-auto relative left-[-161.6px] bg-[#616161] pb-4">
@@ -17,6 +43,7 @@ function SearchPokemon(){
                   <div className="pt-[13px] mb-[10px] w-full flex items-center gap-5">
                     <span className="border-[2.96296px] bg-white border-[#616161] inline-block rounded-[5px] w-[72.5425%]">
                       <input
+                        onChange={handleChange}
                         type="text"
                         id="search"
                         name=""
