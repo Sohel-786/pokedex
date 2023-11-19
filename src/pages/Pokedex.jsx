@@ -73,7 +73,7 @@ function Pokedex() {
           Pokédex
         </h1>
         <SearchPokemon />
-        <div className="w-full my-8">
+        <div className="w-full my-[34px]">
           <div className="flex items-center justify-between">
             <button className="flex justify-center items-center pt-[10.600px] pb-[9.340px] px-[21px] bg-[#30a7d7] text-white rounded-[5px] font-openSans text-[16.8px] w-[40.71%] font-semibold hover:bg-[#1b82b1] gap-[5px]">
               <HiOutlineRefresh size={"22.2px"} /> Surprise Me!

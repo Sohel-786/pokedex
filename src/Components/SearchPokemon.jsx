@@ -1,3 +1,4 @@
+import { nanoid } from "nanoid";
 import { useState } from "react";
 import { FiChevronDown } from "react-icons/fi";
 import { useSelector } from "react-redux";
@@ -15,6 +16,8 @@ function SearchPokemon() {
     },
   });
 
+  const [options, setOptions] = useState();
+
   const { pokemonData } = useSelector((s) => s.pokedex);
 
   function debounce(time) {
@@ -24,31 +27,30 @@ function SearchPokemon() {
       clearTimeout(timer);
       timer = setTimeout(() => {
         const { name, value } = e.target;
+        setsearchConditions({
+          ...searchConditions,
+          [name]: value,
+        });
 
         if (name === "search") {
-          if (Number(value)) {
-            setsearchConditions({
-              ...searchConditions,
-              [name]: value,
-            });
-          } else {
+          if (!Number(value) && value.length > 0) {
             const options = [];
             let i = 0;
             do {
               if (
                 pokemonData[i].name.includes(value) ||
-                pokemonData[i].name.includes(value.toUpperCase()) ||
-                pokemonData[i].name.includes(
-                  value.toUpperCase(value.toLowerCase())
-                ) ||
-                pokemonData[i].name.includes(
-                  value.charAt(0).toUpperCase() + value.slice(1)
-                )
+                pokemonData[i].name.includes(value.toLowerCase()) ||
+                pokemonData[i].name.includes(value.toUpperCase(value.toLowerCase())) ||
+                pokemonData[i].name.includes(value[0].toUpperCase() + value.slice(1))
               ) {
-                options.push(pokemonData[i]);
+                options.push([pokemonData[i].name, pokemonData[i].id]);
               }
               i++;
             } while (options.length < 5 && i < 1010);
+
+            setOptions([...options]);
+          } else {
+            setOptions([]);
           }
         }
       }, time);
@@ -61,21 +63,21 @@ function SearchPokemon() {
     <>
       <div className="max-w-[1280px] w-[100vw] mx-auto relative left-[-161.6px] bg-[#616161] pb-4">
         <div className="w-full bg-[#313131] flex flex-col items-center">
-          <div className="w-[77%] flex gap-2">
+          <div className="w-[77%] flex gap-2 justify-between pr-4 pl-1">
             <div className="w-[45.96%] pl-[14.5px] pt-[32px]">
               <label
-                htmlFor="search"
+                htmlFor="searchIt"
                 className="font-openSans text-[26.8px] leading-[26.8px] text-white"
               >
                 Name or Number
               </label>
 
-              <div className="pt-[13px] mb-[10px] w-full flex items-center gap-5">
-                <span className="border-[2.96296px] bg-white border-[#616161] inline-block rounded-[5px] w-[72.5425%]">
+              <div className="pt-[13px] mb-[10px] w-full flex items-center gap-5 relative">
+                <span className="border-[2.96296px] z-40 bg-white border-[#616161] inline-block rounded-[5px] w-[80.5425%]">
                   <input
                     onChange={handleChange}
                     type="text"
-                    id="search"
+                    id="searchIt"
                     name="search"
                     className="p-[10px] font-roboto text-[16px] leading-[24px] rounded-[5px] w-full"
                   />
@@ -88,6 +90,38 @@ function SearchPokemon() {
                     backgroundRepeat: "no-repeat",
                   }}
                 ></div>
+
+                <div className="w-[79.3%] absolute z-30 bg-white top-[61px] left-[2px]">
+                  {options && (
+                    <>
+                      <ul className="w-full list-none flex flex-col">
+                        {options.map(([name, id]) => {
+                          return (
+                            <li
+                              onClick={() => {
+                                const input =
+                                  document.getElementById("searchIt");
+                                input.value = name[0].toUpperCase() + name.slice(1);
+                                setsearchConditions({
+                                  ...searchConditions,
+                                  search: name,
+                                });
+                                setOptions([]);
+                              }}
+                              key={nanoid(4)}
+                              className="p-[10px] text-[#999999] text-[16px] leading-4 capitalize cursor-pointer hover:bg-[#1b53ba] hover:text-[#c9c9c9]"
+                              style={{
+                                fontFamily: "sans-serif",
+                              }}
+                            >
+                              {name}
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    </>
+                  )}
+                </div>
               </div>
 
               <p className="text-white mb-[24px] font-roboto text-[16px] leading-[20px]">
@@ -96,7 +130,7 @@ function SearchPokemon() {
               </p>
             </div>
 
-            <div className="w-[43.8%] bg-[#4dad5b] rounded-[5px] mt-[32px] mb-[8px] pb-[8px] h-fit">
+            <div className="w-[48.8%] bg-[#4dad5b] rounded-[5px] mt-[32px] mb-[8px] pb-[8px] h-fit">
               <h1 className="my-[15px] ml-[20px] mr-[10px] font-openSans text-[20px] text-white leading-[25px]">
                 Search for a Pokémon by name or using its National Pokédex
                 number.
