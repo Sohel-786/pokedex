@@ -154,9 +154,14 @@ function SearchPokemon({ fn }) {
           </div>
         </div>
 
-        <div className="max-w-[1024px] mb-[16px] mx-auto min-h-[23.9969px]">
-          {showAdvance && (
-            <div className="w-[77%] mx-auto mt-4 flex flex-wrap">
+        <div className="max-w-[1024px] mx-auto">
+          {showAdvance ? (
+            <div
+              className="w-[77%] mx-auto mt-4 flex flex-wrap h-0 transition-all duration-1000 ease-in-out mb-[16px]"
+              style={{
+                height: showAdvance && "300px",
+              }}
+            >
               <section className="flex flex-col">
                 <div className="flex text-white">
                   <h1
@@ -170,12 +175,17 @@ function SearchPokemon({ fn }) {
                 </div>
               </section>
             </div>
+          ) : (
+            <div className="w-[77%] min-h-[23.9969px] mx-auto mb-[16px]"></div>
           )}
         </div>
       </div>
-      <div onClick={() => {
-        setShowAdvance(!showAdvance);
-      }} className="bg-[#616161] w-[49.96%] flex justify-center items-center self-center relative h-4 advanceSearch cursor-pointer">
+      <div
+        onClick={() => {
+          setShowAdvance(!showAdvance);
+        }}
+        className="bg-[#616161] w-[49.96%] flex justify-center items-center self-center relative h-4 advanceSearch cursor-pointer"
+      >
         <span className="text-white w-full font-openSans text-[15px] tracking-wide absolute top-[-16px] flex justify-center items-center">
           Show Advanced Search
           <div className="rounded-full w-[19.9974px] h-[19.9974px] bg-white ml-[10px] self-end flex justify-center">
