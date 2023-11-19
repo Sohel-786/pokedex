@@ -194,16 +194,20 @@ function SearchPokemon({ fn }) {
                       "steel",
                     ].map((el) => {
                       return (
-                        <div key={nanoid(5)} className="flex gap-[12px] w-full leading-[28px] text-[16px]">
+                        <div
+                          key={nanoid(5)}
+                          className="flex gap-[12px] w-full leading-[28px] text-[16px]"
+                        >
                           <div className="w-[50%] border-2 border-[#a4a4a4] rounded-[5px]  overflow-hidden">
-                            <PokemonType
-                              type={el}
-                              width={"100%"}
-                            />
+                            <PokemonType type={el} width={"100%"} />
                           </div>
 
-                          <span className="bg-[#F2F2F2] leading-[30px] cursor-pointer text-center font-bold w-[28px] h-[28px] text-[#313131] rounded-full">T</span>
-                          <span className="bg-[#F2F2F2] leading-[30px] cursor-pointer text-center font-bold w-[28px] h-[28px] text-[#313131] rounded-full">W</span>
+                          <span className="bg-[#F2F2F2] leading-[30px] cursor-pointer text-center font-bold w-[28px] h-[28px] text-[#313131] rounded-full">
+                            T
+                          </span>
+                          <span className="bg-[#F2F2F2] leading-[30px] cursor-pointer text-center font-bold w-[28px] h-[28px] text-[#313131] rounded-full">
+                            W
+                          </span>
                         </div>
                       );
                     })}
@@ -221,26 +225,37 @@ function SearchPokemon({ fn }) {
                       "water",
                     ].map((el) => {
                       return (
-                        <div key={nanoid(5)} className="flex gap-[12px] w-full leading-[28px] text-[16px] justify-end">
+                        <div
+                          key={nanoid(5)}
+                          className="flex gap-[12px] w-full leading-[28px] text-[16px] justify-end"
+                        >
                           <div className="w-[50%] border-2 border-[#a4a4a4] rounded-[5px]  overflow-hidden">
-                            <PokemonType
-                              type={el}
-                              width={"100%"}
-                            />
+                            <PokemonType type={el} width={"100%"} />
                           </div>
 
-                          <span className="bg-[#F2F2F2] leading-[30px] cursor-pointer text-center font-bold w-[28px] h-[28px] text-[#313131] rounded-full">T</span>
-                          <span className="bg-[#F2F2F2] leading-[30px] cursor-pointer text-center font-bold w-[28px] h-[28px] text-[#313131] rounded-full">W</span>
+                          <span className="bg-[#F2F2F2] leading-[30px] cursor-pointer text-center font-bold w-[28px] h-[28px] text-[#313131] rounded-full">
+                            T
+                          </span>
+                          <span className="bg-[#F2F2F2] leading-[30px] cursor-pointer text-center font-bold w-[28px] h-[28px] text-[#313131] rounded-full">
+                            W
+                          </span>
                         </div>
                       );
                     })}
                   </div>
                 </div>
 
-                <div className="w-full mt-10 flex" style={{
-                  fontFamily : "sans-serif"
-                }}>
-                    <h1 className="text-white text-[26.8px] leading-[33.5px]">Number Range</h1>
+                <div
+                  className="w-full mt-10 flex"
+                  style={{
+                    fontFamily: "sans-serif",
+                  }}
+                >
+                  <h1 className="text-white text-[26.8px] leading-[33.5px]">
+                    Number Range
+                  </h1>
+
+                  <div></div>
                 </div>
               </section>
             </div>
