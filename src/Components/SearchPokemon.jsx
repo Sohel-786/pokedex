@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { FiChevronDown } from "react-icons/fi";
+import { useSelector } from "react-redux";
 
 function SearchPokemon(){
     const [ searchConditions, setsearchConditions ] = useState({
-      nameOrnumber : '',
+      search : '',
       type : [],
       weakness : [],
       height : null,
@@ -12,7 +13,9 @@ function SearchPokemon(){
         from : '',
         to : ''
       }
-    })
+    });
+
+    const { pokemonData } = useSelector((s) => s.pokedex);
 
     function debounce(time){
       var timer;
@@ -20,7 +23,25 @@ function SearchPokemon(){
       return (e) => {
         clearTimeout(timer)
         timer = setTimeout(() => {
-          console.log(e.target.value)
+          const { name, value } = e.target;
+
+          if(name === 'search'){
+            if(Number(value)){
+              setsearchConditions({
+                ...searchConditions,
+                [name] : value
+              })
+            }else{
+              const options = [];
+              let i = 0;
+              do {
+                if(pokemonData[i].name.includes(value) || pokemonData[i].name.includes(value.toUpperCase()) || pokemonData[i].name.includes(value.toUpperCase(value.toLowerCase())) || pokemonData[i].name.includes( value.charAt(0).toUpperCase() + value.slice(1))){
+                  options.push(pokemonData[i]);
+                }
+                i++;
+              } while (options.length < 5 && i < 1010);
+            }
+          }
         }, time)
       }
     }
@@ -46,7 +67,7 @@ function SearchPokemon(){
                         onChange={handleChange}
                         type="text"
                         id="search"
-                        name=""
+                        name="search"
                         className="p-[10px] font-roboto text-[16px] leading-[24px] rounded-[5px] w-full"
                       />
                     </span>
