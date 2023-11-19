@@ -1,6 +1,6 @@
 import { nanoid } from "nanoid";
 import { useState } from "react";
-import { FiChevronDown } from "react-icons/fi";
+import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 import { useSelector } from "react-redux";
 
 function SearchPokemon({ fn }) {
@@ -156,12 +156,7 @@ function SearchPokemon({ fn }) {
 
         <div className="max-w-[1024px] mx-auto">
           {showAdvance ? (
-            <div
-              className="w-[77%] mx-auto mt-4 flex flex-wrap h-0 transition-all duration-1000 ease-in-out mb-[16px]"
-              style={{
-                height: showAdvance && "300px",
-              }}
-            >
+            <div className="w-[77%] mx-auto mt-4 flex flex-wrap h-0 transition-all duration-1000 ease-in-out mb-[16px]">
               <section className="flex flex-col">
                 <div className="flex text-white">
                   <h1
@@ -189,10 +184,17 @@ function SearchPokemon({ fn }) {
         <span className="text-white w-full font-openSans text-[15px] tracking-wide absolute top-[-16px] flex justify-center items-center">
           Show Advanced Search
           <div className="rounded-full w-[19.9974px] h-[19.9974px] bg-white ml-[10px] self-end flex justify-center">
-            <FiChevronDown
-              size={"20px"}
-              className="text-black relative top-[-5px]"
-            />
+            {showAdvance ? (
+              <FiChevronUp
+                size={"20px"}
+                className="text-black relative top-[-5px]"
+              />
+            ) : (
+              <FiChevronDown
+                size={"20px"}
+                className="text-black relative top-[-5px]"
+              />
+            )}
           </div>
         </span>
       </div>
