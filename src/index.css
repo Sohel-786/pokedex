@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 color {
-  color: #212121;
+  color: #1b53ba;
 }
 
 body {
@@ -72,3 +72,9 @@ body {
 .advanceSearchBtn:hover::after {
   background-color: #282828;
 }
+
+input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }

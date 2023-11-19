@@ -246,7 +246,7 @@ function SearchPokemon({ fn }) {
                 </div>
 
                 <div
-                  className="w-full mt-10 flex"
+                  className="w-[107%] mt-10 flex items-center justify-between relative"
                   style={{
                     fontFamily: "sans-serif",
                   }}
@@ -255,7 +255,13 @@ function SearchPokemon({ fn }) {
                     Number Range
                   </h1>
 
-                  <div></div>
+                  <div className="mt-[10px] mb-[5px] flex items-center">
+                    <input value={1} type="number" className="border-none rounded-[5px] py-2 px-2 text-black w-[75px]" />
+
+                    <span className="px-[15px] text-white">-</span>
+
+                    <input value={1010} type="number" className="border-none rounded-[5px] py-2 px-2 text-black w-[75px]" />
+                  </div>
                 </div>
               </section>
             </div>
