@@ -3,7 +3,7 @@ import { useState } from "react";
 import { FiChevronDown } from "react-icons/fi";
 import { useSelector } from "react-redux";
 
-function SearchPokemon() {
+function SearchPokemon({fn}) {
   const [searchConditions, setsearchConditions] = useState({
     search: "",
     type: [],
@@ -17,6 +17,7 @@ function SearchPokemon() {
   });
 
   const [options, setOptions] = useState();
+  const [showOptions, SetshowOptions] = useState(true);
 
   const { pokemonData } = useSelector((s) => s.pokedex);
 
@@ -33,6 +34,7 @@ function SearchPokemon() {
         });
 
         if (name === "search") {
+          SetshowOptions(true)
           if (!Number(value) && value.length > 0) {
             const options = [];
             let i = 0;
@@ -43,10 +45,10 @@ function SearchPokemon() {
                 pokemonData[i].name.includes(value.toUpperCase(value.toLowerCase())) ||
                 pokemonData[i].name.includes(value[0].toUpperCase() + value.slice(1))
               ) {
-                options.push([pokemonData[i].name, pokemonData[i].id]);
+                options.push(pokemonData[i]);
               }
               i++;
-            } while (options.length < 5 && i < 1010);
+            } while (i < 1010);
 
             setOptions([...options]);
           } else {
@@ -83,6 +85,9 @@ function SearchPokemon() {
                   />
                 </span>
                 <div
+                  onClick={() => {
+                    fn([...options])
+                  }}
                   className="bg-[#ee6b2f] hover:bg-[#da471b] py-[12.600px] px-[21px] inline-block rounded-[5px] w-[12.95%] h-12"
                   style={{
                     backgroundImage: 'url("/assets/searchbtn.png")',
@@ -92,21 +97,22 @@ function SearchPokemon() {
                 ></div>
 
                 <div className="w-[79.3%] absolute z-30 bg-white top-[61px] left-[2px]">
-                  {options && (
+                  {(options && showOptions) && (
                     <>
                       <ul className="w-full list-none flex flex-col">
-                        {options.map(([name, id]) => {
+                        {(options.slice(0,5)).map((el) => {
                           return (
                             <li
                               onClick={() => {
                                 const input =
                                   document.getElementById("searchIt");
-                                input.value = name[0].toUpperCase() + name.slice(1);
+                                input.value = el.name[0].toUpperCase() + el.name.slice(1);
                                 setsearchConditions({
                                   ...searchConditions,
-                                  search: name,
+                                  search: el.name,
                                 });
-                                setOptions([]);
+                                setOptions([el])
+                                SetshowOptions(false);
                               }}
                               key={nanoid(4)}
                               className="p-[10px] text-[#999999] text-[16px] leading-4 capitalize cursor-pointer hover:bg-[#1b53ba] hover:text-[#c9c9c9]"
@@ -114,7 +120,7 @@ function SearchPokemon() {
                                 fontFamily: "sans-serif",
                               }}
                             >
-                              {name}
+                              {el.name}
                             </li>
                           );
                         })}
