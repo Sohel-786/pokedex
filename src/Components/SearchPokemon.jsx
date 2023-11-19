@@ -2,6 +2,7 @@ import { nanoid } from "nanoid";
 import { useState } from "react";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 import { useSelector } from "react-redux";
+import AnimateHeight from "react-animate-height";
 
 function SearchPokemon({ fn }) {
   const [searchConditions, setsearchConditions] = useState({
@@ -153,26 +154,24 @@ function SearchPokemon({ fn }) {
             </div>
           </div>
         </div>
-
-        <div className="max-w-[1024px] mx-auto">
-          {showAdvance ? (
-            <div className="w-[77%] mx-auto mt-4 flex flex-wrap h-0 transition-all duration-1000 ease-in-out mb-[16px]">
-              <section className="flex flex-col">
-                <div className="flex text-white">
-                  <h1
-                    className="text-[26.8px] leading-[33.5px]"
-                    style={{
-                      fontFamily: "sans-serif",
-                    }}
-                  >
-                    Type & Weakness
-                  </h1>
-                </div>
-              </section>
-            </div>
-          ) : (
-            <div className="w-[77%] min-h-[23.9969px] mx-auto mb-[16px]"></div>
-          )}
+            
+        <div className="max-w-[1024px] mx-auto pt-[40px]">
+            <AnimateHeight className="w-full" height={showAdvance ? 'auto' : 0} duration={100} easing="ease-out">
+              <div className="w-[77%] mx-auto mt-1 flex flex-wrap mb-[16px] border-[2px] border-red-700">
+                <section className="flex flex-col">
+                  <div className="flex text-white">
+                    <h1
+                      className="text-[26.8px] leading-[33.5px]"
+                      style={{
+                        fontFamily: "sans-serif",
+                      }}
+                    >
+                      Type & Weakness
+                    </h1>
+                  </div>
+                </section>
+              </div>
+            </AnimateHeight>
         </div>
       </div>
       <div
