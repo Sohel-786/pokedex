@@ -21,6 +21,7 @@ function SearchPokemon({ fn }) {
   const [options, setOptions] = useState();
   const [showOptions, setShowOptions] = useState(true);
   const [showAdvance, setShowAdvance] = useState(false);
+  const [advanceSearchArrow, setAdvanceSearchArrow] = useState(false);
 
   const { pokemonData } = useSelector((s) => s.pokedex);
 
@@ -163,7 +164,7 @@ function SearchPokemon({ fn }) {
             duration={100}
             easing="ease-out"
           >
-            <div className="w-[87%] mx-auto mt-3 flex flex-wrap mb-[16px] px-2">
+            <div className="w-[87%] mx-auto mt-3 flex flex-wrap mb-[16px] px-2 justify-between">
               <section className="flex flex-col w-[53%]">
                 <div
                   className="flex text-white w-full items-center gap-[34px]"
@@ -270,6 +271,57 @@ function SearchPokemon({ fn }) {
                       className="border-none rounded-[5px] py-2 px-2 text-black w-[75px]"
                     />
                   </div>
+                </div>
+              </section>
+
+              <section
+                className="flex flex-col w-[40%]"
+                style={{
+                  fontFamily: "sans-serif",
+                }}
+              >
+                <div className="w-full">
+                  <h1 className="text-[26.8px] leading-[33.5px] w-[50.22%] text-white mb-4">
+                    Ability
+                  </h1>
+                  <div
+                    onClick={() => {
+                      setAdvanceSearchArrow(!advanceSearchArrow);
+                    }}
+                    className="pl-4 bg-[#313131] w-full py-[6px] rounded-[5px] cursor-pointer"
+                  >
+                    <h1 className="text-white font-roboto text-[16px] leading-[24px] flex items-center relative advanceSearchBtn">
+                      <img
+                        className="h-[28.9988px] aspect-auto mr-[12px]"
+                        src="/icons/pokeball.png"
+                        alt="pokeball"
+                      />{" "}
+                      All
+                      {advanceSearchArrow ? (
+                        <FiChevronUp
+                          size={"25px"}
+                          className="absolute right-[6px] z-[2]"
+                        />
+                      ) : (
+                        <FiChevronDown
+                          size={"25px"}
+                          className="absolute right-[6px] z-[2]"
+                        />
+                      )}
+                    </h1>
+                  </div>
+                </div>
+
+                <div className="mt-4 flex flex-col w-full">
+                  <h1 className="text-[26.8px] leading-[33.5px] w-[50.22%] text-white my-[13.400px] ml-[5.550px]">
+                    Height
+                  </h1>
+                  
+                  <ul className="flex mb-[8px] w-full">
+                        <li className="mx-[5.550px] rounded-[12px] bg-[#f2f2f2] cursor-pointer w-[27.46%]">
+
+                        </li>
+                  </ul>
                 </div>
               </section>
             </div>
