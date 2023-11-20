@@ -391,7 +391,7 @@ function PokemonDetails() {
           <SearchPokemon />
         </section>
       ) : (
-        <div className="pt-[200px]">
+        <div className="pt-[200px] h-[80vh]">
           <Loading />
         </div>
       )}

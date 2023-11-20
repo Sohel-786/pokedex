@@ -48,7 +48,7 @@ function Pokedex() {
 
     console.log(w, d);
 
-    if (w === d || (w-1) === d || (w+1) === d) {
+    if (w === d || w - 1 === d || w + 1 === d) {
       setShowLoading(true);
 
       console.log("done");
@@ -117,26 +117,24 @@ function Pokedex() {
         <div className="flex flex-col w-full my-4">
           {pokemons.length !== 0 ? (
             <>
-            <ul className="flex flex-wrap w-full">
-
-              {pokemons.map((el) => {
-                return (
-                  <PokemonCard
-                    key={nanoid(4)}
-                    url={el.img}
-                    name={el.name}
-                    number={el.number}
-                    types={el.types}
-                    id={el.id}
-                  />
-                );
-              })}
-            </ul>
+              <ul className="flex flex-wrap w-full">
+                {pokemons.map((el) => {
+                  return (
+                    <PokemonCard
+                      key={nanoid(4)}
+                      url={el.img}
+                      name={el.name}
+                      number={el.number}
+                      types={el.types}
+                      id={el.id}
+                    />
+                  );
+                })}
+              </ul>
               {
-              // requestMade ? (
-              //   showLoading && <Loading />
-              // ) : 
-              (
+                // requestMade ? (
+                //   showLoading && <Loading />
+                // ) :
                 <button
                   onClick={() => {
                     setPokemons([
@@ -158,7 +156,7 @@ function Pokedex() {
                 >
                   Load more Pokémon
                 </button>
-              )}
+              }
             </>
           ) : (
             <div className="min-h-[50vh] w-full flex justify-center">

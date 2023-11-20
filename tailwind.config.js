@@ -6,8 +6,7 @@ export default {
       boxShadow: {
         EqualNav: "0 0 7px 1px #666666",
         evo: "0 4px 4px 0px #212121",
-      }
-      ,
+      },
       fontFamily: {
         roboto: "'Roboto', sans-serif",
         openSans: "'Open Sans', sans-serif",
@@ -30,7 +29,7 @@ export default {
           "100%": {
             transform: "none",
           },
-        }
+        },
       },
       backgroundImage: {
         pokedetails: 'url("/assets/pokedetails.png")',
