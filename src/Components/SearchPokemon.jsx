@@ -4,6 +4,8 @@ import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 import { useSelector } from "react-redux";
 import AnimateHeight from "react-animate-height";
 import PokemonType from "./PokemonType";
+import { FaWeightHanging } from "react-icons/fa";
+import { ImTextHeight } from "react-icons/im";
 
 function SearchPokemon({ fn }) {
   const [searchConditions, setsearchConditions] = useState({
@@ -316,12 +318,70 @@ function SearchPokemon({ fn }) {
                   <h1 className="text-[26.8px] leading-[33.5px] w-[50.22%] text-white my-[13.400px] ml-[5.550px]">
                     Height
                   </h1>
-                  
-                  <ul className="flex mb-[8px] w-full">
-                        <li className="mx-[5.550px] rounded-[12px] bg-[#f2f2f2] cursor-pointer w-[27.46%]">
 
-                        </li>
+                  <ul className="flex mb-[8px] w-full h-20">
+                    <li className="mx-[1.5625%] rounded-[12px] bg-[#f2f2f2] cursor-pointer w-[27.46%] flex justify-center items-center">
+                      <ImTextHeight
+                        size={"23px"}
+                        className={`text-[#313131] relative top-2`}
+                      />
+                    </li>
+                    <li className="mx-[5.62%] rounded-[12px] bg-[#f2f2f2] cursor-pointer w-[27.46%] flex justify-center items-center">
+                      <ImTextHeight
+                        size={"35px"}
+                        className={`text-[#313131] relative top-1`}
+                      />
+                    </li>
+                    <li className="mx-[1.5625%] rounded-[12px] bg-[#f2f2f2] cursor-pointer w-[27.46%] flex justify-center items-center">
+                      <ImTextHeight
+                        size={"45px"}
+                        className={`text-[#313131] relative`}
+                      />
+                    </li>
                   </ul>
+                </div>
+
+                <div className="mt-4 flex flex-col w-full">
+                  <h1 className="text-[26.8px] leading-[33.5px] w-[50.22%] text-white my-[13.400px] ml-[5.550px]">
+                    Weight
+                  </h1>
+
+                  <ul className="flex mb-[8px] w-full h-20">
+                    <li className="mx-[1.5625%] rounded-[12px] bg-[#f2f2f2] cursor-pointer w-[27.46%] flex justify-center items-center">
+                      <FaWeightHanging
+                        size={"23px"}
+                        className={`text-[#313131] relative top-2`}
+                      />
+                    </li>
+                    <li className="mx-[5.62%] rounded-[12px] bg-[#f2f2f2] cursor-pointer w-[27.46%] flex justify-center items-center">
+                      <FaWeightHanging
+                        size={"35px"}
+                        className={`text-[#313131] relative top-1`}
+                      />
+                    </li>
+                    <li className="mx-[1.5625%] rounded-[12px] bg-[#f2f2f2] cursor-pointer w-[27.46%] flex justify-center items-center">
+                      <FaWeightHanging
+                        size={"45px"}
+                        className={`text-[#313131] relative`}
+                      />
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="mt-4 w-full">
+                  <div className="mt-[44px] flex w-full justify-end">
+                    <button className="m-[5.550px] pt-[15px] pb-[13.500px] px-[25px] bg-[#a4a4a4] text-white text-[125%] leading-[25px] rounded-[5px] hover:bg-[#8b8b8b]">
+                      Reset
+                    </button>
+                    <button className="m-[5.550px] pt-[15px] pb-[13.500px] px-[25px] bg-[#ee6b2f] text-white text-[125%] leading-[25px] rounded-[5px] flex items-center gap-[6px] hover:bg-[#da471b] ">
+                      <img
+                        src="/assets/searchbtn.png"
+                        alt="SearchBtn"
+                        className="h-[17px]"
+                      />{" "}
+                      Search
+                    </button>
+                  </div>
                 </div>
               </section>
             </div>
