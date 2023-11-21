@@ -142,7 +142,9 @@ function Pokedex() {
                 </p>
               </li>
               <li>
-                <p className="my-2 mx-4 text-[#919191]">Try multiple body sizes and shapes</p>
+                <p className="my-2 mx-4 text-[#919191]">
+                  Try multiple body sizes and shapes
+                </p>
               </li>
             </ul>
           </div>

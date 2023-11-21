@@ -12,8 +12,16 @@ function SearchPokemon({ fn, fn2, fn3 }) {
     search: "",
     type: [],
     weakness: [],
-    height: null,
-    weight: null,
+    height: {
+      short: false,
+      medium: false,
+      tall: false,
+    },
+    weight: {
+      light: false,
+      medium: false,
+      heavy: false,
+    },
     range: {
       from: "1",
       to: "1010",
@@ -40,35 +48,35 @@ function SearchPokemon({ fn, fn2, fn3 }) {
           [name]: value,
         });
 
-          setShowOptions(true);
-          if (!Number(value) && value.length > 0) {
-            const options = [];
-            let i = 0;
-            do {
-              if (
-                pokemonData[i].name.includes(value) ||
-                pokemonData[i].name.includes(value.toLowerCase()) ||
-                pokemonData[i].name.includes(
-                  value.toUpperCase(value.toLowerCase())
-                ) ||
-                pokemonData[i].name.includes(
-                  value[0].toUpperCase() + value.slice(1)
-                )
-              ) {
-                options.push(pokemonData[i]);
-              }
-              i++;
-            } while (i < 1010);
+        setShowOptions(true);
+        if (!Number(value) && value.length > 0) {
+          const options = [];
+          let i = 0;
+          do {
+            if (
+              pokemonData[i].name.includes(value) ||
+              pokemonData[i].name.includes(value.toLowerCase()) ||
+              pokemonData[i].name.includes(
+                value.toUpperCase(value.toLowerCase())
+              ) ||
+              pokemonData[i].name.includes(
+                value[0].toUpperCase() + value.slice(1)
+              )
+            ) {
+              options.push(pokemonData[i]);
+            }
+            i++;
+          } while (i < 1010);
 
-            setOptions([...options]);
-          } else {
-            setOptions([]);
-            if(Number(value)){
-              if(pokemonData[value - 1]){
-                setOptions([pokemonData[value - 1]])
-              }
+          setOptions([...options]);
+        } else {
+          setOptions([]);
+          if (Number(value)) {
+            if (pokemonData[value - 1]) {
+              setOptions([pokemonData[value - 1]]);
             }
           }
+        }
       }, time);
     };
   }
@@ -111,15 +119,15 @@ function SearchPokemon({ fn, fn2, fn3 }) {
     }
   }
 
-  function handleIndexChange(e){
+  function handleIndexChange(e) {
     const { name, value } = e.target;
     setsearchConditions({
       ...searchConditions,
-      range : {
+      range: {
         ...searchConditions.range,
-        [name] : value
-      }
-    })
+        [name]: value,
+      },
+    });
   }
   return (
     <>
@@ -165,10 +173,10 @@ function SearchPokemon({ fn, fn2, fn3 }) {
                       if (options.length === 1) {
                         fn([...options]);
                         setShowOptions(false);
-                      } else if(options.length > 1) {
+                      } else if (options.length > 1) {
                         fn([...options]);
                         setShowOptions(false);
-                      } else{
+                      } else {
                         fn3(true);
                       }
                     }}
@@ -283,10 +291,11 @@ function SearchPokemon({ fn, fn2, fn3 }) {
                             }}
                             className="bg-[#F2F2F2] leading-[30px] cursor-pointer text-center font-bold w-[28px] h-[28px] text-[#313131] rounded-full"
                             style={{
-                              backgroundColor:
-                                searchConditions.type.includes(el)
-                                  ? "#30a7d7"
-                                  : "#F2F2F2",
+                              backgroundColor: searchConditions.type.includes(
+                                el
+                              )
+                                ? "#30a7d7"
+                                : "#F2F2F2",
                             }}
                           >
                             T
@@ -336,10 +345,11 @@ function SearchPokemon({ fn, fn2, fn3 }) {
                             }}
                             className="bg-[#F2F2F2] leading-[30px] cursor-pointer text-center font-bold w-[28px] h-[28px] text-[#313131] rounded-full"
                             style={{
-                              backgroundColor:
-                                searchConditions.type.includes(el)
-                                  ? "#30a7d7"
-                                  : "#F2F2F2",
+                              backgroundColor: searchConditions.type.includes(
+                                el
+                              )
+                                ? "#30a7d7"
+                                : "#F2F2F2",
                             }}
                           >
                             T
@@ -381,7 +391,7 @@ function SearchPokemon({ fn, fn2, fn3 }) {
                       name="from"
                       className="border-none rounded-[5px] py-2 px-2 text-black w-[75px]"
                       value={searchConditions.range.from}
-                      />
+                    />
 
                     <span className="px-[15px] text-white">-</span>
 

@@ -388,7 +388,6 @@ function PokemonDetails() {
           </div>
 
           <EvolutionChain chain={allDetails.chain} />
-          <SearchPokemon />
         </section>
       ) : (
         <div className="pt-[200px] h-[80vh]">
