@@ -7,7 +7,7 @@ import PokemonType from "./PokemonType";
 import { FaWeightHanging } from "react-icons/fa";
 import { ImTextHeight } from "react-icons/im";
 
-function SearchPokemon({ fn }) {
+function SearchPokemon({ fn, fn2 }) {
   const [searchConditions, setsearchConditions] = useState({
     search: "",
     type: [],
@@ -85,6 +85,7 @@ function SearchPokemon({ fn }) {
                 Name or Number
               </label>
 
+              {/* Normal Search Option - Section */}
               <div className="pt-[13px] mb-[10px] w-full flex items-center gap-5 relative">
                 <span className="border-[2.96296px] z-40 bg-white border-[#616161] inline-block rounded-[5px] w-[80.5425%]">
                   <input
@@ -95,27 +96,38 @@ function SearchPokemon({ fn }) {
                     className="p-[10px] font-roboto text-[16px] leading-[24px] rounded-[5px] w-full"
                   />
                 </span>
-                <div
-                  onClick={() => {
-                    window.scrollBy({
-                      top : 300,
-                      behavior : "smooth"
-                    })
-                    if (options.length === 1) {
-                      fn([...options]);
-                      setShowOptions(false);
-                    } else {
-                      fn([...options])
-                      setShowOptions(false)
-                    }
-                  }}
-                  className="bg-[#ee6b2f] hover:bg-[#da471b] py-[12.600px] px-[21px] inline-block rounded-[5px] w-[12.95%] h-12"
-                  style={{
-                    backgroundImage: 'url("/assets/searchbtn.png")',
-                    backgroundPosition: "center",
-                    backgroundRepeat: "no-repeat",
-                  }}
-                ></div>
+
+                {/* Search Btn of Normal search */}
+
+                <a href="#pokemons" className="w-[12.95%]">
+                  <button
+                    disabled={showAdvance ? true : false}
+                    onClick={() => {
+                      const loadPokemon =
+                        document.getElementById("loadPokemon");
+                      if(searchConditions.search === ""){
+                        fn2();
+                        loadPokemon.style.display = "block";
+                        return;
+                      }
+                      loadPokemon.style.display = "none";
+
+                      if (options.length === 1) {
+                        fn([...options]);
+                        setShowOptions(false);
+                      } else {
+                        fn([...options]);
+                        setShowOptions(false);
+                      }
+                    }}
+                    className="bg-[#ee6b2f] hover:bg-[#da471b] py-[12.600px] px-[21px] inline-block rounded-[5px] w-full h-12 disabled:bg-cyan-400 disabled:cursor-not-allowed"
+                    style={{
+                      backgroundImage: 'url("/assets/searchbtn.png")',
+                      backgroundPosition: "center",
+                      backgroundRepeat: "no-repeat",
+                    }}
+                  ></button>
+                </a>
 
                 <div className="w-[79.3%] absolute z-30 bg-white top-[61px] left-[2px]">
                   {options && showOptions && (
