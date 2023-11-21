@@ -266,9 +266,11 @@ function SearchPokemon({ fn, fn2 }) {
                               handleType(el);
                             }}
                             className="bg-[#F2F2F2] leading-[30px] cursor-pointer text-center font-bold w-[28px] h-[28px] text-[#313131] rounded-full"
-
                             style={{
-                              backgroundColor : searchConditions.weakness.includes(el) ? '#30a7d7' : '#F2F2F2'
+                              backgroundColor:
+                                searchConditions.weakness.includes(el)
+                                  ? "#30a7d7"
+                                  : "#F2F2F2",
                             }}
                           >
                             T
@@ -278,9 +280,11 @@ function SearchPokemon({ fn, fn2 }) {
                               handleWeakness(el);
                             }}
                             className="bg-[#F2F2F2] leading-[30px] cursor-pointer text-center font-bold w-[28px] h-[28px] text-[#313131] rounded-full"
-
                             style={{
-                              backgroundColor : searchConditions.weakness.includes(el) ? '#30a7d7' : '#F2F2F2'
+                              backgroundColor:
+                                searchConditions.weakness.includes(el)
+                                  ? "#30a7d7"
+                                  : "#F2F2F2",
                             }}
                           >
                             W
@@ -315,9 +319,11 @@ function SearchPokemon({ fn, fn2 }) {
                               handleType(el);
                             }}
                             className="bg-[#F2F2F2] leading-[30px] cursor-pointer text-center font-bold w-[28px] h-[28px] text-[#313131] rounded-full"
-
                             style={{
-                              backgroundColor : searchConditions.weakness.includes(el) ? '#30a7d7' : '#F2F2F2'
+                              backgroundColor:
+                                searchConditions.weakness.includes(el)
+                                  ? "#30a7d7"
+                                  : "#F2F2F2",
                             }}
                           >
                             T
@@ -327,9 +333,11 @@ function SearchPokemon({ fn, fn2 }) {
                               handleWeakness(el);
                             }}
                             className="leading-[30px] cursor-pointer text-center font-bold w-[28px] h-[28px] text-[#313131] rounded-full"
-
                             style={{
-                              backgroundColor : searchConditions.weakness.includes(el) ? '#30a7d7' : '#F2F2F2'
+                              backgroundColor:
+                                searchConditions.weakness.includes(el)
+                                  ? "#30a7d7"
+                                  : "#F2F2F2",
                             }}
                           >
                             W
