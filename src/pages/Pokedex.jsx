@@ -126,23 +126,23 @@ function Pokedex() {
               No Pokémon Matched Your Search!
             </h3>
 
-            <p className="text-[#919191] text-[100%] leading-[125%] my-2 mx-4">
+            <p className="text-[#919191] text-[100%] leading-[125%] my-2 mx-4 tracking-wide">
               <strong>Try these suggestions to find a Pokémon:</strong>
             </p>
 
-            <ul className="m-2 text-[#919191] text-[100%] leading-[125%]">
+            <ul className="m-2 text-[#616161] relative left-6 text-[100%] leading-[125%] tracking-wide list-disc">
               <li>
-                <p className="my-2 mx-4">
+                <p className="my-2 mx-4 text-[#919191]">
                   Reduce the number of search parameters
                 </p>
               </li>
               <li>
-                <p className="my-2 mx-4">
+                <p className="my-2 mx-4 text-[#919191]">
                   Search for only one Pokémon type at a time
                 </p>
               </li>
               <li>
-                <p className="my-2 mx-4">Try multiple body sizes and shapes</p>
+                <p className="my-2 mx-4 text-[#919191]">Try multiple body sizes and shapes</p>
               </li>
             </ul>
           </div>

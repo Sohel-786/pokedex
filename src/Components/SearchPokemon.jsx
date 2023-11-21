@@ -156,6 +156,7 @@ function SearchPokemon({ fn, fn2, fn3 }) {
                         document.getElementById("loadPokemon");
                       if (searchConditions.search === "") {
                         fn2();
+                        fn3(false);
                         loadPokemon.style.display = "block";
                         return;
                       }
