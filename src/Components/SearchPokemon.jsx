@@ -294,7 +294,7 @@ function SearchPokemon({ fn }) {
                     }}
                     className="pl-4 bg-[#313131] w-full py-[6px] rounded-[5px] cursor-pointer"
                   >
-                    <h1 className="text-white font-roboto text-[16px] leading-[24px] flex items-center relative advanceSearchBtn">
+                    <h1 className="text-white font-roboto text-[16px] leading-[24px] flex items-center relative advanceSearchBtn select-none">
                       <img
                         className="h-[28.9988px] aspect-auto mr-[12px]"
                         src="/icons/pokeball.png"
@@ -318,7 +318,7 @@ function SearchPokemon({ fn }) {
                   {showAbility && (
                     <div className="absolute bg-[#a4a4a4] h-[300px] rounded-b-[5px] p-[10px] z-50 w-full">
                       <section className="w-full overflow-x-hidden overflow-y-scroll h-full advanceScroll">
-                        <ul className="list-none">
+                        <ul className="list-none select-none">
                           <li className="cursor-pointer px-[9.802px] pt-[12px] pb-[10.800px] text-[#212121] hover:bg-[#313131] hover:text-[#4dad5b] capitalize w-[99%]">
                             All
                           </li>
