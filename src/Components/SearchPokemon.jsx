@@ -97,9 +97,16 @@ function SearchPokemon({ fn }) {
                 </span>
                 <div
                   onClick={() => {
+                    window.scrollBy({
+                      top : 300,
+                      behavior : "smooth"
+                    })
                     if (options.length === 1) {
                       fn([...options]);
+                      setShowOptions(false);
                     } else {
+                      fn([...options])
+                      setShowOptions(false)
                     }
                   }}
                   className="bg-[#ee6b2f] hover:bg-[#da471b] py-[12.600px] px-[21px] inline-block rounded-[5px] w-[12.95%] h-12"
