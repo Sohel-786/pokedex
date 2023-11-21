@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 color {
-  color: #1b53ba;
+  color: #f2f2f2
 }
 
 body {
@@ -77,4 +77,41 @@ input[type="number"]::-webkit-inner-spin-button,
   input[type="number"]::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
-  }
+}
+
+.advanceScroll::-webkit-scrollbar {
+  width: 22px;
+  height: 22px;
+}
+
+/* Track */
+.advanceScroll::-webkit-scrollbar-track {
+  box-shadow: none;
+  margin: 10px;
+}
+ 
+/* Handle */
+.advanceScroll::-webkit-scrollbar-thumb {
+  background: #313131; 
+  border-radius: 3px;
+  width: 10px;
+}
+
+.advanceScroll::-webkit-scrollbar-button:single-button:vertical:decrement {
+  height: 14px;
+  width: 19px;
+  background-image: url("/assets/scrollbar_bg_dark.png");
+  background-position-x: 2px;
+  background-position-y: 0px;
+  background-repeat: no-repeat;
+}
+
+.advanceScroll::-webkit-scrollbar-button:single-button:vertical:increment {
+  height: 14px;
+  width: 19px;
+  background-image: url("/assets/scrollbar_bg_dark.png");
+  background: ;
+  background-position-x: 2px;
+  background-position-y: 0px;
+  background-repeat: no-repeat;
+}

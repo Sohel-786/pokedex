@@ -168,7 +168,7 @@ function SearchPokemon({ fn }) {
             easing="ease-out"
           >
             <div className="w-[87%] mx-auto mt-3 flex flex-wrap mb-[16px] px-2 justify-between">
-              <section className="flex flex-col w-[53%]">
+              <section className="flex flex-col w-[51%]">
                 <div
                   className="flex text-white w-full items-center gap-[34px]"
                   style={{
@@ -278,7 +278,7 @@ function SearchPokemon({ fn }) {
               </section>
 
               <section
-                className="flex flex-col w-[40%]"
+                className="flex flex-col w-[41%]"
                 style={{
                   fontFamily: "sans-serif",
                 }}
@@ -317,16 +317,16 @@ function SearchPokemon({ fn }) {
 
                   {showAbility && (
                     <div className="absolute bg-[#a4a4a4] h-[300px] rounded-b-[5px] p-[10px] z-50 w-full">
-                      <section className="w-full overflow-x-hidden overflow-y-scroll h-full">
+                      <section className="w-full overflow-x-hidden overflow-y-scroll h-full advanceScroll">
                         <ul className="list-none">
-                          <li className="cursor-pointer px-[9.802px] pt-[12px] pb-[10.800px] text-[#212121] hover:bg-[#313131] hover:text-[#4dad5b] capitalize">
+                          <li className="cursor-pointer px-[9.802px] pt-[12px] pb-[10.800px] text-[#212121] hover:bg-[#313131] hover:text-[#4dad5b] capitalize w-[99%]">
                             All
                           </li>
                           {abilities.map((el) => {
                             return (
                               <li
                                 key={nanoid(5)}
-                                className="cursor-pointer px-[9.802px] pt-[12px] pb-[10.800px] text-[#212121] hover:bg-[#313131] hover:text-[#4dad5b] capitalize"
+                                className="cursor-pointer px-[9.802px] pt-[12px] pb-[10.800px] text-[#212121] hover:bg-[#313131] hover:text-[#4dad5b] capitalize w-[99%]"
                               >
                                 {el}
                               </li>
