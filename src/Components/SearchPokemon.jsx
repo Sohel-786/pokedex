@@ -72,6 +72,42 @@ function SearchPokemon({ fn, fn2 }) {
 
   var handleChange = debounce(300);
 
+  function handleType(t) {
+    if (searchConditions.type.includes(t)) {
+      setsearchConditions({
+        ...searchConditions,
+        type: searchConditions.type.filter((el) => {
+          if (el !== t) {
+            return el;
+          }
+        }),
+      });
+    } else {
+      setsearchConditions({
+        ...searchConditions,
+        type: [...searchConditions.type, t],
+      });
+    }
+  }
+
+  function handleWeakness(w) {
+    if (searchConditions.weakness.includes(w)) {
+      setsearchConditions({
+        ...searchConditions,
+        weakness: searchConditions.weakness.filter((el) => {
+          if (el !== w) {
+            return el;
+          }
+        }),
+      });
+    } else {
+      setsearchConditions({
+        ...searchConditions,
+        weakness: [...searchConditions.weakness, w],
+      });
+    }
+  }
+
   return (
     <>
       <div className="max-w-[1280px] w-[100vw] mx-auto relative left-[-161.6px] bg-[#616161] pb-4">
@@ -105,7 +141,7 @@ function SearchPokemon({ fn, fn2 }) {
                     onClick={() => {
                       const loadPokemon =
                         document.getElementById("loadPokemon");
-                      if(searchConditions.search === ""){
+                      if (searchConditions.search === "") {
                         fn2();
                         loadPokemon.style.display = "block";
                         return;
@@ -225,10 +261,28 @@ function SearchPokemon({ fn, fn2 }) {
                             <PokemonType type={el} width={"100%"} />
                           </div>
 
-                          <span className="bg-[#F2F2F2] leading-[30px] cursor-pointer text-center font-bold w-[28px] h-[28px] text-[#313131] rounded-full">
+                          <span
+                            onClick={() => {
+                              handleType(el);
+                            }}
+                            className="bg-[#F2F2F2] leading-[30px] cursor-pointer text-center font-bold w-[28px] h-[28px] text-[#313131] rounded-full"
+
+                            style={{
+                              backgroundColor : searchConditions.weakness.includes(el) ? '#30a7d7' : '#F2F2F2'
+                            }}
+                          >
                             T
                           </span>
-                          <span className="bg-[#F2F2F2] leading-[30px] cursor-pointer text-center font-bold w-[28px] h-[28px] text-[#313131] rounded-full">
+                          <span
+                            onClick={() => {
+                              handleWeakness(el);
+                            }}
+                            className="bg-[#F2F2F2] leading-[30px] cursor-pointer text-center font-bold w-[28px] h-[28px] text-[#313131] rounded-full"
+
+                            style={{
+                              backgroundColor : searchConditions.weakness.includes(el) ? '#30a7d7' : '#F2F2F2'
+                            }}
+                          >
                             W
                           </span>
                         </div>
@@ -256,10 +310,28 @@ function SearchPokemon({ fn, fn2 }) {
                             <PokemonType type={el} width={"100%"} />
                           </div>
 
-                          <span className="bg-[#F2F2F2] leading-[30px] cursor-pointer text-center font-bold w-[28px] h-[28px] text-[#313131] rounded-full">
+                          <span
+                            onClick={() => {
+                              handleType(el);
+                            }}
+                            className="bg-[#F2F2F2] leading-[30px] cursor-pointer text-center font-bold w-[28px] h-[28px] text-[#313131] rounded-full"
+
+                            style={{
+                              backgroundColor : searchConditions.weakness.includes(el) ? '#30a7d7' : '#F2F2F2'
+                            }}
+                          >
                             T
                           </span>
-                          <span className="bg-[#F2F2F2] leading-[30px] cursor-pointer text-center font-bold w-[28px] h-[28px] text-[#313131] rounded-full">
+                          <span
+                            onClick={() => {
+                              handleWeakness(el);
+                            }}
+                            className="leading-[30px] cursor-pointer text-center font-bold w-[28px] h-[28px] text-[#313131] rounded-full"
+
+                            style={{
+                              backgroundColor : searchConditions.weakness.includes(el) ? '#30a7d7' : '#F2F2F2'
+                            }}
+                          >
                             W
                           </span>
                         </div>
