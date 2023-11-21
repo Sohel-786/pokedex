@@ -24,8 +24,9 @@ function SearchPokemon({ fn }) {
   const [showOptions, setShowOptions] = useState(true);
   const [showAdvance, setShowAdvance] = useState(false);
   const [advanceSearchArrow, setAdvanceSearchArrow] = useState(false);
+  const [showAbility, setShowAbility] = useState(false);
 
-  const { pokemonData } = useSelector((s) => s.pokedex);
+  const { pokemonData, abilities } = useSelector((s) => s.pokedex);
 
   function debounce(time) {
     var timer;
@@ -282,13 +283,14 @@ function SearchPokemon({ fn }) {
                   fontFamily: "sans-serif",
                 }}
               >
-                <div className="w-full">
+                <div className="w-full relative">
                   <h1 className="text-[26.8px] leading-[33.5px] w-[50.22%] text-white mb-4">
                     Ability
                   </h1>
                   <div
                     onClick={() => {
                       setAdvanceSearchArrow(!advanceSearchArrow);
+                      setShowAbility(!showAbility);
                     }}
                     className="pl-4 bg-[#313131] w-full py-[6px] rounded-[5px] cursor-pointer"
                   >
@@ -312,6 +314,28 @@ function SearchPokemon({ fn }) {
                       )}
                     </h1>
                   </div>
+
+                  {showAbility && (
+                    <div className="absolute bg-[#a4a4a4] h-[300px] rounded-b-[5px] p-[10px] z-50 w-full">
+                      <section className="w-full overflow-x-hidden overflow-y-scroll h-full">
+                        <ul className="list-none">
+                          <li className="cursor-pointer px-[9.802px] pt-[12px] pb-[10.800px] text-[#212121] hover:bg-[#313131] hover:text-[#4dad5b] capitalize">
+                            All
+                          </li>
+                          {abilities.map((el) => {
+                            return (
+                              <li
+                                key={nanoid(5)}
+                                className="cursor-pointer px-[9.802px] pt-[12px] pb-[10.800px] text-[#212121] hover:bg-[#313131] hover:text-[#4dad5b] capitalize"
+                              >
+                                {el}
+                              </li>
+                            );
+                          })}
+                        </ul>
+                      </section>
+                    </div>
+                  )}
                 </div>
 
                 <div className="mt-4 flex flex-col w-full">
@@ -350,7 +374,7 @@ function SearchPokemon({ fn }) {
                     <li className="mx-[1.5625%] rounded-[12px] bg-[#f2f2f2] cursor-pointer w-[27.46%] flex justify-center items-center">
                       <FaWeightHanging
                         size={"23px"}
-                        className={`text-[#313131] relative top-2`}
+                        className={`text-[#313131] relative top-[10px]`}
                       />
                     </li>
                     <li className="mx-[5.62%] rounded-[12px] bg-[#f2f2f2] cursor-pointer w-[27.46%] flex justify-center items-center">

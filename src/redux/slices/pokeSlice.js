@@ -6,6 +6,7 @@ const initialState = {
   male: [],
   female: [],
   both: [],
+  abilities : []
 };
 
 export const getAllpokemonData = createAsyncThunk("/pokemon/all", async () => {
@@ -44,11 +45,16 @@ export const getAllpokemonData = createAsyncThunk("/pokemon/all", async () => {
       }
     });
 
+    const {data : abilityData} = await axios.get('https://pokeapi.co/api/v2/ability?offset=0&limit=363');
+    const abilities = abilityData.results.map((el) => {
+      return el.name.replaceAll('-', ' ');
+    })
     return {
       result,
       male: datamale,
       female: datafemale,
       both,
+      abilities
     };
   } catch (e) {
     console.log(e);
@@ -93,6 +99,7 @@ const pokeSlice = createSlice({
       state.male = action?.payload?.male;
       state.female = action?.payload?.female;
       state.both = action?.payload?.both;
+      state.abilities = action?.payload?.abilities;
     });
   },
 });
