@@ -12,6 +12,7 @@ function Pokedex() {
   const [sortOrder, setSortOrder] = useState("Lowest Number (First)");
   const [searchArrow, setSearchArrow] = useState(false);
   const [showLoading, setShowLoading] = useState(false);
+  const [showError, setShowError] = useState(false);
   const [offsetLimit, setOffsetLimit] = useState({
     offset: 12,
     positionLimit: 24,
@@ -72,7 +73,7 @@ function Pokedex() {
         <h1 className="font-openSans text-[30px] text-[#919191] leading-[37.5px] mt-[25px] mb-[16px]">
           Pokédex
         </h1>
-        <SearchPokemon fn={setPokemons} fn2={getPokemons} />
+        <SearchPokemon fn={setPokemons} fn2={getPokemons} fn3={setShowError} />
         <div id="pokemons" className="w-full my-[34px]">
           <div className="flex items-center justify-between">
             <button className="flex justify-center items-center pt-[10.600px] pb-[9.340px] px-[21px] bg-[#30a7d7] text-white rounded-[5px] font-openSans text-[16.8px] w-[40.71%] font-semibold hover:bg-[#1b82b1] gap-[5px]">
@@ -114,57 +115,74 @@ function Pokedex() {
           </div>
         </div>
 
-        <div className="flex flex-col w-full my-4">
-          {pokemons.length !== 0 ? (
-            <>
-              <ul className="flex flex-wrap w-full">
-                {pokemons.map((el) => {
-                  return (
-                    <PokemonCard
-                      key={nanoid(4)}
-                      url={el.img}
-                      name={el.name}
-                      number={el.number}
-                      types={el.types}
-                      id={el.id}
-                    />
-                  );
-                })}
-              </ul>
-              {
-                // requestMade ? (
-                //   showLoading && <Loading />
-                // ) :
-                <button
-                  id="loadPokemon"
-                  onClick={() => {
-                    setPokemons([
-                      ...pokemons,
-                      ...pokemonData.slice(
-                        offsetLimit.offset,
-                        offsetLimit.positionLimit
-                      ),
-                    ]);
+        {showError ? (
+          <div
+            className="w-full border-2 border-[#E3350D] rounded-[10px] mt-[8px] "
+            style={{
+              fontFamily: "sans-serif",
+            }}
+          >
+            <h3 className="my-[10px] px-[20px] text-[#E3350D] text-[125%] leading-[125%]">
+              No Pokémon Matched Your Search!
+            </h3>
 
-                    setOffsetLimit({
-                      offset: offsetLimit.offset + 12,
-                      positionLimit: offsetLimit.positionLimit + 12,
-                    });
+            <p>
+              <strong>Try these suggestions to find a Pokémon:</strong>
+            </p>
+          </div>
+        ) : (
+          <div className="flex flex-col w-full my-4">
+            {pokemons.length !== 0 ? (
+              <>
+                <ul className="flex flex-wrap w-full">
+                  {pokemons.map((el) => {
+                    return (
+                      <PokemonCard
+                        key={nanoid(4)}
+                        url={el.img}
+                        name={el.name}
+                        number={el.number}
+                        types={el.types}
+                        id={el.id}
+                      />
+                    );
+                  })}
+                </ul>
+                {
+                  // requestMade ? (
+                  //   showLoading && <Loading />
+                  // ) :
+                  <button
+                    id="loadPokemon"
+                    onClick={() => {
+                      setPokemons([
+                        ...pokemons,
+                        ...pokemonData.slice(
+                          offsetLimit.offset,
+                          offsetLimit.positionLimit
+                        ),
+                      ]);
 
-                    // setRequestMade(true);
-                  }}
-                  className="pt-[12px] pb-[10.800px] px-[20px] bg-[#30a7d7] text-white rounded-[5px] font-openSans text-[16px] leading-[20px] font-semibold hover:bg-[#1b82b1] mx-auto my-5 mt-10"
-                >
-                  Load more Pokémon
-                </button>
-              }
-            </>
-          ) : (
-            <div className="min-h-[50vh] w-full flex justify-center">
-              <Loading />
-            </div>
-          )}
-        </div>
+                      setOffsetLimit({
+                        offset: offsetLimit.offset + 12,
+                        positionLimit: offsetLimit.positionLimit + 12,
+                      });
+
+                      // setRequestMade(true);
+                    }}
+                    className="pt-[12px] pb-[10.800px] px-[20px] bg-[#30a7d7] text-white rounded-[5px] font-openSans text-[16px] leading-[20px] font-semibold hover:bg-[#1b82b1] mx-auto my-5 mt-10"
+                  >
+                    Load more Pokémon
+                  </button>
+                }
+              </>
+            ) : (
+              <div className="min-h-[50vh] w-full flex justify-center">
+                <Loading />
+              </div>
+            )}
+          </div>
+        )}
       </section>
     </EqualLayout>
   );

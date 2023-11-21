@@ -7,16 +7,16 @@ import PokemonType from "./PokemonType";
 import { FaWeightHanging } from "react-icons/fa";
 import { ImTextHeight } from "react-icons/im";
 
-function SearchPokemon({ fn, fn2 }) {
+function SearchPokemon({ fn, fn2, fn3 }) {
   const [searchConditions, setsearchConditions] = useState({
     search: "",
     type: [],
     weakness: [],
     height: null,
     weight: null,
-    Range: {
-      from: "",
-      to: "",
+    range: {
+      from: "1",
+      to: "1010",
     },
   });
 
@@ -40,7 +40,6 @@ function SearchPokemon({ fn, fn2 }) {
           [name]: value,
         });
 
-        if (name === "search") {
           setShowOptions(true);
           if (!Number(value) && value.length > 0) {
             const options = [];
@@ -64,8 +63,12 @@ function SearchPokemon({ fn, fn2 }) {
             setOptions([...options]);
           } else {
             setOptions([]);
+            if(Number(value)){
+              if(pokemonData[value - 1]){
+                setOptions([pokemonData[value - 1]])
+              }
+            }
           }
-        }
       }, time);
     };
   }
@@ -108,6 +111,16 @@ function SearchPokemon({ fn, fn2 }) {
     }
   }
 
+  function handleIndexChange(e){
+    const { name, value } = e.target;
+    setsearchConditions({
+      ...searchConditions,
+      range : {
+        ...searchConditions.range,
+        [name] : value
+      }
+    })
+  }
   return (
     <>
       <div className="max-w-[1280px] w-[100vw] mx-auto relative left-[-161.6px] bg-[#616161] pb-4">
@@ -151,9 +164,11 @@ function SearchPokemon({ fn, fn2 }) {
                       if (options.length === 1) {
                         fn([...options]);
                         setShowOptions(false);
-                      } else {
+                      } else if(options.length > 1) {
                         fn([...options]);
                         setShowOptions(false);
+                      } else{
+                        fn3(true);
                       }
                     }}
                     className="bg-[#ee6b2f] hover:bg-[#da471b] py-[12.600px] px-[21px] inline-block rounded-[5px] w-full h-12 disabled:bg-cyan-400 disabled:cursor-not-allowed"
@@ -360,17 +375,21 @@ function SearchPokemon({ fn, fn2 }) {
 
                   <div className="mt-[10px] mb-[5px] flex items-center">
                     <input
-                      value={1}
+                      onChange={handleIndexChange}
                       type="number"
+                      name="from"
                       className="border-none rounded-[5px] py-2 px-2 text-black w-[75px]"
-                    />
+                      value={searchConditions.range.from}
+                      />
 
                     <span className="px-[15px] text-white">-</span>
 
                     <input
-                      value={1010}
+                      onChange={handleIndexChange}
                       type="number"
+                      name="to"
                       className="border-none rounded-[5px] py-2 px-2 text-black w-[75px]"
+                      value={searchConditions.range.to}
                     />
                   </div>
                 </div>
