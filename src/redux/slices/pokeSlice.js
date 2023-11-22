@@ -47,7 +47,7 @@ export const getAllpokemonData = createAsyncThunk("/pokemon/all", async () => {
 
     const {data : abilityData} = await axios.get('https://pokeapi.co/api/v2/ability?offset=0&limit=363');
     const abilities = abilityData.results.map((el) => {
-      return el.name.replaceAll('-', ' ');
+      return el.name;
     })
     return {
       result,
