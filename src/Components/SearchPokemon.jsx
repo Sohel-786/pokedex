@@ -508,17 +508,17 @@ function SearchPokemon({ fn, fn2, fn3 }) {
                         });
                       }}
                       className={`mx-[5.62%] rounded-[12px] bg-[${
-                        searchConditions.height.short ? "#ee6b2f" : "#f2f2f2"
+                        searchConditions.height.medium ? "#ee6b2f" : "#f2f2f2"
                       }] cursor-pointer w-[27.46%] flex justify-center items-center`}
                       style={{
-                        color: searchConditions.height.short
+                        color: searchConditions.height.medium
                           ? "#f2f2f2"
                           : "#313131",
                       }}
                     >
                       <ImTextHeight
                         size={"35px"}
-                        className={`text-[#313131] relative top-1`}
+                        className={` relative top-1`}
                       />
                     </li>
                     <li
@@ -532,18 +532,15 @@ function SearchPokemon({ fn, fn2, fn3 }) {
                         });
                       }}
                       className={`mx-[1.5625%] rounded-[12px] bg-[${
-                        searchConditions.height.short ? "#ee6b2f" : "#f2f2f2"
+                        searchConditions.height.tall ? "#ee6b2f" : "#f2f2f2"
                       }] cursor-pointer w-[27.46%] flex justify-center items-center`}
                       style={{
-                        color: searchConditions.height.short
+                        color: searchConditions.height.tall
                           ? "#f2f2f2"
                           : "#313131",
                       }}
                     >
-                      <ImTextHeight
-                        size={"45px"}
-                        className={`text-[#313131] relative`}
-                      />
+                      <ImTextHeight size={"45px"} className={` relative`} />
                     </li>
                   </ul>
                 </div>
@@ -564,11 +561,18 @@ function SearchPokemon({ fn, fn2, fn3 }) {
                           },
                         });
                       }}
-                      className="mx-[1.5625%] rounded-[12px] bg-[#f2f2f2] cursor-pointer w-[27.46%] flex justify-center items-center"
+                      className={`mx-[1.5625%] rounded-[12px] bg-[${
+                        searchConditions.weight.light ? "#ee6b2f" : "#f2f2f2"
+                      }] cursor-pointer w-[27.46%] flex justify-center items-center`}
+                      style={{
+                        color: searchConditions.weight.light
+                          ? "#f2f2f2"
+                          : "#313131",
+                      }}
                     >
                       <FaWeightHanging
                         size={"23px"}
-                        className={`text-[#313131] relative top-[10px]`}
+                        className={` relative top-[10px]`}
                       />
                     </li>
                     <li
@@ -581,11 +585,18 @@ function SearchPokemon({ fn, fn2, fn3 }) {
                           },
                         });
                       }}
-                      className="mx-[5.62%] rounded-[12px] bg-[#f2f2f2] cursor-pointer w-[27.46%] flex justify-center items-center"
+                      className={`mx-[5.62%] rounded-[12px] bg-[${
+                        searchConditions.weight.medium ? "#ee6b2f" : "#f2f2f2"
+                      }] cursor-pointer w-[27.46%] flex justify-center items-center`}
+                      style={{
+                        color: searchConditions.weight.medium
+                          ? "#f2f2f2"
+                          : "#313131",
+                      }}
                     >
                       <FaWeightHanging
                         size={"35px"}
-                        className={`text-[#313131] relative top-1`}
+                        className={` relative top-1`}
                       />
                     </li>
                     <li
@@ -598,12 +609,16 @@ function SearchPokemon({ fn, fn2, fn3 }) {
                           },
                         });
                       }}
-                      className="mx-[1.5625%] rounded-[12px] bg-[#f2f2f2] cursor-pointer w-[27.46%] flex justify-center items-center"
+                      className={`mx-[1.5625%] rounded-[12px] bg-[${
+                        searchConditions.weight.heavy ? "#ee6b2f" : "#f2f2f2"
+                      }] cursor-pointer w-[27.46%] flex justify-center items-center`}
+                      style={{
+                        color: searchConditions.weight.heavy
+                          ? "#f2f2f2"
+                          : "#313131",
+                      }}
                     >
-                      <FaWeightHanging
-                        size={"45px"}
-                        className={`text-[#313131] relative`}
-                      />
+                      <FaWeightHanging size={"45px"} className={` relative`} />
                     </li>
                   </ul>
                 </div>
