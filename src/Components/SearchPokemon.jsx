@@ -467,25 +467,79 @@ function SearchPokemon({ fn, fn2, fn3 }) {
                   )}
                 </div>
 
-                <div className="mt-4 flex flex-col w-full">
+                <div className="mt-4 flex flex-col w-full select-none">
                   <h1 className="text-[26.8px] leading-[33.5px] w-[50.22%] text-white my-[13.400px] ml-[5.550px]">
                     Height
                   </h1>
 
                   <ul className="flex mb-[8px] w-full h-20">
-                    <li className="mx-[1.5625%] rounded-[12px] bg-[#f2f2f2] cursor-pointer w-[27.46%] flex justify-center items-center">
+                    <li
+                      onClick={() => {
+                        setsearchConditions({
+                          ...searchConditions,
+                          height: {
+                            ...searchConditions.height,
+                            short: !searchConditions.height.short,
+                          },
+                        });
+                      }}
+                      className={`mx-[1.5625%] rounded-[12px] bg-[${
+                        searchConditions.height.short ? "#ee6b2f" : "#f2f2f2"
+                      }] cursor-pointer w-[27.46%] flex justify-center items-center`}
+                      style={{
+                        color: searchConditions.height.short
+                          ? "#f2f2f2"
+                          : "#313131",
+                      }}
+                    >
                       <ImTextHeight
                         size={"23px"}
-                        className={`text-[#313131] relative top-2`}
+                        className={`relative top-2`}
                       />
                     </li>
-                    <li className="mx-[5.62%] rounded-[12px] bg-[#f2f2f2] cursor-pointer w-[27.46%] flex justify-center items-center">
+                    <li
+                      onClick={() => {
+                        setsearchConditions({
+                          ...searchConditions,
+                          height: {
+                            ...searchConditions.height,
+                            medium: !searchConditions.height.medium,
+                          },
+                        });
+                      }}
+                      className={`mx-[5.62%] rounded-[12px] bg-[${
+                        searchConditions.height.short ? "#ee6b2f" : "#f2f2f2"
+                      }] cursor-pointer w-[27.46%] flex justify-center items-center`}
+                      style={{
+                        color: searchConditions.height.short
+                          ? "#f2f2f2"
+                          : "#313131",
+                      }}
+                    >
                       <ImTextHeight
                         size={"35px"}
                         className={`text-[#313131] relative top-1`}
                       />
                     </li>
-                    <li className="mx-[1.5625%] rounded-[12px] bg-[#f2f2f2] cursor-pointer w-[27.46%] flex justify-center items-center">
+                    <li
+                      onClick={() => {
+                        setsearchConditions({
+                          ...searchConditions,
+                          height: {
+                            ...searchConditions.height,
+                            tall: !searchConditions.height.tall,
+                          },
+                        });
+                      }}
+                      className={`mx-[1.5625%] rounded-[12px] bg-[${
+                        searchConditions.height.short ? "#ee6b2f" : "#f2f2f2"
+                      }] cursor-pointer w-[27.46%] flex justify-center items-center`}
+                      style={{
+                        color: searchConditions.height.short
+                          ? "#f2f2f2"
+                          : "#313131",
+                      }}
+                    >
                       <ImTextHeight
                         size={"45px"}
                         className={`text-[#313131] relative`}
@@ -494,25 +548,58 @@ function SearchPokemon({ fn, fn2, fn3 }) {
                   </ul>
                 </div>
 
-                <div className="mt-4 flex flex-col w-full">
+                <div className="mt-4 flex flex-col w-full select-none">
                   <h1 className="text-[26.8px] leading-[33.5px] w-[50.22%] text-white my-[13.400px] ml-[5.550px]">
                     Weight
                   </h1>
 
                   <ul className="flex mb-[8px] w-full h-20">
-                    <li className="mx-[1.5625%] rounded-[12px] bg-[#f2f2f2] cursor-pointer w-[27.46%] flex justify-center items-center">
+                    <li
+                      onClick={() => {
+                        setsearchConditions({
+                          ...searchConditions,
+                          weight: {
+                            ...searchConditions.weight,
+                            light: !searchConditions.weight.light,
+                          },
+                        });
+                      }}
+                      className="mx-[1.5625%] rounded-[12px] bg-[#f2f2f2] cursor-pointer w-[27.46%] flex justify-center items-center"
+                    >
                       <FaWeightHanging
                         size={"23px"}
                         className={`text-[#313131] relative top-[10px]`}
                       />
                     </li>
-                    <li className="mx-[5.62%] rounded-[12px] bg-[#f2f2f2] cursor-pointer w-[27.46%] flex justify-center items-center">
+                    <li
+                      onClick={() => {
+                        setsearchConditions({
+                          ...searchConditions,
+                          weight: {
+                            ...searchConditions.weight,
+                            medium: !searchConditions.weight.medium,
+                          },
+                        });
+                      }}
+                      className="mx-[5.62%] rounded-[12px] bg-[#f2f2f2] cursor-pointer w-[27.46%] flex justify-center items-center"
+                    >
                       <FaWeightHanging
                         size={"35px"}
                         className={`text-[#313131] relative top-1`}
                       />
                     </li>
-                    <li className="mx-[1.5625%] rounded-[12px] bg-[#f2f2f2] cursor-pointer w-[27.46%] flex justify-center items-center">
+                    <li
+                      onClick={() => {
+                        setsearchConditions({
+                          ...searchConditions,
+                          weight: {
+                            ...searchConditions.weight,
+                            heavy: !searchConditions.weight.heavy,
+                          },
+                        });
+                      }}
+                      className="mx-[1.5625%] rounded-[12px] bg-[#f2f2f2] cursor-pointer w-[27.46%] flex justify-center items-center"
+                    >
                       <FaWeightHanging
                         size={"45px"}
                         className={`text-[#313131] relative`}
