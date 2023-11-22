@@ -6,7 +6,7 @@ const initialState = {
   male: [],
   female: [],
   both: [],
-  abilities : []
+  abilities: [],
 };
 
 export const getAllpokemonData = createAsyncThunk("/pokemon/all", async () => {
@@ -45,16 +45,18 @@ export const getAllpokemonData = createAsyncThunk("/pokemon/all", async () => {
       }
     });
 
-    const {data : abilityData} = await axios.get('https://pokeapi.co/api/v2/ability?offset=0&limit=363');
+    const { data: abilityData } = await axios.get(
+      "https://pokeapi.co/api/v2/ability?offset=0&limit=363"
+    );
     const abilities = abilityData.results.map((el) => {
       return el.name;
-    })
+    });
     return {
       result,
       male: datamale,
       female: datafemale,
       both,
-      abilities
+      abilities,
     };
   } catch (e) {
     console.log(e);
@@ -69,15 +71,24 @@ const getPokemon = async (url) => {
     let types = (res?.data?.types).map((el) => {
       return el.type.name;
     });
+    var abilities = [];
+    res?.data?.abilities.forEach(async (el) => {
+      const { name } = el.ability;
+      abilities.push(name);
+    });
+
     const pokemon = {
       id: res?.data?.id,
       name: res?.data?.species?.name,
+      height: res?.data?.height,
+      weight: res?.data?.weight,
+      abilities,
       number:
-        ((res?.data?.id).toString()).length === 1
+        (res?.data?.id).toString().length === 1
           ? "#000" + res.data.id
-          : ((res?.data?.id).toString()).length === 2
+          : (res?.data?.id).toString().length === 2
           ? "#00" + res.data.id
-          : ((res?.data?.id).toString()).length === 3
+          : (res?.data?.id).toString().length === 3
           ? "#0" + res.data.id
           : "#" + res.data.id,
       img: url1 ? url1 : url2,

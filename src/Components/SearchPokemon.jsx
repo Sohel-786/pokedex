@@ -26,7 +26,7 @@ function SearchPokemon({ fn, fn2, fn3 }) {
       from: "1",
       to: "1010",
     },
-    ability : "all"
+    ability: "all",
   });
 
   const [options, setOptions] = useState();
@@ -430,7 +430,7 @@ function SearchPokemon({ fn, fn2, fn3 }) {
                         src="/icons/pokeball.png"
                         alt="pokeball"
                       />{" "}
-                      {searchConditions.ability}
+                      {searchConditions.ability.replaceAll("-", " ")}
                       {advanceSearchArrow ? (
                         <FiChevronUp
                           size={"25px"}
@@ -449,27 +449,32 @@ function SearchPokemon({ fn, fn2, fn3 }) {
                     <div className="absolute bg-[#a4a4a4] h-[300px] rounded-b-[5px] p-[10px] z-50 w-full">
                       <section className="w-full overflow-x-hidden overflow-y-scroll h-full advanceScroll">
                         <ul className="list-none select-none">
-                          <li onClick={() => {
-                            setsearchConditions({
-                              ...searchConditions,
-                              ability : 'all'
-                            })
-                          }} className="cursor-pointer px-[9.802px] pt-[12px] pb-[10.800px] text-[#212121] hover:bg-[#313131] hover:text-[#4dad5b] capitalize w-[99%]">
+                          <li
+                            onClick={() => {
+                              setShowAbility(false);
+                              setsearchConditions({
+                                ...searchConditions,
+                                ability: "all",
+                              });
+                            }}
+                            className="cursor-pointer px-[9.802px] pt-[12px] pb-[10.800px] text-[#212121] hover:bg-[#313131] hover:text-[#4dad5b] capitalize w-[99%]"
+                          >
                             All
                           </li>
                           {abilities.map((el) => {
                             return (
                               <li
                                 onClick={() => {
+                                  setShowAbility(false);
                                   setsearchConditions({
                                     ...searchConditions,
-                                    ability : el
-                                  })
+                                    ability: el,
+                                  });
                                 }}
                                 key={nanoid(5)}
                                 className="cursor-pointer px-[9.802px] pt-[12px] pb-[10.800px] text-[#212121] hover:bg-[#313131] hover:text-[#4dad5b] capitalize w-[99%]"
                               >
-                                {el.replaceAll('-', ' ')}
+                                {el.replaceAll("-", " ")}
                               </li>
                             );
                           })}

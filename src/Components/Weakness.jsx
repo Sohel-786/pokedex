@@ -8,7 +8,7 @@ function Weakness({ typesData }) {
   useEffect(() => {
     let weaknessData = {};
 
-    Object.keys(typesData).map((el) => {
+    Object.keys(typesData).forEach((el) => {
       let defense = typesData[el].defense;
 
       Object.entries(defense).forEach(([key, value]) => {
