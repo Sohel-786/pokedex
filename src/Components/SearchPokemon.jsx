@@ -135,8 +135,8 @@ function SearchPokemon({ fn, fn2, fn3 }) {
     const result = pokemonData.filter((el) => {
       let type = true;
       let ability = true;
-      let height = true;
-      let weight = true;
+      let height = false;
+      let weight = false;
 
       if (
         searchConditions.type.length > 0
@@ -158,26 +158,34 @@ function SearchPokemon({ fn, fn2, fn3 }) {
         searchConditions.height.short ||
         searchConditions.height.medium ||
         searchConditions.height.tall
-      ) {
+      ){
         let short = false;
         let medium = false;
         let tall = false;
 
-        if (searchConditions.height.short) {
+        if(searchConditions.height.short) {
           if (el.height <= 12) {
             short = true;
           }
         }
-        if (searchConditions.height.medium) {
+        if(searchConditions.height.medium) {
           if (el.height <= 21 && el.height > 12) {
             medium = true;
           }
         }
-        if (searchConditions.height.medium) {
+        if (searchConditions.height.tall) {
           if (el.height > 21) {
             tall = true;
           }
         }
+
+        if(short || medium || tall){
+            height = true;
+        }else{
+          height = false;
+        }
+      }else{
+        height = true;
       }
     });
   }
