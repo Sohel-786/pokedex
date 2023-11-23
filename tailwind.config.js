@@ -36,6 +36,9 @@ export default {
         pokeEvo: 'url("/assets/pokeEvo.png")',
         evoContainer: 'url("/assets/evolutionBg.png")',
       },
+      backgroundColor : {
+        '#f2f2f2' : '#f2f2f2'
+      }
     },
   },
   plugins: [],

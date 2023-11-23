@@ -132,7 +132,7 @@ function SearchPokemon({ fn, fn2, fn3 }) {
   }
 
   function handleAdvanceSearch() {
-    const result = pokemonData.filter((el) => {
+    const result = pokemonData.slice(searchConditions.range.from - 1, searchConditions.range.to).filter((el) => {
       let type = true;
       let ability = true;
       let height = false;
@@ -186,6 +186,44 @@ function SearchPokemon({ fn, fn2, fn3 }) {
         }
       }else{
         height = true;
+      }
+
+      if (
+        searchConditions.weight.light ||
+        searchConditions.weight.medium ||
+        searchConditions.weight.heavy
+      ){
+        let light = false;
+        let medium = false;
+        let heavy = false;
+
+        if(searchConditions.weight.light) {
+          if (el.weight <= 450) {
+            light = true;
+          }
+        }
+        if(searchConditions.weight.medium) {
+          if (el.weight <= 2265 && el.weight > 450) {
+            medium = true;
+          }
+        }
+        if (searchConditions.weight.heavy) {
+          if (el.weight > 2265) {
+            heavy = true;
+          }
+        }
+
+        if(short || medium || heavy){
+            weight = true;
+        }else{
+          weight = false;
+        }
+      }else{
+        weight = true;
+      }
+
+      if(type && ability && height && weight){
+        return el;
       }
     });
   }
@@ -559,13 +597,12 @@ function SearchPokemon({ fn, fn2, fn3 }) {
                           },
                         });
                       }}
-                      className={`mx-[1.5625%] rounded-[12px] bg-[${
-                        searchConditions.height.short ? "#ee6b2f" : "#f2f2f2"
-                      }] cursor-pointer w-[27.46%] flex justify-center items-center`}
+                      className={`mx-[1.5625%] rounded-[12px] cursor-pointer w-[27.46%] flex justify-center items-center`}
                       style={{
                         color: searchConditions.height.short
                           ? "#f2f2f2"
                           : "#313131",
+                        backgroundColor :  searchConditions.height.short ? "#ee6b2f" : "#f2f2f2"
                       }}
                     >
                       <ImTextHeight
@@ -583,13 +620,12 @@ function SearchPokemon({ fn, fn2, fn3 }) {
                           },
                         });
                       }}
-                      className={`mx-[5.62%] rounded-[12px] bg-[${
-                        searchConditions.height.medium ? "#ee6b2f" : "#f2f2f2"
-                      }] cursor-pointer w-[27.46%] flex justify-center items-center`}
+                      className={`mx-[5.62%] rounded-[12px] cursor-pointer w-[27.46%] flex justify-center items-center`}
                       style={{
                         color: searchConditions.height.medium
                           ? "#f2f2f2"
                           : "#313131",
+                        backgroundColor :  searchConditions.height.medium ? "#ee6b2f" : "#f2f2f2"
                       }}
                     >
                       <ImTextHeight
@@ -607,13 +643,12 @@ function SearchPokemon({ fn, fn2, fn3 }) {
                           },
                         });
                       }}
-                      className={`mx-[1.5625%] rounded-[12px] bg-[${
-                        searchConditions.height.tall ? "#ee6b2f" : "#f2f2f2"
-                      }] cursor-pointer w-[27.46%] flex justify-center items-center`}
+                      className={`mx-[1.5625%] rounded-[12px] cursor-pointer w-[27.46%] flex justify-center items-center`}
                       style={{
                         color: searchConditions.height.tall
                           ? "#f2f2f2"
                           : "#313131",
+                          backgroundColor :  searchConditions.height.tall ? "#ee6b2f" : "#f2f2f2"
                       }}
                     >
                       <ImTextHeight size={"45px"} className={` relative`} />
@@ -637,13 +672,12 @@ function SearchPokemon({ fn, fn2, fn3 }) {
                           },
                         });
                       }}
-                      className={`mx-[1.5625%] rounded-[12px] bg-[${
-                        searchConditions.weight.light ? "#ee6b2f" : "#f2f2f2"
-                      }] cursor-pointer w-[27.46%] flex justify-center items-center`}
+                      className={`mx-[1.5625%] rounded-[12px] cursor-pointer w-[27.46%] flex justify-center items-center`}
                       style={{
                         color: searchConditions.weight.light
                           ? "#f2f2f2"
                           : "#313131",
+                        backgroundColor :  searchConditions.weight.light ? "#ee6b2f" : "#f2f2f2"
                       }}
                     >
                       <FaWeightHanging
@@ -661,13 +695,12 @@ function SearchPokemon({ fn, fn2, fn3 }) {
                           },
                         });
                       }}
-                      className={`mx-[5.62%] rounded-[12px] bg-[${
-                        searchConditions.weight.medium ? "#ee6b2f" : "#f2f2f2"
-                      }] cursor-pointer w-[27.46%] flex justify-center items-center`}
+                      className={`mx-[5.62%] rounded-[12px] cursor-pointer w-[27.46%] flex justify-center items-center`}
                       style={{
                         color: searchConditions.weight.medium
                           ? "#f2f2f2"
                           : "#313131",
+                          backgroundColor :  searchConditions.weight.medium ? "#ee6b2f" : "#f2f2f2"
                       }}
                     >
                       <FaWeightHanging
@@ -685,13 +718,12 @@ function SearchPokemon({ fn, fn2, fn3 }) {
                           },
                         });
                       }}
-                      className={`mx-[1.5625%] rounded-[12px] bg-[${
-                        searchConditions.weight.heavy ? "#ee6b2f" : "#f2f2f2"
-                      }] cursor-pointer w-[27.46%] flex justify-center items-center`}
+                      className={`mx-[1.5625%] rounded-[12px] cursor-pointer w-[27.46%] flex justify-center items-center`}
                       style={{
                         color: searchConditions.weight.heavy
                           ? "#f2f2f2"
                           : "#313131",
+                          backgroundColor :  searchConditions.weight.heavy ? "#ee6b2f" : "#f2f2f2"
                       }}
                     >
                       <FaWeightHanging size={"45px"} className={` relative`} />
