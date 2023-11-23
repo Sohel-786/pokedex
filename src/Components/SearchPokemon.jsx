@@ -132,100 +132,100 @@ function SearchPokemon({ fn, fn2, fn3 }) {
   }
 
   function handleAdvanceSearch() {
-    const result = pokemonData.slice(searchConditions.range.from - 1, searchConditions.range.to).filter((el) => {
-      let type = true;
-      let ability = true;
-      let height = false;
-      let weight = false;
+    const result = pokemonData
+      .slice(searchConditions.range.from - 1, searchConditions.range.to)
+      .filter((el) => {
+        let type = true;
+        let ability = true;
+        let height = false;
+        let weight = false;
 
-      if (
-        searchConditions.type.length > 0
-      ) {
-        searchConditions.type.forEach((el) => {
-          if (!el.types.includes(el)) {
-            type = false;
-          }
-        });
-      }
-
-      if (!(searchConditions.ability === "all")) {
-        if (!el.abilities.includes(searchConditions.ability)) {
-          ability = false;
+        if (searchConditions.type.length > 0) {
+          searchConditions.type.forEach((el) => {
+            if (!el.types.includes(el)) {
+              type = false;
+            }
+          });
         }
-      }
 
-      if (
-        searchConditions.height.short ||
-        searchConditions.height.medium ||
-        searchConditions.height.tall
-      ){
-        let short = false;
-        let medium = false;
-        let tall = false;
-
-        if(searchConditions.height.short) {
-          if (el.height <= 12) {
-            short = true;
-          }
-        }
-        if(searchConditions.height.medium) {
-          if (el.height <= 21 && el.height > 12) {
-            medium = true;
-          }
-        }
-        if (searchConditions.height.tall) {
-          if (el.height > 21) {
-            tall = true;
+        if (!(searchConditions.ability === "all")) {
+          if (!el.abilities.includes(searchConditions.ability)) {
+            ability = false;
           }
         }
 
-        if(short || medium || tall){
+        if (
+          searchConditions.height.short ||
+          searchConditions.height.medium ||
+          searchConditions.height.tall
+        ) {
+          let short = false;
+          let medium = false;
+          let tall = false;
+
+          if (searchConditions.height.short) {
+            if (el.height <= 12) {
+              short = true;
+            }
+          }
+          if (searchConditions.height.medium) {
+            if (el.height <= 21 && el.height > 12) {
+              medium = true;
+            }
+          }
+          if (searchConditions.height.tall) {
+            if (el.height > 21) {
+              tall = true;
+            }
+          }
+
+          if (short || medium || tall) {
             height = true;
-        }else{
-          height = false;
-        }
-      }else{
-        height = true;
-      }
-
-      if (
-        searchConditions.weight.light ||
-        searchConditions.weight.medium ||
-        searchConditions.weight.heavy
-      ){
-        let light = false;
-        let medium = false;
-        let heavy = false;
-
-        if(searchConditions.weight.light) {
-          if (el.weight <= 450) {
-            light = true;
+          } else {
+            height = false;
           }
-        }
-        if(searchConditions.weight.medium) {
-          if (el.weight <= 2265 && el.weight > 450) {
-            medium = true;
-          }
-        }
-        if (searchConditions.weight.heavy) {
-          if (el.weight > 2265) {
-            heavy = true;
-          }
+        } else {
+          height = true;
         }
 
-        if(short || medium || heavy){
+        if (
+          searchConditions.weight.light ||
+          searchConditions.weight.medium ||
+          searchConditions.weight.heavy
+        ) {
+          let light = false;
+          let medium = false;
+          let heavy = false;
+
+          if (searchConditions.weight.light) {
+            if (el.weight <= 450) {
+              light = true;
+            }
+          }
+          if (searchConditions.weight.medium) {
+            if (el.weight <= 2265 && el.weight > 450) {
+              medium = true;
+            }
+          }
+          if (searchConditions.weight.heavy) {
+            if (el.weight > 2265) {
+              heavy = true;
+            }
+          }
+
+          if (short || medium || heavy) {
             weight = true;
-        }else{
-          weight = false;
+          } else {
+            weight = false;
+          }
+        } else {
+          weight = true;
         }
-      }else{
-        weight = true;
-      }
 
-      if(type && ability && height && weight){
-        return el;
-      }
-    });
+        if (type && ability && height && weight) {
+          return el;
+        }
+      });
   }
   return (
     <>
@@ -602,7 +602,9 @@ function SearchPokemon({ fn, fn2, fn3 }) {
                         color: searchConditions.height.short
                           ? "#f2f2f2"
                           : "#313131",
-                        backgroundColor :  searchConditions.height.short ? "#ee6b2f" : "#f2f2f2"
+                        backgroundColor: searchConditions.height.short
+                          ? "#ee6b2f"
+                          : "#f2f2f2",
                       }}
                     >
                       <ImTextHeight
@@ -625,7 +627,9 @@ function SearchPokemon({ fn, fn2, fn3 }) {
                         color: searchConditions.height.medium
                           ? "#f2f2f2"
                           : "#313131",
-                        backgroundColor :  searchConditions.height.medium ? "#ee6b2f" : "#f2f2f2"
+                        backgroundColor: searchConditions.height.medium
+                          ? "#ee6b2f"
+                          : "#f2f2f2",
                       }}
                     >
                       <ImTextHeight
@@ -648,7 +652,9 @@ function SearchPokemon({ fn, fn2, fn3 }) {
                         color: searchConditions.height.tall
                           ? "#f2f2f2"
                           : "#313131",
-                          backgroundColor :  searchConditions.height.tall ? "#ee6b2f" : "#f2f2f2"
+                        backgroundColor: searchConditions.height.tall
+                          ? "#ee6b2f"
+                          : "#f2f2f2",
                       }}
                     >
                       <ImTextHeight size={"45px"} className={` relative`} />
@@ -677,7 +683,9 @@ function SearchPokemon({ fn, fn2, fn3 }) {
                         color: searchConditions.weight.light
                           ? "#f2f2f2"
                           : "#313131",
-                        backgroundColor :  searchConditions.weight.light ? "#ee6b2f" : "#f2f2f2"
+                        backgroundColor: searchConditions.weight.light
+                          ? "#ee6b2f"
+                          : "#f2f2f2",
                       }}
                     >
                       <FaWeightHanging
@@ -700,7 +708,9 @@ function SearchPokemon({ fn, fn2, fn3 }) {
                         color: searchConditions.weight.medium
                           ? "#f2f2f2"
                           : "#313131",
-                          backgroundColor :  searchConditions.weight.medium ? "#ee6b2f" : "#f2f2f2"
+                        backgroundColor: searchConditions.weight.medium
+                          ? "#ee6b2f"
+                          : "#f2f2f2",
                       }}
                     >
                       <FaWeightHanging
@@ -723,7 +733,9 @@ function SearchPokemon({ fn, fn2, fn3 }) {
                         color: searchConditions.weight.heavy
                           ? "#f2f2f2"
                           : "#313131",
-                          backgroundColor :  searchConditions.weight.heavy ? "#ee6b2f" : "#f2f2f2"
+                        backgroundColor: searchConditions.weight.heavy
+                          ? "#ee6b2f"
+                          : "#f2f2f2",
                       }}
                     >
                       <FaWeightHanging size={"45px"} className={` relative`} />
