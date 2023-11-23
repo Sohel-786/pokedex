@@ -139,19 +139,13 @@ function SearchPokemon({ fn, fn2, fn3 }) {
       let weight = true;
 
       if (
-        searchConditions.type.length > 0 &&
-        el.types.length === searchConditions.type.length
+        searchConditions.type.length > 0
       ) {
-        el.types.forEach((el) => {
-          if (!searchConditions.type.includes(el)) {
+        searchConditions.type.forEach((el) => {
+          if (!el.types.includes(el)) {
             type = false;
           }
         });
-      } else if (
-        searchConditions.type.length > 0 &&
-        el.types.length !== searchConditions.type.length
-      ) {
-        type = false;
       }
 
       if (!(searchConditions.ability === "all")) {
@@ -175,8 +169,13 @@ function SearchPokemon({ fn, fn2, fn3 }) {
           }
         }
         if (searchConditions.height.medium) {
-          if (el.height <= 12) {
-            short = true;
+          if (el.height <= 21 && el.height > 12) {
+            medium = true;
+          }
+        }
+        if (searchConditions.height.medium) {
+          if (el.height > 21) {
+            tall = true;
           }
         }
       }
