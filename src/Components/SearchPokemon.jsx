@@ -132,100 +132,239 @@ function SearchPokemon({ fn, fn2, fn3 }) {
   }
 
   function handleAdvanceSearch() {
-    const result = pokemonData
-      .slice(searchConditions.range.from - 1, searchConditions.range.to)
-      .filter((el) => {
-        let type = true;
-        let ability = true;
-        let height = false;
-        let weight = false;
+    var result = [];
+    if(searchConditions.search !== ""){
+      result = options
+       .slice(searchConditions.range.from - 1, searchConditions.range.to)
+       .filter((el) => {
+         let type = true;
+         let ability = true;
+         let height = false;
+         let weight = false;
+ 
+         if (searchConditions.type.length > 0) {
+           searchConditions.type.forEach((el) => {
+             if (!el.types.includes(el)) {
+               type = false;
+             }
+           });
+         }
+ 
+         if (!(searchConditions.ability === "all")) {
+           if (!el.abilities.includes(searchConditions.ability)) {
+             ability = false;
+           }
+         }
+ 
+         if (
+           searchConditions.height.short ||
+           searchConditions.height.medium ||
+           searchConditions.height.tall
+         ) {
+           let short = false;
+           let medium = false;
+           let tall = false;
+ 
+           if (searchConditions.height.short) {
+             if (el.height <= 12) {
+               short = true;
+             }
+           }
+           if (searchConditions.height.medium) {
+             if (el.height <= 21 && el.height > 12) {
+               medium = true;
+             }
+           }
+           if (searchConditions.height.tall) {
+             if (el.height > 21) {
+               tall = true;
+             }
+           }
+ 
+           if (short || medium || tall) {
+             height = true;
+           } else {
+             height = false;
+           }
+         } else {
+           height = true;
+         }
+ 
+         if (
+           searchConditions.weight.light ||
+           searchConditions.weight.medium ||
+           searchConditions.weight.heavy
+         ) {
+           let light = false;
+           let medium = false;
+           let heavy = false;
+ 
+           if (searchConditions.weight.light) {
+             if (el.weight <= 450) {
+               light = true;
+             }
+           }
+           if (searchConditions.weight.medium) {
+             if (el.weight <= 2265 && el.weight > 450) {
+               medium = true;
+             }
+           }
+           if (searchConditions.weight.heavy) {
+             if (el.weight > 2265) {
+               heavy = true;
+             }
+           }
+ 
+           if (light || medium || heavy) {
+             weight = true;
+           } else {
+             weight = false;
+           }
+         } else {
+           weight = true;
+         }
+ 
+         if (type && ability && height && weight) {
+           return el;
+         }
+       });
+    }else{
+      result = pokemonData
+       .slice(searchConditions.range.from - 1, searchConditions.range.to)
+       .filter((el) => {
+         let type = true;
+         let ability = true;
+         let height = false;
+         let weight = false;
+ 
+         if (searchConditions.type.length > 0) {
+           searchConditions.type.forEach((element) => {
+            console.log(el, el.types);
+             if (!(el.types.includes(element))) {
+               type = false;
+             }
+           });
+         }
+ 
+         if (!(searchConditions.ability === "all")) {
+           if (!el.abilities.includes(searchConditions.ability)) {
+             ability = false;
+           }
+         }
+ 
+         if (
+           searchConditions.height.short ||
+           searchConditions.height.medium ||
+           searchConditions.height.tall
+         ) {
+           let short = false;
+           let medium = false;
+           let tall = false;
+ 
+           if (searchConditions.height.short) {
+             if (el.height <= 12) {
+               short = true;
+             }
+           }
+           if (searchConditions.height.medium) {
+             if (el.height <= 21 && el.height > 12) {
+               medium = true;
+             }
+           }
+           if (searchConditions.height.tall) {
+             if (el.height > 21) {
+               tall = true;
+             }
+           }
+ 
+           if (short || medium || tall) {
+             height = true;
+           } else {
+             height = false;
+           }
+         } else {
+           height = true;
+         }
+ 
+         if (
+           searchConditions.weight.light ||
+           searchConditions.weight.medium ||
+           searchConditions.weight.heavy
+         ) {
+           let light = false;
+           let medium = false;
+           let heavy = false;
+ 
+           if (searchConditions.weight.light) {
+             if (el.weight <= 450) {
+               light = true;
+             }
+           }
+           if (searchConditions.weight.medium) {
+             if (el.weight <= 2265 && el.weight > 450) {
+               medium = true;
+             }
+           }
+           if (searchConditions.weight.heavy) {
+             if (el.weight > 2265) {
+               heavy = true;
+             }
+           }
+ 
+           if (light || medium || heavy) {
+             weight = true;
+           } else {
+             weight = false;
+           }
+         } else {
+           weight = true;
+         }
+ 
+         if (type && ability && height && weight) {
+           return el;
+         }
+       });
+    }
 
-        if (searchConditions.type.length > 0) {
-          searchConditions.type.forEach((el) => {
-            if (!el.types.includes(el)) {
-              type = false;
-            }
-          });
-        }
+      const loadPokemon =
+      document.getElementById("loadPokemon");
+      loadPokemon.style.display = 'none';  
 
-        if (!(searchConditions.ability === "all")) {
-          if (!el.abilities.includes(searchConditions.ability)) {
-            ability = false;
-          }
-        }
+    if (result.length > 0) {
+      fn([...result]);
+    } else {
+      fn3(true);
+    }
+  }
 
-        if (
-          searchConditions.height.short ||
-          searchConditions.height.medium ||
-          searchConditions.height.tall
-        ) {
-          let short = false;
-          let medium = false;
-          let tall = false;
-
-          if (searchConditions.height.short) {
-            if (el.height <= 12) {
-              short = true;
-            }
-          }
-          if (searchConditions.height.medium) {
-            if (el.height <= 21 && el.height > 12) {
-              medium = true;
-            }
-          }
-          if (searchConditions.height.tall) {
-            if (el.height > 21) {
-              tall = true;
-            }
-          }
-
-          if (short || medium || tall) {
-            height = true;
-          } else {
-            height = false;
-          }
-        } else {
-          height = true;
-        }
-
-        if (
-          searchConditions.weight.light ||
-          searchConditions.weight.medium ||
-          searchConditions.weight.heavy
-        ) {
-          let light = false;
-          let medium = false;
-          let heavy = false;
-
-          if (searchConditions.weight.light) {
-            if (el.weight <= 450) {
-              light = true;
-            }
-          }
-          if (searchConditions.weight.medium) {
-            if (el.weight <= 2265 && el.weight > 450) {
-              medium = true;
-            }
-          }
-          if (searchConditions.weight.heavy) {
-            if (el.weight > 2265) {
-              heavy = true;
-            }
-          }
-
-          if (short || medium || heavy) {
-            weight = true;
-          } else {
-            weight = false;
-          }
-        } else {
-          weight = true;
-        }
-
-        if (type && ability && height && weight) {
-          return el;
-        }
-      });
+  function handleAdvanceReset(){
+    fn3(false);
+    fn2();
+    setShowAdvance(false);
+    setOptions(null);
+    setsearchConditions({
+      search: "",
+      type: [],
+      weakness: [],
+      height: {
+        short: false,
+        medium: false,
+        tall: false,
+      },
+      weight: {
+        light: false,
+        medium: false,
+        heavy: false,
+      },
+      range: {
+        from: "1",
+        to: "1010",
+      },
+      ability: "all",
+    })
+    const loadPokemon =
+      document.getElementById("loadPokemon");
+      loadPokemon.style.display = 'block';  
   }
   return (
     <>
@@ -745,20 +884,24 @@ function SearchPokemon({ fn, fn2, fn3 }) {
 
                 <div className="mt-4 w-full">
                   <div className="mt-[44px] flex w-full justify-end">
-                    <button className="m-[5.550px] pt-[15px] pb-[13.500px] px-[25px] bg-[#a4a4a4] text-white text-[125%] leading-[25px] rounded-[5px] hover:bg-[#8b8b8b]">
-                      Reset
-                    </button>
-                    <button
-                      onClick={handleAdvanceSearch}
-                      className="m-[5.550px] pt-[15px] pb-[13.500px] px-[25px] bg-[#ee6b2f] text-white text-[125%] leading-[25px] rounded-[5px] flex items-center gap-[6px] hover:bg-[#da471b] "
-                    >
-                      <img
-                        src="/assets/searchbtn.png"
-                        alt="SearchBtn"
-                        className="h-[17px]"
-                      />{" "}
-                      Search
-                    </button>
+                    <a href="#pokemons">
+                      <button onClick={handleAdvanceReset} className="m-[5.550px] pt-[15px] pb-[13.500px] px-[25px] bg-[#a4a4a4] text-white text-[125%] leading-[25px] rounded-[5px] hover:bg-[#8b8b8b]">
+                        Reset
+                      </button>
+                    </a>
+                    <a href="#pokemons">
+                      <button
+                        onClick={handleAdvanceSearch}
+                        className="m-[5.550px] pt-[15px] pb-[13.500px] px-[25px] bg-[#ee6b2f] text-white text-[125%] leading-[25px] rounded-[5px] flex items-center gap-[6px] hover:bg-[#da471b] "
+                      >
+                        <img
+                          src="/assets/searchbtn.png"
+                          alt="SearchBtn"
+                          className="h-[17px]"
+                        />{" "}
+                        Search
+                      </button>
+                    </a>
                   </div>
                 </div>
               </section>
