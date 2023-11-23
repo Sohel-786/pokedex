@@ -131,28 +131,56 @@ function SearchPokemon({ fn, fn2, fn3 }) {
     });
   }
 
-  function handleAdvanceSearch(){
-    pokemonData.forEach((el) => {
+  function handleAdvanceSearch() {
+    const result = pokemonData.filter((el) => {
       let type = true;
       let ability = true;
+      let height = true;
+      let weight = true;
 
-      if(searchConditions.type.length > 0 && el.types.length === searchConditions.type.length){
+      if (
+        searchConditions.type.length > 0 &&
+        el.types.length === searchConditions.type.length
+      ) {
         el.types.forEach((el) => {
-          if(!(searchConditions.type.includes(el))){
+          if (!searchConditions.type.includes(el)) {
             type = false;
           }
-        })
-      }else if(searchConditions.type.length > 0 && el.types.length !== searchConditions.type.length){
+        });
+      } else if (
+        searchConditions.type.length > 0 &&
+        el.types.length !== searchConditions.type.length
+      ) {
         type = false;
       }
 
-      if(!(searchConditions.ability === 'all')){
-        if(!(el.abilities.includes(searchConditions.ability))){
+      if (!(searchConditions.ability === "all")) {
+        if (!el.abilities.includes(searchConditions.ability)) {
           ability = false;
         }
       }
 
-    })
+      if (
+        searchConditions.height.short ||
+        searchConditions.height.medium ||
+        searchConditions.height.tall
+      ) {
+        let short = false;
+        let medium = false;
+        let tall = false;
+
+        if (searchConditions.height.short) {
+          if (el.height <= 12) {
+            short = true;
+          }
+        }
+        if (searchConditions.height.medium) {
+          if (el.height <= 12) {
+            short = true;
+          }
+        }
+      }
+    });
   }
   return (
     <>
@@ -669,7 +697,10 @@ function SearchPokemon({ fn, fn2, fn3 }) {
                     <button className="m-[5.550px] pt-[15px] pb-[13.500px] px-[25px] bg-[#a4a4a4] text-white text-[125%] leading-[25px] rounded-[5px] hover:bg-[#8b8b8b]">
                       Reset
                     </button>
-                    <button onClick={handleAdvanceSearch} className="m-[5.550px] pt-[15px] pb-[13.500px] px-[25px] bg-[#ee6b2f] text-white text-[125%] leading-[25px] rounded-[5px] flex items-center gap-[6px] hover:bg-[#da471b] ">
+                    <button
+                      onClick={handleAdvanceSearch}
+                      className="m-[5.550px] pt-[15px] pb-[13.500px] px-[25px] bg-[#ee6b2f] text-white text-[125%] leading-[25px] rounded-[5px] flex items-center gap-[6px] hover:bg-[#da471b] "
+                    >
                       <img
                         src="/assets/searchbtn.png"
                         alt="SearchBtn"
