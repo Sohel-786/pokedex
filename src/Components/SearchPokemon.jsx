@@ -130,6 +130,30 @@ function SearchPokemon({ fn, fn2, fn3 }) {
       },
     });
   }
+
+  function handleAdvanceSearch(){
+    pokemonData.forEach((el) => {
+      let type = true;
+      let ability = true;
+
+      if(searchConditions.type.length > 0 && el.types.length === searchConditions.type.length){
+        el.types.forEach((el) => {
+          if(!(searchConditions.type.includes(el))){
+            type = false;
+          }
+        })
+      }else if(searchConditions.type.length > 0 && el.types.length !== searchConditions.type.length){
+        type = false;
+      }
+
+      if(!(searchConditions.ability === 'all')){
+        if(!(el.abilities.includes(searchConditions.ability))){
+          ability = false;
+        }
+      }
+
+    })
+  }
   return (
     <>
       <div className="max-w-[1280px] w-[100vw] mx-auto relative left-[-161.6px] bg-[#616161] pb-4">
@@ -645,7 +669,7 @@ function SearchPokemon({ fn, fn2, fn3 }) {
                     <button className="m-[5.550px] pt-[15px] pb-[13.500px] px-[25px] bg-[#a4a4a4] text-white text-[125%] leading-[25px] rounded-[5px] hover:bg-[#8b8b8b]">
                       Reset
                     </button>
-                    <button className="m-[5.550px] pt-[15px] pb-[13.500px] px-[25px] bg-[#ee6b2f] text-white text-[125%] leading-[25px] rounded-[5px] flex items-center gap-[6px] hover:bg-[#da471b] ">
+                    <button onClick={handleAdvanceSearch} className="m-[5.550px] pt-[15px] pb-[13.500px] px-[25px] bg-[#ee6b2f] text-white text-[125%] leading-[25px] rounded-[5px] flex items-center gap-[6px] hover:bg-[#da471b] ">
                       <img
                         src="/assets/searchbtn.png"
                         alt="SearchBtn"
