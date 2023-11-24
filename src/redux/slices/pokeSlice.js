@@ -99,7 +99,7 @@ const getPokemon = async (url) => {
   }
 };
 
-async function handleAbilities(data){
+async function handleAbilities(data) {
   let temp = [];
   data.forEach(async (el) => {
     const { name } = el.ability;
@@ -109,36 +109,39 @@ async function handleAbilities(data){
   return temp;
 }
 
-async function handleDamage(data){
-    const { data: typeInfo } = await axios.get(data.type.url);
-    var double = [],
-      zero = [],
-      half = [];
+async function handleDamage(data) {
+  const { data: typeInfo } = await axios.get(data.type.url);
+  var double = [],
+    zero = [],
+    half = [];
 
-    typeInfo["damage_relations"].double_damage_from.forEach((el) => {
-      double.push(el.name);
-    });
-    typeInfo["damage_relations"].half_damage_from.forEach((el) => {
-      half.push(el.name);
-    });
-    typeInfo["damage_relations"].no_damage_from.forEach((el) => {
-      zero.push(el.name);
-    });
+  typeInfo["damage_relations"].double_damage_from.forEach((el) => {
+    double.push(el.name);
+  });
+  typeInfo["damage_relations"].half_damage_from.forEach((el) => {
+    half.push(el.name);
+  });
+  typeInfo["damage_relations"].no_damage_from.forEach((el) => {
+    zero.push(el.name);
+  });
 
-    return [data.type.name, {
-      defense : {
+  return [
+    data.type.name,
+    {
+      defense: {
         double,
         zero,
-        half
-      }
-    }]
+        half,
+      },
+    },
+  ];
 }
 
-async function handleTypeData(data){
+async function handleTypeData(data) {
   let arr = [];
-  for(let i = 0; i< data.length ; i++){
-      let temp = await handleDamage(data[i]);
-      arr.push(temp);
+  for (let i = 0; i < data.length; i++) {
+    let temp = await handleDamage(data[i]);
+    arr.push(temp);
   }
   let obj = {};
   arr.forEach((el) => {
@@ -151,43 +154,43 @@ async function handleTypeData(data){
   return obj;
 }
 
-function handleWeakness(data){
-    let weaknessData = {};
+function handleWeakness(data) {
+  let weaknessData = {};
 
-    Object.keys(data).forEach((el) => {
-      let defense = data[el].defense;
+  Object.keys(data).forEach((el) => {
+    let defense = data[el].defense;
 
-      Object.entries(defense).forEach(([key, value]) => {
-        switch (key) {
-          case "double":
-            value.forEach((i) => {
-              weaknessData[i] ? (weaknessData[i] *= 2) : (weaknessData[i] = 2);
-            });
-            break;
-          case "half":
-            value.forEach((i) => {
-              weaknessData[i]
-                ? (weaknessData[i] *= 0.5)
-                : (weaknessData[i] = 0.5);
-            });
-            break;
-          case "zero":
-            value.forEach((i) => {
-              weaknessData[i] = 0;
-            });
-            break;
-        }
-      });
-    });
-
-    let weaknessFinal = [];
-    Object.entries(weaknessData).forEach(([key, value]) => {
-      if (value >= 2) {
-        weaknessFinal.push(key);
+    Object.entries(defense).forEach(([key, value]) => {
+      switch (key) {
+        case "double":
+          value.forEach((i) => {
+            weaknessData[i] ? (weaknessData[i] *= 2) : (weaknessData[i] = 2);
+          });
+          break;
+        case "half":
+          value.forEach((i) => {
+            weaknessData[i]
+              ? (weaknessData[i] *= 0.5)
+              : (weaknessData[i] = 0.5);
+          });
+          break;
+        case "zero":
+          value.forEach((i) => {
+            weaknessData[i] = 0;
+          });
+          break;
       }
     });
+  });
 
-    return weaknessFinal;
+  let weaknessFinal = [];
+  Object.entries(weaknessData).forEach(([key, value]) => {
+    if (value >= 2) {
+      weaknessFinal.push(key);
+    }
+  });
+
+  return weaknessFinal;
 }
 
 const pokeSlice = createSlice({
