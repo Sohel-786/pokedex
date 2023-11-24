@@ -51,7 +51,11 @@ function SearchPokemon({ fn, fn2, fn3 }) {
 
         setShowOptions(true);
         if (!Number(value) && value.length > 0) {
-          handleOptionsData(searchConditions.range.from - 1, searchConditions.range.to, value);
+          handleOptionsData(
+            Number(searchConditions.range.from) - 1,
+            Number(searchConditions.range.to),
+            value
+          );
         } else {
           setOptions([]);
           if (Number(value)) {
@@ -66,28 +70,24 @@ function SearchPokemon({ fn, fn2, fn3 }) {
 
   var handleChange = debounce(300);
 
-  function handleOptionsData(from, to, value){
+  function handleOptionsData(from, to, value) {
     const options = [];
-          let i = from;
-          do {
-            if (
-              pokemonData[i].name.includes(value) ||
-              pokemonData[i].name.includes(value.toLowerCase()) ||
-              pokemonData[i].name.includes(
-                value.toUpperCase(value.toLowerCase())
-              ) ||
-              pokemonData[i].name.includes(
-                value[0].toUpperCase() + value.slice(1)
-              )
-            ) {
-              options.push(pokemonData[i]);
-            }
-            i++;
-          } while (i < to);
+    let i = from;
+    do {
+      if (
+        pokemonData[i].name.includes(value) ||
+        pokemonData[i].name.includes(value.toLowerCase()) ||
+        pokemonData[i].name.includes(value.toUpperCase(value.toLowerCase())) ||
+        pokemonData[i].name.includes(value[0].toUpperCase() + value.slice(1))
+      ) {
+        options.push(pokemonData[i]);
+      }
+      i++;
+    } while (i < to);
 
-          setOptions([...options]);
+    setOptions([...options]);
 
-          return options;
+    return options;
   }
 
   function handleType(t) {
@@ -137,305 +137,138 @@ function SearchPokemon({ fn, fn2, fn3 }) {
     });
   }
 
+  function handleAdvanceResult(data){
+    const result = data.filter((el) => {
+      let type = true;
+      let ability = true;
+      let height = false;
+      let weight = false;
+
+      if (searchConditions.type.length > 0) {
+        searchConditions.type.forEach((element) => {
+          if (!el?.types.includes(element)) {
+            type = false;
+          }
+        });
+      }
+
+      if (!(searchConditions.ability === "all")) {
+        if (!el?.abilities.includes(searchConditions.ability)) {
+          ability = false;
+        }
+      }
+
+      if (
+        searchConditions.height.short ||
+        searchConditions.height.medium ||
+        searchConditions.height.tall
+      ) {
+        let short = false;
+        let medium = false;
+        let tall = false;
+
+        if (searchConditions.height.short) {
+          if (el?.height <= 12) {
+            short = true;
+          }
+        }
+        if (searchConditions.height.medium) {
+          if (el?.height <= 21 && el.height > 12) {
+            medium = true;
+          }
+        }
+        if (searchConditions.height.tall) {
+          if (el.height > 21) {
+            tall = true;
+          }
+        }
+
+        if (short || medium || tall) {
+          height = true;
+        } else {
+          height = false;
+        }
+      } else {
+        height = true;
+      }
+
+      if (
+        searchConditions.weight.light ||
+        searchConditions.weight.medium ||
+        searchConditions.weight.heavy
+      ) {
+        let light = false;
+        let medium = false;
+        let heavy = false;
+
+        if (searchConditions.weight.light) {
+          if (el.weight <= 450) {
+            light = true;
+          }
+        }
+        if (searchConditions.weight.medium) {
+          if (el.weight <= 2265 && el.weight > 450) {
+            medium = true;
+          }
+        }
+        if (searchConditions.weight.heavy) {
+          if (el.weight > 2265) {
+            heavy = true;
+          }
+        }
+
+        if (light || medium || heavy) {
+          weight = true;
+        } else {
+          weight = false;
+        }
+      } else {
+        weight = true;
+      }
+
+      if (type && ability && height && weight) {
+        return el;
+      }
+    })
+
+    return result;
+  }
+
   function handleAdvanceSearch() {
     fn3(false);
     var result = [];
-    if(!(searchConditions.range.from > searchConditions.range.to)){if(searchConditions.search !== "" && !Number(searchConditions.search)){
-      const data = handleOptionsData(searchConditions.range.from - 1, searchConditions.range.to, searchConditions.search);
-      if(data.length > 0){
-        result = data.filter((el) => {
-           let type = true;
-           let ability = true;
-           let height = false;
-           let weight = false;
-   
-           if (searchConditions.type.length > 0) {
-             searchConditions.type.forEach((element) => {
-               if (!el?.types.includes(element)) {
-                 type = false;
-               }
-             });
-           }
-   
-           if (!(searchConditions.ability === "all")) {
-             if (!el?.abilities.includes(searchConditions.ability)) {
-               ability = false;
-             }
-           }
-   
-           if (
-             searchConditions.height.short ||
-             searchConditions.height.medium ||
-             searchConditions.height.tall
-           ) {
-             let short = false;
-             let medium = false;
-             let tall = false;
-   
-             if (searchConditions.height.short) {
-               if (el?.height <= 12) {
-                 short = true;
-               }
-             }
-             if (searchConditions.height.medium) {
-               if (el?.height <= 21 && el.height > 12) {
-                 medium = true;
-               }
-             }
-             if (searchConditions.height.tall) {
-               if (el.height > 21) {
-                 tall = true;
-               }
-             }
-   
-             if (short || medium || tall) {
-               height = true;
-             } else {
-               height = false;
-             }
-           } else {
-             height = true;
-           }
-   
-           if (
-             searchConditions.weight.light ||
-             searchConditions.weight.medium ||
-             searchConditions.weight.heavy
-           ) {
-             let light = false;
-             let medium = false;
-             let heavy = false;
-   
-             if (searchConditions.weight.light) {
-               if (el.weight <= 450) {
-                 light = true;
-               }
-             }
-             if (searchConditions.weight.medium) {
-               if (el.weight <= 2265 && el.weight > 450) {
-                 medium = true;
-               }
-             }
-             if (searchConditions.weight.heavy) {
-               if (el.weight > 2265) {
-                 heavy = true;
-               }
-             }
-   
-             if (light || medium || heavy) {
-               weight = true;
-             } else {
-               weight = false;
-             }
-           } else {
-             weight = true;
-           }
-   
-           if (type && ability && height && weight) {
-             return el;
-           }
-         });
-      }
-    }
-    else if(Number(searchConditions.search)){
-      if(searchConditions.search >= searchConditions.range.from && searchConditions.search <= searchConditions.range.to){
-        if(pokemonData[searchConditions.search - 1]){
-          result = [pokemonData[searchConditions.search - 1]].filter((el) => {
-            let type = true;
-            let ability = true;
-            let height = false;
-            let weight = false;
-    
-            if (searchConditions.type.length > 0) {
-              searchConditions.type.forEach((element) => {
-                if (!el?.types.includes(element)) {
-                  type = false;
-                }
-              });
-            }
-    
-            if (!(searchConditions.ability === "all")) {
-              if (!el?.abilities.includes(searchConditions.ability)) {
-                ability = false;
-              }
-            }
-    
-            if (
-              searchConditions.height.short ||
-              searchConditions.height.medium ||
-              searchConditions.height.tall
-            ) {
-              let short = false;
-              let medium = false;
-              let tall = false;
-    
-              if (searchConditions.height.short) {
-                if (el?.height <= 12) {
-                  short = true;
-                }
-              }
-              if (searchConditions.height.medium) {
-                if (el?.height <= 21 && el.height > 12) {
-                  medium = true;
-                }
-              }
-              if (searchConditions.height.tall) {
-                if (el.height > 21) {
-                  tall = true;
-                }
-              }
-    
-              if (short || medium || tall) {
-                height = true;
-              } else {
-                height = false;
-              }
-            } else {
-              height = true;
-            }
-    
-            if (
-              searchConditions.weight.light ||
-              searchConditions.weight.medium ||
-              searchConditions.weight.heavy
-            ) {
-              let light = false;
-              let medium = false;
-              let heavy = false;
-    
-              if (searchConditions.weight.light) {
-                if (el.weight <= 450) {
-                  light = true;
-                }
-              }
-              if (searchConditions.weight.medium) {
-                if (el.weight <= 2265 && el.weight > 450) {
-                  medium = true;
-                }
-              }
-              if (searchConditions.weight.heavy) {
-                if (el.weight > 2265) {
-                  heavy = true;
-                }
-              }
-    
-              if (light || medium || heavy) {
-                weight = true;
-              } else {
-                weight = false;
-              }
-            } else {
-              weight = true;
-            }
-    
-            if (type && ability && height && weight) {
-              return el;
-            }
-          })
-        }
-      }
-    }
-    else{
-      result = pokemonData
-       .slice(searchConditions.range.from - 1, searchConditions.range.to)
-       .filter((el) => {
-         let type = true;
-         let ability = true;
-         let height = false;
-         let weight = false;
- 
-         if (searchConditions.type.length > 0) {
-           searchConditions.type.forEach((element) => {
-            console.log(el, el.types);
-             if (!(el.types.includes(element))) {
-               type = false;
-             }
-           });
-         }
- 
-         if (!(searchConditions.ability === "all")) {
-           if (!el.abilities.includes(searchConditions.ability)) {
-             ability = false;
-           }
-         }
- 
-         if (
-           searchConditions.height.short ||
-           searchConditions.height.medium ||
-           searchConditions.height.tall
-         ) {
-           let short = false;
-           let medium = false;
-           let tall = false;
- 
-           if (searchConditions.height.short) {
-             if (el.height <= 12) {
-               short = true;
-             }
-           }
-           if (searchConditions.height.medium) {
-             if (el.height <= 21 && el.height > 12) {
-               medium = true;
-             }
-           }
-           if (searchConditions.height.tall) {
-             if (el.height > 21) {
-               tall = true;
-             }
-           }
- 
-           if (short || medium || tall) {
-             height = true;
-           } else {
-             height = false;
-           }
-         } else {
-           height = true;
-         }
- 
-         if (
-           searchConditions.weight.light ||
-           searchConditions.weight.medium ||
-           searchConditions.weight.heavy
-         ) {
-           let light = false;
-           let medium = false;
-           let heavy = false;
- 
-           if (searchConditions.weight.light) {
-             if (el.weight <= 450) {
-               light = true;
-             }
-           }
-           if (searchConditions.weight.medium) {
-             if (el.weight <= 2265 && el.weight > 450) {
-               medium = true;
-             }
-           }
-           if (searchConditions.weight.heavy) {
-             if (el.weight > 2265) {
-               heavy = true;
-             }
-           }
- 
-           if (light || medium || heavy) {
-             weight = true;
-           } else {
-             weight = false;
-           }
-         } else {
-           weight = true;
-         }
- 
-         if (type && ability && height && weight) {
-           return el;
-         }
-       });
-    }}
+    let from = Number(searchConditions.range.from) < 0 ? 1 : Number(searchConditions.range.from);
+    let to = Number(searchConditions.range.to)
 
-      const loadPokemon =
-      document.getElementById("loadPokemon");
-      loadPokemon.style.display = 'none';  
+    if (!(from > to)) {
+      if (searchConditions.search !== "" && !Number(searchConditions.search)) {
+        const data = handleOptionsData(
+          from - 1,
+          to,
+          searchConditions.search
+        );
+        if (data.length > 0) {
+          result = handleAdvanceResult(data)
+        }
+      } 
+      else if(Number(searchConditions.search)) {
+        let temp = Number(searchConditions.search);
+        if (
+          temp >= from &&
+          temp <= to
+        ) {
+          if (pokemonData[temp - 1]) {
+            result = handleAdvanceResult([pokemonData[temp - 1]])
+          }
+        }
+      } 
+      else {
+        result = handleAdvanceResult(pokemonData.slice(from - 1, to))
+      }
+    }
+
+    const loadPokemon = document.getElementById("loadPokemon");
+    loadPokemon.style.display = "none";
 
     if (result.length > 0) {
       fn([...result]);
@@ -444,7 +277,7 @@ function SearchPokemon({ fn, fn2, fn3 }) {
     }
   }
 
-  function handleAdvanceReset(){
+  function handleAdvanceReset() {
     fn3(false);
     fn2();
     setShowAdvance(false);
@@ -464,14 +297,13 @@ function SearchPokemon({ fn, fn2, fn3 }) {
         heavy: false,
       },
       range: {
-        from: "1",
-        to: "1010",
+        from: 1,
+        to: 1010,
       },
       ability: "all",
-    })
-    const loadPokemon =
-      document.getElementById("loadPokemon");
-      loadPokemon.style.display = 'block';  
+    });
+    const loadPokemon = document.getElementById("loadPokemon");
+    loadPokemon.style.display = "block";
   }
   return (
     <>
@@ -992,7 +824,10 @@ function SearchPokemon({ fn, fn2, fn3 }) {
                 <div className="mt-4 w-full">
                   <div className="mt-[44px] flex w-full justify-end">
                     <a href="#pokemons">
-                      <button onClick={handleAdvanceReset} className="m-[5.550px] pt-[15px] pb-[13.500px] px-[25px] bg-[#a4a4a4] text-white text-[125%] leading-[25px] rounded-[5px] hover:bg-[#8b8b8b]">
+                      <button
+                        onClick={handleAdvanceReset}
+                        className="m-[5.550px] pt-[15px] pb-[13.500px] px-[25px] bg-[#a4a4a4] text-white text-[125%] leading-[25px] rounded-[5px] hover:bg-[#8b8b8b]"
+                      >
                         Reset
                       </button>
                     </a>
