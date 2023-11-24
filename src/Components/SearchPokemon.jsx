@@ -140,7 +140,7 @@ function SearchPokemon({ fn, fn2, fn3 }) {
   function handleAdvanceSearch() {
     fn3(false);
     var result = [];
-    if(searchConditions.search !== "" && !Number(searchConditions.search)){
+    if(!(searchConditions.range.from > searchConditions.range.to)){if(searchConditions.search !== "" && !Number(searchConditions.search)){
       const data = handleOptionsData(searchConditions.range.from - 1, searchConditions.range.to, searchConditions.search);
       if(data.length > 0){
         result = data.filter((el) => {
@@ -431,7 +431,7 @@ function SearchPokemon({ fn, fn2, fn3 }) {
            return el;
          }
        });
-    }
+    }}
 
       const loadPokemon =
       document.getElementById("loadPokemon");
