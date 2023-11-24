@@ -74,13 +74,17 @@ function SearchPokemon({ fn, fn2, fn3 }) {
     const options = [];
     let i = from;
     do {
-      if (
-        pokemonData[i].name.includes(value) ||
-        pokemonData[i].name.includes(value.toLowerCase()) ||
-        pokemonData[i].name.includes(value.toUpperCase(value.toLowerCase())) ||
-        pokemonData[i].name.includes(value[0].toUpperCase() + value.slice(1))
-      ) {
-        options.push(pokemonData[i]);
+      if (pokemonData[i]) {
+        if (
+          pokemonData[i].name.includes(value) ||
+          pokemonData[i].name.includes(value.toLowerCase()) ||
+          pokemonData[i].name.includes(
+            value.toUpperCase(value.toLowerCase())
+          ) ||
+          pokemonData[i].name.includes(value[0].toUpperCase() + value.slice(1))
+        ) {
+          options.push(pokemonData[i]);
+        }
       }
       i++;
     } while (i < to);
@@ -137,99 +141,102 @@ function SearchPokemon({ fn, fn2, fn3 }) {
     });
   }
 
-  function handleAdvanceResult(data){
+  function handleAdvanceResult(data) {
     const result = data.filter((el) => {
-      let type = true;
-      let ability = true;
-      let height = false;
-      let weight = false;
+      console.log(el);
+      if (el) {
+        let type = true;
+        let ability = true;
+        let height = false;
+        let weight = false;
 
-      if (searchConditions.type.length > 0) {
-        searchConditions.type.forEach((element) => {
-          if (!el?.types.includes(element)) {
-            type = false;
-          }
-        });
-      }
-
-      if (!(searchConditions.ability === "all")) {
-        if (!el?.abilities.includes(searchConditions.ability)) {
-          ability = false;
+        if (searchConditions.type.length > 0) {
+          searchConditions.type.forEach((element) => {
+            if (!el?.types.includes(element)) {
+              type = false;
+            }
+          });
         }
-      }
 
-      if (
-        searchConditions.height.short ||
-        searchConditions.height.medium ||
-        searchConditions.height.tall
-      ) {
-        let short = false;
-        let medium = false;
-        let tall = false;
-
-        if (searchConditions.height.short) {
-          if (el?.height <= 12) {
-            short = true;
-          }
-        }
-        if (searchConditions.height.medium) {
-          if (el?.height <= 21 && el.height > 12) {
-            medium = true;
-          }
-        }
-        if (searchConditions.height.tall) {
-          if (el.height > 21) {
-            tall = true;
+        if (!(searchConditions.ability === "all")) {
+          if (!el?.abilities.includes(searchConditions.ability)) {
+            ability = false;
           }
         }
 
-        if (short || medium || tall) {
+        if (
+          searchConditions.height.short ||
+          searchConditions.height.medium ||
+          searchConditions.height.tall
+        ) {
+          let short = false;
+          let medium = false;
+          let tall = false;
+
+          if (searchConditions.height.short) {
+            if (el?.height <= 12) {
+              short = true;
+            }
+          }
+          if (searchConditions.height.medium) {
+            if (el?.height <= 21 && el.height > 12) {
+              medium = true;
+            }
+          }
+          if (searchConditions.height.tall) {
+            if (el.height > 21) {
+              tall = true;
+            }
+          }
+
+          if (short || medium || tall) {
+            height = true;
+          } else {
+            height = false;
+          }
+        } else {
           height = true;
+        }
+
+        if (
+          searchConditions.weight.light ||
+          searchConditions.weight.medium ||
+          searchConditions.weight.heavy
+        ) {
+          let light = false;
+          let medium = false;
+          let heavy = false;
+
+          if (searchConditions.weight.light) {
+            if (el.weight <= 450) {
+              light = true;
+            }
+          }
+          if (searchConditions.weight.medium) {
+            if (el.weight <= 2265 && el.weight > 450) {
+              medium = true;
+            }
+          }
+          if (searchConditions.weight.heavy) {
+            if (el.weight > 2265) {
+              heavy = true;
+            }
+          }
+
+          if (light || medium || heavy) {
+            weight = true;
+          } else {
+            weight = false;
+          }
         } else {
-          height = false;
-        }
-      } else {
-        height = true;
-      }
-
-      if (
-        searchConditions.weight.light ||
-        searchConditions.weight.medium ||
-        searchConditions.weight.heavy
-      ) {
-        let light = false;
-        let medium = false;
-        let heavy = false;
-
-        if (searchConditions.weight.light) {
-          if (el.weight <= 450) {
-            light = true;
-          }
-        }
-        if (searchConditions.weight.medium) {
-          if (el.weight <= 2265 && el.weight > 450) {
-            medium = true;
-          }
-        }
-        if (searchConditions.weight.heavy) {
-          if (el.weight > 2265) {
-            heavy = true;
-          }
-        }
-
-        if (light || medium || heavy) {
           weight = true;
-        } else {
-          weight = false;
         }
-      } else {
-        weight = true;
-      }
 
-      if (type && ability && height && weight) {
-        return el;
+        if (type && ability && height && weight) {
+          return el;
+        }
       }
-    })
+    });
 
     return result;
   }
@@ -237,38 +244,32 @@ function SearchPokemon({ fn, fn2, fn3 }) {
   function handleAdvanceSearch() {
     fn3(false);
     var result = [];
-    let from = Number(searchConditions.range.from) < 0 ? 1 : Number(searchConditions.range.from);
-    let to = Number(searchConditions.range.to)
+    let from = Number(searchConditions.range.from) <= 0 ? 1 : Number(searchConditions.range.from);
+    let to = Number(searchConditions.range.to) < 0 ? 0 : Number(searchConditions.range.to) > 1010 ? 1010 : Number(searchConditions.range.to);
 
     if (!(from > to)) {
       if (searchConditions.search !== "" && !Number(searchConditions.search)) {
-        const data = handleOptionsData(
-          from - 1,
-          to,
-          searchConditions.search
-        );
+        const data = handleOptionsData(from - 1, to, searchConditions.search);
         if (data.length > 0) {
-          result = handleAdvanceResult(data)
+          result = handleAdvanceResult(data);
         }
-      } 
-      else if(Number(searchConditions.search)) {
+      } else if (Number(searchConditions.search)) {
         let temp = Number(searchConditions.search);
-        if (
-          temp >= from &&
-          temp <= to
-        ) {
+        if (temp >= from && temp <= to) {
           if (pokemonData[temp - 1]) {
-            result = handleAdvanceResult([pokemonData[temp - 1]])
+            result = handleAdvanceResult([pokemonData[temp - 1]]);
           }
         }
-      } 
-      else {
-        result = handleAdvanceResult(pokemonData.slice(from - 1, to))
+      } else {
+        console.log(pokemonData.slice(from - 1, to))
+        result = handleAdvanceResult(pokemonData.slice(from - 1, to));
       }
     }
 
     const loadPokemon = document.getElementById("loadPokemon");
-    loadPokemon.style.display = "none";
+    if(loadPokemon){
+      loadPokemon.style.display = "none";
+    }
 
     if (result.length > 0) {
       fn([...result]);
@@ -303,7 +304,11 @@ function SearchPokemon({ fn, fn2, fn3 }) {
       ability: "all",
     });
     const loadPokemon = document.getElementById("loadPokemon");
-    loadPokemon.style.display = "block";
+    const search = document.getElementById("searchIt");
+    search.value = "";
+    if(loadPokemon){
+      loadPokemon.style.display = "block";
+    }
   }
   return (
     <>
