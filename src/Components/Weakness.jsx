@@ -34,7 +34,7 @@ function Weakness({ typesData }) {
       });
     });
 
-    const weaknessFinal = [];
+    let weaknessFinal = [];
     Object.entries(weaknessData).forEach(([key, value]) => {
       if (value >= 2) {
         weaknessFinal.push(key);

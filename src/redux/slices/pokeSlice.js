@@ -71,11 +71,9 @@ const getPokemon = async (url) => {
     let types = (res?.data?.types).map((el) => {
       return el.type.name;
     });
-    var abilities = [];
-    res?.data?.abilities.forEach(async (el) => {
-      const { name } = el.ability;
-      abilities.push(name);
-    });
+    var abilities = await handleAbilities(res?.data?.abilities);
+    var type_data = await handleTypeData(res.data.types);
+    var weakness = handleWeakness(type_data);
 
     const pokemon = {
       id: res?.data?.id,
@@ -83,6 +81,7 @@ const getPokemon = async (url) => {
       height: res?.data?.height,
       weight: res?.data?.weight,
       abilities,
+      weakness,
       number:
         (res?.data?.id).toString().length === 1
           ? "#000" + res.data.id
@@ -99,6 +98,97 @@ const getPokemon = async (url) => {
     console.log(e);
   }
 };
+
+async function handleAbilities(data){
+  let temp = [];
+  data.forEach(async (el) => {
+    const { name } = el.ability;
+    temp.push(name);
+  });
+
+  return temp;
+}
+
+async function handleDamage(data){
+    const { data: typeInfo } = await axios.get(data.type.url);
+    var double = [],
+      zero = [],
+      half = [];
+
+    typeInfo["damage_relations"].double_damage_from.forEach((el) => {
+      double.push(el.name);
+    });
+    typeInfo["damage_relations"].half_damage_from.forEach((el) => {
+      half.push(el.name);
+    });
+    typeInfo["damage_relations"].no_damage_from.forEach((el) => {
+      zero.push(el.name);
+    });
+
+    return [data.type.name, {
+      defense : {
+        double,
+        zero,
+        half
+      }
+    }]
+}
+
+async function handleTypeData(data){
+  let arr = [];
+  for(let i = 0; i< data.length ; i++){
+      let temp = await handleDamage(data[i]);
+      arr.push(temp);
+  }
+  let obj = {};
+  arr.forEach((el) => {
+    let key = el[0];
+    let value = el[1];
+
+    obj[key] = value;
+  });
+
+  return obj;
+}
+
+function handleWeakness(data){
+    let weaknessData = {};
+
+    Object.keys(data).forEach((el) => {
+      let defense = data[el].defense;
+
+      Object.entries(defense).forEach(([key, value]) => {
+        switch (key) {
+          case "double":
+            value.forEach((i) => {
+              weaknessData[i] ? (weaknessData[i] *= 2) : (weaknessData[i] = 2);
+            });
+            break;
+          case "half":
+            value.forEach((i) => {
+              weaknessData[i]
+                ? (weaknessData[i] *= 0.5)
+                : (weaknessData[i] = 0.5);
+            });
+            break;
+          case "zero":
+            value.forEach((i) => {
+              weaknessData[i] = 0;
+            });
+            break;
+        }
+      });
+    });
+
+    let weaknessFinal = [];
+    Object.entries(weaknessData).forEach(([key, value]) => {
+      if (value >= 2) {
+        weaknessFinal.push(key);
+      }
+    });
+
+    return weaknessFinal;
+}
 
 const pokeSlice = createSlice({
   name: "pokedex",

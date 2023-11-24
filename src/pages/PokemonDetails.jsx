@@ -19,7 +19,7 @@ function PokemonDetails() {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const [allDetails, setAllDetails] = useState();
+  const [allDetails, setAllDetails] = useState(null);
 
   useEffect(() => {
     handlePokemonInfo(id);
@@ -29,25 +29,9 @@ function PokemonDetails() {
     const { data: info } = await axios.get(
       `https://pokeapi.co/api/v2/pokemon/${id}`
     );
-    var abilities = [];
-    info.abilities.forEach(async (el) => {
-      const { name, url } = el.ability;
-      const { data } = await axios.get(url);
-      var effect;
 
-      data.effect_entries.map((el) => {
-        if (el.language.name === "en") {
-          effect = el.effect.replaceAll("\n", " ");
-        }
-      });
-
-      abilities.push({
-        name,
-        effect,
-        hidden: el.is_hidden,
-      });
-    });
-
+    const abilities = await handleAbilities(info.abilities);
+    
     var desc;
     const { data: species } = await axios.get(info.species.url);
     for (let i = 0; i < species.flavor_text_entries.length; i++) {
@@ -68,32 +52,8 @@ function PokemonDetails() {
       }
     }
 
-    var type_data = {};
-    info.types.forEach(async (el) => {
-      const { data: typeInfo } = await axios.get(el.type.url);
-      var double = [],
-        zero = [],
-        half = [];
-
-      typeInfo["damage_relations"].double_damage_from.forEach((el) => {
-        double.push(el.name);
-      });
-      typeInfo["damage_relations"].half_damage_from.forEach((el) => {
-        half.push(el.name);
-      });
-      typeInfo["damage_relations"].no_damage_from.forEach((el) => {
-        zero.push(el.name);
-      });
-
-      type_data[`${el.type.name}`] = {
-        defense: {
-          half,
-          double,
-          zero,
-        },
-      };
-    });
-
+    const type_data = await typeData(info.types);
+    
     const { data: evolutionInfo } = await axios.get(
       species.evolution_chain.url
     );
@@ -125,6 +85,59 @@ function PokemonDetails() {
       chain: evolutionInfo.chain,
       stats,
     });
+  }
+
+  async function typeData(data){
+    let temp = {};
+    data.forEach(async (el) => {
+      const { data: typeInfo } = await axios.get(el.type.url);
+      var double = [],
+        zero = [],
+        half = [];
+
+      typeInfo["damage_relations"].double_damage_from.forEach((el) => {
+        double.push(el.name);
+      });
+      typeInfo["damage_relations"].half_damage_from.forEach((el) => {
+        half.push(el.name);
+      });
+      typeInfo["damage_relations"].no_damage_from.forEach((el) => {
+        zero.push(el.name);
+      });
+
+      temp[`${el.type.name}`] = {
+        defense: {
+          half,
+          double,
+          zero,
+        },
+      };
+    });
+
+    return temp;
+  }
+
+  async function handleAbilities(data){
+    const temp = [];
+    data.map(async (el) => {
+      const { name, url } = el.ability;
+      const { data } = await axios.get(url);
+      var effect;
+
+      data.effect_entries.map((el) => {
+        if (el.language.name === "en") {
+          effect = el.effect.replaceAll("\n", " ");
+        }
+      });
+
+      temp.push({
+        name,
+        effect,
+        hidden: el.is_hidden,
+      });
+    });
+
+    return temp;
   }
 
   return (
@@ -382,7 +395,7 @@ function PokemonDetails() {
               </h1>
 
               <div className="w-full mt-[8px] flex flex-wrap gap-1 gap-y-2 text-[16px] leading-8">
-                <Weakness typesData={allDetails.type_data} />
+               {allDetails.type_data && <Weakness typesData={allDetails.type_data} />}
               </div>
             </div>
           </div>

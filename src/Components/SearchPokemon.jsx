@@ -143,7 +143,6 @@ function SearchPokemon({ fn, fn2, fn3 }) {
 
   function handleAdvanceResult(data) {
     const result = data.filter((el) => {
-      console.log(el);
       if (el) {
         let type = true;
         let ability = true;
