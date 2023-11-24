@@ -244,8 +244,16 @@ function SearchPokemon({ fn, fn2, fn3 }) {
   function handleAdvanceSearch() {
     fn3(false);
     var result = [];
-    let from = Number(searchConditions.range.from) <= 0 ? 1 : Number(searchConditions.range.from);
-    let to = Number(searchConditions.range.to) < 0 ? 0 : Number(searchConditions.range.to) > 1010 ? 1010 : Number(searchConditions.range.to);
+    let from =
+      Number(searchConditions.range.from) <= 0
+        ? 1
+        : Number(searchConditions.range.from);
+    let to =
+      Number(searchConditions.range.to) < 0
+        ? 0
+        : Number(searchConditions.range.to) > 1010
+        ? 1010
+        : Number(searchConditions.range.to);
 
     if (!(from > to)) {
       if (searchConditions.search !== "" && !Number(searchConditions.search)) {
@@ -261,13 +269,13 @@ function SearchPokemon({ fn, fn2, fn3 }) {
           }
         }
       } else {
-        console.log(pokemonData.slice(from - 1, to))
+        console.log(pokemonData.slice(from - 1, to));
         result = handleAdvanceResult(pokemonData.slice(from - 1, to));
       }
     }
 
     const loadPokemon = document.getElementById("loadPokemon");
-    if(loadPokemon){
+    if (loadPokemon) {
       loadPokemon.style.display = "none";
     }
 
@@ -306,7 +314,7 @@ function SearchPokemon({ fn, fn2, fn3 }) {
     const loadPokemon = document.getElementById("loadPokemon");
     const search = document.getElementById("searchIt");
     search.value = "";
-    if(loadPokemon){
+    if (loadPokemon) {
       loadPokemon.style.display = "block";
     }
   }
