@@ -11,7 +11,6 @@ import { FaCircleQuestion } from "react-icons/fa6";
 import PokemonType from "../Components/PokemonType";
 import { nanoid } from "nanoid";
 import EvolutionChain from "../Components/EvolutionChain";
-import Weakness from "../Components/Weakness";
 import Loading from "../Components/Loading";
 
 function PokemonDetails() {
@@ -31,7 +30,7 @@ function PokemonDetails() {
     );
 
     const abilities = await handleAbilities(info.abilities);
-    
+
     var desc;
     const { data: species } = await axios.get(info.species.url);
     for (let i = 0; i < species.flavor_text_entries.length; i++) {
@@ -53,7 +52,7 @@ function PokemonDetails() {
     }
 
     const type_data = await typeData(info.types);
-    
+
     const { data: evolutionInfo } = await axios.get(
       species.evolution_chain.url
     );
@@ -87,7 +86,7 @@ function PokemonDetails() {
     });
   }
 
-  async function typeData(data){
+  async function typeData(data) {
     let temp = {};
     data.forEach(async (el) => {
       const { data: typeInfo } = await axios.get(el.type.url);
@@ -117,7 +116,7 @@ function PokemonDetails() {
     return temp;
   }
 
-  async function handleAbilities(data){
+  async function handleAbilities(data) {
     const temp = [];
     data.map(async (el) => {
       const { name, url } = el.ability;
@@ -395,7 +394,14 @@ function PokemonDetails() {
               </h1>
 
               <div className="w-full mt-[8px] flex flex-wrap gap-1 gap-y-2 text-[16px] leading-8">
-               {allDetails.type_data && <Weakness typesData={allDetails.type_data} />}
+                {pokemonData[id - 1]?.weakness.map((el) => (
+                  <PokemonType
+                    key={nanoid(4)}
+                    width={"32%"}
+                    type={el}
+                    rounded={"5px"}
+                  />
+                ))}
               </div>
             </div>
           </div>
