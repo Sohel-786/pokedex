@@ -1,8 +1,7 @@
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
 import EqualLayout from "../Layouts/EqualLayout";
-import SearchPokemon from "../Components/SearchPokemon";
 import StatsLi from "../Components/StatsLi";
-import { IoMaleSharp, IoFemaleSharp } from "react-icons/io5";
+import { IoMaleSharp, IoFemaleSharp, IoCloseSharp } from "react-icons/io5";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -19,6 +18,12 @@ function PokemonDetails() {
   const navigate = useNavigate();
 
   const [allDetails, setAllDetails] = useState(null);
+  const [abilityInfo, setAbilityInfo] = useState({
+    name : '',
+    info : '',
+    hidden : false
+  })
+  const [showAbility, setShowAbility] = useState(false);
 
   useEffect(() => {
     handlePokemonInfo(id);
@@ -242,11 +247,21 @@ function PokemonDetails() {
               </p>
 
               <div
-                className="w-full rounded-[10px] bg-[#30a7d7] text-white grid grid-cols-2 text-[17px] leading-[17px] mt-5"
+                className="w-full rounded-[10px] bg-[#30a7d7] text-white grid grid-cols-2 text-[17px] leading-[17px] mt-5 relative"
                 style={{
                   fontFamily: "sans-serif",
                 }}
               >
+                <div className="absolute w-full h-full bg-[#313131] rounded-[10px]">
+                    <span className="text-[#616161] text-[80%] float-left my-[17px] mx-[27.200px] font-semibold">
+                      Ability Info
+                    </span>
+
+                    <span className="text-white flex items-center text-[87%] cursor-pointer float-right p-[17.500px] pr-[21px] pb-[10.500px] bg-black">
+                      <IoCloseSharp size={'14px'} className="mr-[0.25em]" />
+                      Close
+                    </span>
+                </div>
                 <div className="ml-[20px] mt-[20px] mb-[25px] flex flex-col gap-[20px]">
                   <div className="flex flex-col gap-[15px]">
                     <p>Height</p>
@@ -321,10 +336,19 @@ function PokemonDetails() {
                         className="text-black text-[20px] leading-5 flex gap-[9.375px] items-center capitalize"
                       >
                         {el.name}{" "}
+                        <span onClick={() => {
+                            showAbility(true);
+                            setAbilityInfo({
+                              name : el.name,
+                              info : el.effect,
+                              hidden : el.hidden
+                            })
+                        }} className="cursor-pointer">
                         <FaCircleQuestion
                           size={"15.9954px"}
                           className="text-white mt-[3.125px]"
                         />
+                        </span>
                       </h1>
                     ))}
                   </div>
