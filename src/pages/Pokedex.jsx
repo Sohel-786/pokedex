@@ -13,6 +13,7 @@ function Pokedex() {
   const [searchArrow, setSearchArrow] = useState(false);
   const [showLoading, setShowLoading] = useState(false);
   const [showError, setShowError] = useState(false);
+  const [showOrderList, setShoworderList] = useState(false);
   const [offsetLimit, setOffsetLimit] = useState({
     offset: 12,
     positionLimit: 24,
@@ -88,8 +89,9 @@ function Pokedex() {
               <div
                 onClick={() => {
                   setSearchArrow(!searchArrow);
+                  setShoworderList(!showOrderList);
                 }}
-                className="pl-4 bg-[#313131] w-[78%] py-[6px] rounded-[5px] cursor-pointer"
+                className="pl-4 bg-[#313131] w-[78%] py-[6px] rounded-[5px] cursor-pointer relative select-none"
               >
                 <h1 className="text-white font-roboto text-[16px] leading-[24px] flex items-center relative advanceSearchBtn">
                   <img
@@ -110,6 +112,25 @@ function Pokedex() {
                     />
                   )}
                 </h1>
+                {showOrderList && <ul className="w-full list-none flex flex-col absolute z-40 bg-[#616161] text-white top-10 left-0 rounded-b-[5px]">
+                        {['Lowest Number (First)', 'Highest Number (First)', 'A-Z', 'Z-A'].map((el) => {
+                          return (
+                            <li
+                              onClick={() => {
+                                setSortOrder(el);
+                                setShoworderList(false);
+                              }}
+                              key={nanoid(4)}
+                              className="p-[10px] text-[16px] leading-5 capitalize cursor-pointer hover:bg-[#313131]"
+                              style={{
+                                fontFamily: "sans-serif",
+                              }}
+                            >
+                              {el}
+                            </li>
+                          );
+                        })}
+                      </ul>}
               </div>
             </div>
           </div>
