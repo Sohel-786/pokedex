@@ -22,10 +22,10 @@ function Pokedex() {
   const [requestMade, setRequestMade] = useState(false);
 
   const { pokemonData } = useSelector((s) => s.pokedex);
-  const [ sortedData, setSortedData ] = useState([]);
+  const [sortedData, setSortedData] = useState([]);
 
   useEffect(() => {
-    setSortedData(pokemonData)
+    setSortedData(pokemonData);
   }, [pokemonData]);
 
   useEffect(() => {
@@ -77,49 +77,65 @@ function Pokedex() {
     }
   }
 
-  function handleSorting(sort){
-    if(sort === 'Lowest Number (First)'){
-      let sortedDataAsc = [...sortedData].sort((a,b) => {
+  function handleSorting(sort) {
+    if (sort === "Lowest Number (First)") {
+      let sortedDataAsc = [...sortedData].sort((a, b) => {
         let x = a.id;
         let y = b.id;
 
-        if(x>y){return 1;}
-        if(y>x){return -1;}
+        if (x > y) {
+          return 1;
+        }
+        if (y > x) {
+          return -1;
+        }
         return 0;
-      })
+      });
       setSortedData([...sortedDataAsc]);
     }
-    if(sort === 'Highest Number (First)'){
-      let sortedDataDes = [...sortedData].sort((a,b) => {
+    if (sort === "Highest Number (First)") {
+      let sortedDataDes = [...sortedData].sort((a, b) => {
         let x = a.id;
         let y = b.id;
 
-        if(x>y){return -1;}
-        if(y>x){return 1;}
+        if (x > y) {
+          return -1;
+        }
+        if (y > x) {
+          return 1;
+        }
         return 0;
-      })
+      });
       setSortedData([...sortedDataDes]);
     }
-    if(sort === 'A-Z'){
-      let sortedDataAsc = [...sortedData].sort((a,b) => {
+    if (sort === "A-Z") {
+      let sortedDataAsc = [...sortedData].sort((a, b) => {
         let x = a.name;
         let y = b.name;
 
-        if(x>y){return 1;}
-        if(y>x){return -1;}
+        if (x > y) {
+          return 1;
+        }
+        if (y > x) {
+          return -1;
+        }
         return 0;
-      })
+      });
       setSortedData([...sortedDataAsc]);
     }
-    if(sort === 'Z-A'){
-      let sortedDataDes = [...sortedData].sort((a,b) => {
+    if (sort === "Z-A") {
+      let sortedDataDes = [...sortedData].sort((a, b) => {
         let x = a.name;
         let y = b.name;
 
-        if(x>y){return -1;}
-        if(y>x){return 1;}
+        if (x > y) {
+          return -1;
+        }
+        if (y > x) {
+          return 1;
+        }
         return 0;
-      })
+      });
       setSortedData([...sortedDataDes]);
     }
   }
@@ -130,7 +146,12 @@ function Pokedex() {
         <h1 className="font-openSans text-[30px] text-[#919191] leading-[37.5px] mt-[25px] mb-[16px]">
           Pokédex
         </h1>
-        <SearchPokemon order={setSortOrder}  setPokemons={setPokemons} setSortedData={setSortedData} setShowError={setShowError} />
+        <SearchPokemon
+          order={setSortOrder}
+          setPokemons={setPokemons}
+          setSortedData={setSortedData}
+          setShowError={setShowError}
+        />
         <div id="pokemons" className="w-full my-[34px]">
           <div className="flex items-center justify-between">
             <button className="flex justify-center items-center pt-[10.600px] pb-[9.340px] px-[21px] bg-[#30a7d7] text-white rounded-[5px] font-openSans text-[16.8px] w-[40.71%] font-semibold hover:bg-[#1b82b1] gap-[5px]">
@@ -168,26 +189,33 @@ function Pokedex() {
                     />
                   )}
                 </h1>
-                {showOrderList && <ul className="w-full list-none flex flex-col absolute z-40 bg-[#616161] text-white top-10 left-0 rounded-b-[5px]">
-                        {['Lowest Number (First)', 'Highest Number (First)', 'A-Z', 'Z-A'].map((el) => {
-                          return (
-                            <li
-                              onClick={() => {
-                                setSortOrder(el);
-                                setShoworderList(false);
-                                handleSorting(el);
-                              }}
-                              key={nanoid(4)}
-                              className="p-[10px] text-[16px] leading-5 capitalize cursor-pointer hover:bg-[#313131]"
-                              style={{
-                                fontFamily: "sans-serif",
-                              }}
-                            >
-                              {el}
-                            </li>
-                          );
-                        })}
-                      </ul>}
+                {showOrderList && (
+                  <ul className="w-full list-none flex flex-col absolute z-40 bg-[#616161] text-white top-10 left-0 rounded-b-[5px]">
+                    {[
+                      "Lowest Number (First)",
+                      "Highest Number (First)",
+                      "A-Z",
+                      "Z-A",
+                    ].map((el) => {
+                      return (
+                        <li
+                          onClick={() => {
+                            setSortOrder(el);
+                            setShoworderList(false);
+                            handleSorting(el);
+                          }}
+                          key={nanoid(4)}
+                          className="p-[10px] text-[16px] leading-5 capitalize cursor-pointer hover:bg-[#313131]"
+                          style={{
+                            fontFamily: "sans-serif",
+                          }}
+                        >
+                          {el}
+                        </li>
+                      );
+                    })}
+                  </ul>
+                )}
               </div>
             </div>
           </div>
@@ -249,29 +277,30 @@ function Pokedex() {
                   //   showLoading && <Loading />
                   // ) :
 
-                  pokemons.length < sortedData.length &&
-                  <button
-                    id="loadPokemon"
-                    onClick={() => {
-                      setPokemons([
-                        ...pokemons,
-                        ...sortedData.slice(
-                          offsetLimit.offset,
-                          offsetLimit.positionLimit
-                        ),
-                      ]);
+                  pokemons.length < sortedData.length && (
+                    <button
+                      id="loadPokemon"
+                      onClick={() => {
+                        setPokemons([
+                          ...pokemons,
+                          ...sortedData.slice(
+                            offsetLimit.offset,
+                            offsetLimit.positionLimit
+                          ),
+                        ]);
 
-                      setOffsetLimit({
-                        offset: offsetLimit.offset + 12,
-                        positionLimit: offsetLimit.positionLimit + 12,
-                      });
+                        setOffsetLimit({
+                          offset: offsetLimit.offset + 12,
+                          positionLimit: offsetLimit.positionLimit + 12,
+                        });
 
-                      // setRequestMade(true);
-                    }}
-                    className="pt-[12px] pb-[10.800px] px-[20px] bg-[#30a7d7] text-white rounded-[5px] font-openSans text-[16px] leading-[20px] font-semibold hover:bg-[#1b82b1] mx-auto my-5 mt-10"
-                  >
-                    Load more Pokémon
-                  </button>
+                        // setRequestMade(true);
+                      }}
+                      className="pt-[12px] pb-[10.800px] px-[20px] bg-[#30a7d7] text-white rounded-[5px] font-openSans text-[16px] leading-[20px] font-semibold hover:bg-[#1b82b1] mx-auto my-5 mt-10"
+                    >
+                      Load more Pokémon
+                    </button>
+                  )
                 }
               </>
             ) : (

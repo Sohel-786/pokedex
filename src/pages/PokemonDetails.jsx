@@ -105,13 +105,13 @@ function PokemonDetails() {
       });
 
       let flag = false;
-      for(let i = 0; i < temp.length ; i++){
-          if(temp[i].name === name){
-            flag = true;
-          }
+      for (let i = 0; i < temp.length; i++) {
+        if (temp[i].name === name) {
+          flag = true;
+        }
       }
 
-      if(!flag){
+      if (!flag) {
         temp.push({
           name,
           effect,
