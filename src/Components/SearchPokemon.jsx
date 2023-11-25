@@ -327,26 +327,25 @@ function SearchPokemon({ fn, fn2, fn3 }) {
     }
   }
 
-  function handleNormalSearch(){
-    const loadPokemon =
-    document.getElementById("loadPokemon");
-  if (searchConditions.search === "") {
-    fn2();
-    fn3(false);
-    loadPokemon.style.display = "block";
-    return;
-  }
-  loadPokemon.style.display = "none";
+  function handleNormalSearch() {
+    const loadPokemon = document.getElementById("loadPokemon");
+    if (searchConditions.search === "") {
+      fn2();
+      fn3(false);
+      loadPokemon.style.display = "block";
+      return;
+    }
+    loadPokemon.style.display = "none";
 
-  if (options.length === 1) {
-    fn([...options]);
-    setShowOptions(false);
-  } else if (options.length > 1) {
-    fn([...options]);
-    setShowOptions(false);
-  } else {
-    fn3(true);
-  }
+    if (options.length === 1) {
+      fn([...options]);
+      setShowOptions(false);
+    } else if (options.length > 1) {
+      fn([...options]);
+      setShowOptions(false);
+    } else {
+      fn3(true);
+    }
   }
   return (
     <>
@@ -371,8 +370,8 @@ function SearchPokemon({ fn, fn2, fn3 }) {
                     name="search"
                     onKeyDown={(e) => {
                       console.log(e.key);
-                      if(e.key === 'Enter'){
-                        handleNormalSearch()
+                      if (e.key === "Enter") {
+                        handleNormalSearch();
                       }
                     }}
                     className="p-[10px] font-roboto text-[16px] leading-[24px] rounded-[5px] w-full"
