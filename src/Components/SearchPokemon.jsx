@@ -7,7 +7,7 @@ import PokemonType from "./PokemonType";
 import { FaWeightHanging } from "react-icons/fa";
 import { ImTextHeight } from "react-icons/im";
 
-function SearchPokemon({ setPokemons, getPokemons, setShowError }) {
+function SearchPokemon({ setPokemons, setSortedData, setShowError, order }) {
   const [searchConditions, setsearchConditions] = useState({
     search: "",
     type: [],
@@ -287,15 +287,46 @@ function SearchPokemon({ setPokemons, getPokemons, setShowError }) {
     }
 
     if (result.length > 0) {
-      setPokemons([...result]);
+      handleSorting(result);
     } else {
       setShowError(true);
     }
   }
 
+  function handleSorting(data){
+    if(order === 'Lowest Number (First)'){
+      setPokemons(data);
+    }
+    if(order === 'Highest Number (First)'){
+      setPokemons([...data].reverse());
+    }
+    if(order === 'A-Z'){
+      let sortedDataAsc = [...data].sort((a,b) => {
+        let x = a.name;
+        let y = b.name;
+
+        if(x>y){return 1;}
+        if(y>x){return -1;}
+        return 0;
+      })
+      setPokemons([...sortedDataAsc]);
+    }
+    if(order === 'Z-A'){
+      let sortedDataDes = [...data].sort((a,b) => {
+        let x = a.name;
+        let y = b.name;
+
+        if(x>y){return -1;}
+        if(y>x){return 1;}
+        return 0;
+      })
+      setPokemons([...sortedDataDes]);
+    }
+  }
+
   function handleAdvanceReset() {
     setShowError(false);
-    getPokemons();
+    setSortedData(pokemonData);
     setShowAdvance(false);
     setOptions(null);
     setsearchConditions({
@@ -329,7 +360,7 @@ function SearchPokemon({ setPokemons, getPokemons, setShowError }) {
   function handleNormalSearch() {
     const loadPokemon = document.getElementById("loadPokemon");
     if (searchConditions.search === "") {
-      getPokemons();
+      setSortedData(pokemonData);
       setShowError(false);
       loadPokemon.style.display = "block";
       return;
@@ -337,10 +368,10 @@ function SearchPokemon({ setPokemons, getPokemons, setShowError }) {
     loadPokemon.style.display = "none";
 
     if (options.length === 1) {
-      setPokemons([...options]);
+      handleSorting(options);
       setShowOptions(false);
     } else if (options.length > 1) {
-      setPokemons([...options]);
+      handleSorting(options);
       setShowOptions(false);
     } else {
       setShowError(true);
