@@ -7,7 +7,7 @@ import PokemonType from "./PokemonType";
 import { FaWeightHanging } from "react-icons/fa";
 import { ImTextHeight } from "react-icons/im";
 
-function SearchPokemon({ fn, fn2, fn3 }) {
+function SearchPokemon({ setPokemons, getPokemons, setShowError }) {
   const [searchConditions, setsearchConditions] = useState({
     search: "",
     type: [],
@@ -250,7 +250,7 @@ function SearchPokemon({ fn, fn2, fn3 }) {
   }
 
   function handleAdvanceSearch() {
-    fn3(false);
+    setShowError(false);
     var result = [];
     let from =
       Number(searchConditions.range.from) <= 0
@@ -277,7 +277,6 @@ function SearchPokemon({ fn, fn2, fn3 }) {
           }
         }
       } else {
-        console.log(pokemonData.slice(from - 1, to));
         result = handleAdvanceResult(pokemonData.slice(from - 1, to));
       }
     }
@@ -288,15 +287,15 @@ function SearchPokemon({ fn, fn2, fn3 }) {
     }
 
     if (result.length > 0) {
-      fn([...result]);
+      setPokemons([...result]);
     } else {
-      fn3(true);
+      setShowError(true);
     }
   }
 
   function handleAdvanceReset() {
-    fn3(false);
-    fn2();
+    setShowError(false);
+    getPokemons();
     setShowAdvance(false);
     setOptions(null);
     setsearchConditions({
@@ -330,21 +329,21 @@ function SearchPokemon({ fn, fn2, fn3 }) {
   function handleNormalSearch() {
     const loadPokemon = document.getElementById("loadPokemon");
     if (searchConditions.search === "") {
-      fn2();
-      fn3(false);
+      getPokemons();
+      setShowError(false);
       loadPokemon.style.display = "block";
       return;
     }
     loadPokemon.style.display = "none";
 
     if (options.length === 1) {
-      fn([...options]);
+      setPokemons([...options]);
       setShowOptions(false);
     } else if (options.length > 1) {
-      fn([...options]);
+      setPokemons([...options]);
       setShowOptions(false);
     } else {
-      fn3(true);
+      setShowError(true);
     }
   }
   return (
@@ -369,7 +368,6 @@ function SearchPokemon({ fn, fn2, fn3 }) {
                     id="searchIt"
                     name="search"
                     onKeyDown={(e) => {
-                      console.log(e.key);
                       if (e.key === "Enter") {
                         handleNormalSearch();
                       }
