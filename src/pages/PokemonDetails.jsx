@@ -1,7 +1,7 @@
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
 import EqualLayout from "../Layouts/EqualLayout";
 import StatsLi from "../Components/StatsLi";
-import { IoMaleSharp, IoFemaleSharp, IoCloseSharp } from "react-icons/io5";
+import { IoMaleSharp, IoFemaleSharp, IoClose } from "react-icons/io5";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -19,10 +19,10 @@ function PokemonDetails() {
 
   const [allDetails, setAllDetails] = useState(null);
   const [abilityInfo, setAbilityInfo] = useState({
-    name : '',
-    info : '',
-    hidden : false
-  })
+    name: "",
+    info: "",
+    hidden: false,
+  });
   const [showAbility, setShowAbility] = useState(false);
 
   useEffect(() => {
@@ -252,15 +252,28 @@ function PokemonDetails() {
                   fontFamily: "sans-serif",
                 }}
               >
-                <div className="absolute w-full h-full bg-[#313131] rounded-[10px]">
-                    <span className="text-[#616161] text-[80%] float-left my-[17px] mx-[27.200px] font-semibold">
-                      Ability Info
-                    </span>
+                <div className="absolute w-full h-full bg-[#313131] rounded-[10px] overflow-hidden flex flex-col">
+                  <span className="text-[#616161] text-[80%] float-left my-[17px] mx-[27.200px] font-semibold">
+                    Ability Info
+                  </span>
 
-                    <span className="text-white flex items-center text-[87%] cursor-pointer float-right p-[17.500px] pr-[21px] pb-[10.500px] bg-black">
-                      <IoCloseSharp size={'14px'} className="mr-[0.25em]" />
-                      Close
-                    </span>
+                  <span className="text-white flex items-center text-[87%] cursor-pointer font-semibold pl-[12.500px] pt-[14px] pr-[21px] pb-[10.500px] bg-abilityClose bg-left-bottom bg-no-repeat bg-black absolute  right-0 top-0">
+                    <IoClose size={"20px"} className="mr-[1px]" />
+                    Close
+                  </span>
+
+                  <div className="mx-6 flex flex-col">
+                    <h3 className="my-[8px] text-white text-[150%] tracking-wide leading-[125%]">
+                      Overgrow
+                    </h3>
+                    {/* {abilityInfo.name} {abilityInfo.info}*/}
+                    <p className=" mb-10 text-[#F2F2F2] text-[95%] leading-[125%]">
+                      Powers up Grass-type moves when the Pokémon’s <br /> HP is
+                      low.
+                    </p>
+
+                    <p className="font-sans">Hidden</p>
+                  </div>
                 </div>
                 <div className="ml-[20px] mt-[20px] mb-[25px] flex flex-col gap-[20px]">
                   <div className="flex flex-col gap-[15px]">
@@ -336,18 +349,21 @@ function PokemonDetails() {
                         className="text-black text-[20px] leading-5 flex gap-[9.375px] items-center capitalize"
                       >
                         {el.name}{" "}
-                        <span onClick={() => {
+                        <span
+                          onClick={() => {
                             showAbility(true);
                             setAbilityInfo({
-                              name : el.name,
-                              info : el.effect,
-                              hidden : el.hidden
-                            })
-                        }} className="cursor-pointer">
-                        <FaCircleQuestion
-                          size={"15.9954px"}
-                          className="text-white mt-[3.125px]"
-                        />
+                              name: el.name,
+                              info: el.effect,
+                              hidden: el.hidden,
+                            });
+                          }}
+                          className="cursor-pointer"
+                        >
+                          <FaCircleQuestion
+                            size={"15.9954px"}
+                            className="text-white mt-[3.125px]"
+                          />
                         </span>
                       </h1>
                     ))}

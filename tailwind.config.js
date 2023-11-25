@@ -35,6 +35,7 @@ export default {
         pokedetails: 'url("/assets/pokedetails.png")',
         pokeEvo: 'url("/assets/pokeEvo.png")',
         evoContainer: 'url("/assets/evolutionBg.png")',
+        abilityClose : 'url("/assets/abilityClose.png")'
       },
       backgroundColor : {
         '#f2f2f2' : '#f2f2f2'
