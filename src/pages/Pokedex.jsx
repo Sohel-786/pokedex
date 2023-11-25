@@ -22,10 +22,15 @@ function Pokedex() {
   const [requestMade, setRequestMade] = useState(false);
 
   const { pokemonData } = useSelector((s) => s.pokedex);
+  const [ sortedData, setSortedData ] = useState([]);
 
   useEffect(() => {
-    getPokemons();
+    setSortedData(pokemonData)
   }, [pokemonData]);
+
+  useEffect(() => {
+    getPokemons(sortedData);
+  }, [sortedData]);
 
   useEffect(() => {
     if (requestMade) {
@@ -34,8 +39,12 @@ function Pokedex() {
     return () => window.removeEventListener("scroll", handleAddPoke);
   }, [requestMade]);
 
-  function getPokemons() {
-    setPokemons([...pokemonData.slice(0, 12)]);
+  function getPokemons(data) {
+    setPokemons([...data.slice(0, 12)]);
+    setOffsetLimit({
+      offset: 12,
+      positionLimit: 24,
+    });
   }
 
   function handleAddPoke() {
@@ -65,6 +74,37 @@ function Pokedex() {
         positionLimit: offsetLimit.positionLimit + 12,
       });
       setShowLoading(false);
+    }
+  }
+
+  function handleSorting(sort){
+    if(sort === 'Lowest Number (First)'){
+      setSortedData(pokemonData);
+    }
+    if(sort === 'Highest Number (First)'){
+      setSortedData([...pokemonData].reverse());
+    }
+    if(sort === 'A-Z'){
+      let sortedDataAsc = [...pokemonData].sort((a,b) => {
+        let x = a.name;
+        let y = b.name;
+
+        if(x>y){return 1;}
+        if(y>x){return -1;}
+        return 0;
+      })
+      setSortedData([...sortedDataAsc]);
+    }
+    if(sort === 'Z-A'){
+      let sortedDataDes = [...pokemonData].sort((a,b) => {
+        let x = a.name;
+        let y = b.name;
+
+        if(x>y){return -1;}
+        if(y>x){return 1;}
+        return 0;
+      })
+      setSortedData([...sortedDataDes]);
     }
   }
 
@@ -119,6 +159,7 @@ function Pokedex() {
                               onClick={() => {
                                 setSortOrder(el);
                                 setShoworderList(false);
+                                handleSorting(el);
                               }}
                               key={nanoid(4)}
                               className="p-[10px] text-[16px] leading-5 capitalize cursor-pointer hover:bg-[#313131]"
@@ -196,7 +237,7 @@ function Pokedex() {
                     onClick={() => {
                       setPokemons([
                         ...pokemons,
-                        ...pokemonData.slice(
+                        ...sortedData.slice(
                           offsetLimit.offset,
                           offsetLimit.positionLimit
                         ),
