@@ -7,7 +7,7 @@ import PokemonType from "./PokemonType";
 import { FaWeightHanging } from "react-icons/fa";
 import { ImTextHeight } from "react-icons/im";
 
-function SearchPokemon({ setSortedData, setShowError }) {
+function SearchPokemon({ setSortedData, setShowError, order }) {
   const [searchConditions, setsearchConditions] = useState({
     search: "",
     type: [],
@@ -250,6 +250,7 @@ function SearchPokemon({ setSortedData, setShowError }) {
   }
 
   function handleAdvanceSearch() {
+    order("Lowest Number (First)");
     setShowError(false);
     var result = [];
     let from =
@@ -289,6 +290,7 @@ function SearchPokemon({ setSortedData, setShowError }) {
   }
 
   function handleAdvanceReset() {
+    order("Lowest Number (First)");
     setShowError(false);
     setSortedData(pokemonData);
     setShowAdvance(false);

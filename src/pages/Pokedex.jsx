@@ -130,7 +130,7 @@ function Pokedex() {
         <h1 className="font-openSans text-[30px] text-[#919191] leading-[37.5px] mt-[25px] mb-[16px]">
           Pokédex
         </h1>
-        <SearchPokemon order={sortOrder}  setPokemons={setPokemons} setSortedData={setSortedData} setShowError={setShowError} />
+        <SearchPokemon order={setSortOrder}  setPokemons={setPokemons} setSortedData={setSortedData} setShowError={setShowError} />
         <div id="pokemons" className="w-full my-[34px]">
           <div className="flex items-center justify-between">
             <button className="flex justify-center items-center pt-[10.600px] pb-[9.340px] px-[21px] bg-[#30a7d7] text-white rounded-[5px] font-openSans text-[16.8px] w-[40.71%] font-semibold hover:bg-[#1b82b1] gap-[5px]">
@@ -248,6 +248,8 @@ function Pokedex() {
                   // requestMade ? (
                   //   showLoading && <Loading />
                   // ) :
+
+                  pokemons.length < sortedData.length &&
                   <button
                     id="loadPokemon"
                     onClick={() => {
