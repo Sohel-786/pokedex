@@ -15,6 +15,7 @@ export default {
         loading: "spin 0.5s linear infinite",
         height: "height 1s ease-in-out 1 forwards",
         pokeBounce: "pokecardBounce 0.4s ease-in-out 1",
+        opacity : "opacity 0.2s ease-in-out 1 forwards"
       },
       keyframes: {
         height: {
@@ -30,6 +31,10 @@ export default {
             transform: "none",
           },
         },
+        opacity : {
+          "0%" : { opacity : "0" },
+          "100%" : { opacity : "1" }
+        }
       },
       backgroundImage: {
         pokedetails: 'url("/assets/pokedetails.png")',

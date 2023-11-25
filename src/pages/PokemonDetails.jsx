@@ -90,12 +90,14 @@ function PokemonDetails() {
 
   async function handleAbilities(data) {
     const temp = [];
-    data.map(async (el) => {
-      const { name, url } = el.ability;
-      const { data } = await axios.get(url);
+
+    for(let i = 0; i < data.length ; i++){
+
+      const {name, url} = data[i].ability;
+      const {data : effectInfo} = await axios.get(url);
       var effect;
 
-      data.effect_entries.map((el) => {
+      effectInfo.effect_entries.map((el) => {
         if (el.language.name === "en") {
           effect = el.effect.replaceAll("\n", " ");
         }
@@ -104,9 +106,9 @@ function PokemonDetails() {
       temp.push({
         name,
         effect,
-        hidden: el.is_hidden,
+        hidden: data[i].is_hidden,
       });
-    });
+    }
 
     return temp;
   }
@@ -252,29 +254,49 @@ function PokemonDetails() {
                   fontFamily: "sans-serif",
                 }}
               >
-                <div className="absolute w-full h-full bg-[#313131] rounded-[10px] overflow-hidden flex flex-col">
-                  <span className="text-[#616161] text-[80%] float-left my-[17px] mx-[27.200px] font-semibold">
-                    Ability Info
-                  </span>
+                {showAbility && (
+                  <div className="absolute w-full h-full bg-[#313131] rounded-[10px] overflow-hidden flex flex-col z-30 animate-opacity">
+                    <span className="text-[#616161] text-[80%] float-left my-[17px] mx-[27.200px] font-semibold">
+                      Ability Info
+                    </span>
 
-                  <span className="text-white flex items-center text-[87%] cursor-pointer font-semibold pl-[12.500px] pt-[14px] pr-[21px] pb-[10.500px] bg-abilityClose bg-left-bottom bg-no-repeat bg-black absolute  right-0 top-0">
-                    <IoClose size={"20px"} className="mr-[1px]" />
-                    Close
-                  </span>
+                    <span
+                      onClick={() => {
+                        setAbilityInfo({
+                          name: "",
+                          hidden: false,
+                          info: "",
+                        });
 
-                  <div className="mx-6 flex flex-col">
-                    <h3 className="my-[8px] text-white text-[150%] tracking-wide leading-[125%]">
-                      Overgrow
-                    </h3>
-                    {/* {abilityInfo.name} {abilityInfo.info}*/}
-                    <p className=" mb-10 text-[#F2F2F2] text-[95%] leading-[125%]">
-                      Powers up Grass-type moves when the Pokémon’s <br /> HP is
-                      low.
-                    </p>
+                        setShowAbility(false);
+                      }}
+                      className="text-white flex items-center text-[87%] cursor-pointer font-semibold pl-[12.500px] pt-[14px] pr-[21px] pb-[10.500px] bg-abilityClose bg-left-bottom bg-no-repeat bg-black absolute  right-0 top-0"
+                    >
+                      <IoClose size={"20px"} className="mr-[1px]" />
+                      Close
+                    </span>
 
-                    <p className="font-sans">Hidden</p>
+                    <div className="mx-6 flex flex-col">
+                      <h3 className="my-[5px] mb-3 text-white text-[150%] tracking-wide leading-[125%] capitalize">
+                        {abilityInfo.name}
+                      </h3>
+                      <p className="text-[#F2F2F2] text-[98%] leading-[125%] tracking-wide">
+                        {abilityInfo.info}
+                      </p>
+
+                      {abilityInfo.hidden && (
+                        <p
+                          className="font-bold tracking-wide text-base absolute bottom-4 right-8 text-cyan-300"
+                          style={{
+                            fontFamily: "monospace",
+                          }}
+                        >
+                          Hidden
+                        </p>
+                      )}
+                    </div>
                   </div>
-                </div>
+                )}
                 <div className="ml-[20px] mt-[20px] mb-[25px] flex flex-col gap-[20px]">
                   <div className="flex flex-col gap-[15px]">
                     <p>Height</p>
@@ -345,21 +367,19 @@ function PokemonDetails() {
                     <p>Abilities</p>
                     {allDetails.abilities.map((el) => (
                       <h1
+                      onClick={() => {
+                        setShowAbility(true);
+                        setAbilityInfo({
+                          name: el.name,
+                          info: el.effect,
+                          hidden: el.hidden,
+                        });
+                      }}
                         key={nanoid(5)}
-                        className="text-black text-[20px] leading-5 flex gap-[9.375px] items-center capitalize"
+                        className="text-black text-[20px] leading-5 flex gap-[9.375px] items-center capitalize cursor-pointer"
                       >
                         {el.name}{" "}
-                        <span
-                          onClick={() => {
-                            showAbility(true);
-                            setAbilityInfo({
-                              name: el.name,
-                              info: el.effect,
-                              hidden: el.hidden,
-                            });
-                          }}
-                          className="cursor-pointer"
-                        >
+                        <span className="cursor-pointer">
                           <FaCircleQuestion
                             size={"15.9954px"}
                             className="text-white mt-[3.125px]"
