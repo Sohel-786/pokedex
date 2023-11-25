@@ -18,15 +18,17 @@ function PokemonDetails() {
   const navigate = useNavigate();
 
   const [allDetails, setAllDetails] = useState(null);
-  const [abilityInfo, setAbilityInfo] = useState({
-    name: "",
-    info: "",
-    hidden: false,
-  });
-  const [showAbility, setShowAbility] = useState(false);
+  const [abilityInfo, setAbilityInfo] = useState();
+  const [showAbility, setShowAbility] = useState();
 
   useEffect(() => {
     handlePokemonInfo(id);
+    setShowAbility(false);
+    setAbilityInfo({
+      name: "",
+      info: "",
+      hidden: false,
+    });
   }, [both, id]);
 
   async function handlePokemonInfo(id) {
@@ -91,10 +93,9 @@ function PokemonDetails() {
   async function handleAbilities(data) {
     const temp = [];
 
-    for(let i = 0; i < data.length ; i++){
-
-      const {name, url} = data[i].ability;
-      const {data : effectInfo} = await axios.get(url);
+    for (let i = 0; i < data.length; i++) {
+      const { name, url } = data[i].ability;
+      const { data: effectInfo } = await axios.get(url);
       var effect;
 
       effectInfo.effect_entries.map((el) => {
@@ -103,11 +104,20 @@ function PokemonDetails() {
         }
       });
 
-      temp.push({
-        name,
-        effect,
-        hidden: data[i].is_hidden,
-      });
+      let flag = false;
+      for(let i = 0; i < temp.length ; i++){
+          if(temp[i].name === name){
+            flag = true;
+          }
+      }
+
+      if(!flag){
+        temp.push({
+          name,
+          effect,
+          hidden: data[i].is_hidden,
+        });
+      }
     }
 
     return temp;
@@ -255,7 +265,7 @@ function PokemonDetails() {
                 }}
               >
                 {showAbility && (
-                  <div className="absolute w-full h-full bg-[#313131] rounded-[10px] overflow-hidden flex flex-col z-30 animate-opacity">
+                  <div className="absolute w-full h-full bg-[#313131] rounded-[10px] overflow-hidden flex flex-col z-30 animate-opacity pb-5">
                     <span className="text-[#616161] text-[80%] float-left my-[17px] mx-[27.200px] font-semibold">
                       Ability Info
                     </span>
@@ -276,17 +286,19 @@ function PokemonDetails() {
                       Close
                     </span>
 
-                    <div className="mx-6 flex flex-col">
+                    <div className="mx-6 flex flex-col overflow-y-scroll advanceScroll abilityScroll">
                       <h3 className="my-[5px] mb-3 text-white text-[150%] tracking-wide leading-[125%] capitalize">
                         {abilityInfo.name}
                       </h3>
                       <p className="text-[#F2F2F2] text-[98%] leading-[125%] tracking-wide">
-                        {abilityInfo.info}
+                        {abilityInfo.info
+                          ? abilityInfo.info
+                          : "Source have no details about this Ability."}
                       </p>
 
                       {abilityInfo.hidden && (
                         <p
-                          className="font-bold tracking-wide text-base absolute bottom-4 right-8 text-cyan-300"
+                          className="font-bold tracking-wide text-base absolute top-3 left-28 text-cyan-300"
                           style={{
                             fontFamily: "monospace",
                           }}
@@ -367,14 +379,14 @@ function PokemonDetails() {
                     <p>Abilities</p>
                     {allDetails.abilities.map((el) => (
                       <h1
-                      onClick={() => {
-                        setShowAbility(true);
-                        setAbilityInfo({
-                          name: el.name,
-                          info: el.effect,
-                          hidden: el.hidden,
-                        });
-                      }}
+                        onClick={() => {
+                          setShowAbility(true);
+                          setAbilityInfo({
+                            name: el.name,
+                            info: el.effect ? el.effect : "",
+                            hidden: el.hidden,
+                          });
+                        }}
                         key={nanoid(5)}
                         className="text-black text-[20px] leading-5 flex gap-[9.375px] items-center capitalize cursor-pointer"
                       >
