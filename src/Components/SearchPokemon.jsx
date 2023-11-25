@@ -145,6 +145,7 @@ function SearchPokemon({ fn, fn2, fn3 }) {
     const result = data.filter((el) => {
       if (el) {
         let type = true;
+        let weakness = true;
         let ability = true;
         let height = false;
         let weight = false;
@@ -153,6 +154,14 @@ function SearchPokemon({ fn, fn2, fn3 }) {
           searchConditions.type.forEach((element) => {
             if (!el?.types.includes(element)) {
               type = false;
+            }
+          });
+        }
+
+        if (searchConditions.weakness.length > 0) {
+          searchConditions.weakness.forEach((element) => {
+            if (!el?.weakness.includes(element)) {
+              weakness = false;
             }
           });
         }
@@ -231,7 +240,7 @@ function SearchPokemon({ fn, fn2, fn3 }) {
           weight = true;
         }
 
-        if (type && ability && height && weight) {
+        if (type && ability && height && weight && weakness) {
           return el;
         }
       }
@@ -317,6 +326,28 @@ function SearchPokemon({ fn, fn2, fn3 }) {
       loadPokemon.style.display = "block";
     }
   }
+
+  function handleNormalSearch(){
+    const loadPokemon =
+    document.getElementById("loadPokemon");
+  if (searchConditions.search === "") {
+    fn2();
+    fn3(false);
+    loadPokemon.style.display = "block";
+    return;
+  }
+  loadPokemon.style.display = "none";
+
+  if (options.length === 1) {
+    fn([...options]);
+    setShowOptions(false);
+  } else if (options.length > 1) {
+    fn([...options]);
+    setShowOptions(false);
+  } else {
+    fn3(true);
+  }
+  }
   return (
     <>
       <div className="max-w-[1280px] w-[100vw] mx-auto relative left-[-161.6px] bg-[#616161] pb-4">
@@ -338,6 +369,12 @@ function SearchPokemon({ fn, fn2, fn3 }) {
                     type="text"
                     id="searchIt"
                     name="search"
+                    onKeyDown={(e) => {
+                      console.log(e.key);
+                      if(e.key === 'Enter'){
+                        handleNormalSearch()
+                      }
+                    }}
                     className="p-[10px] font-roboto text-[16px] leading-[24px] rounded-[5px] w-full"
                   />
                 </span>
@@ -347,27 +384,7 @@ function SearchPokemon({ fn, fn2, fn3 }) {
                 <a href="#pokemons" className="w-[12.95%]">
                   <button
                     disabled={showAdvance ? true : false}
-                    onClick={() => {
-                      const loadPokemon =
-                        document.getElementById("loadPokemon");
-                      if (searchConditions.search === "") {
-                        fn2();
-                        fn3(false);
-                        loadPokemon.style.display = "block";
-                        return;
-                      }
-                      loadPokemon.style.display = "none";
-
-                      if (options.length === 1) {
-                        fn([...options]);
-                        setShowOptions(false);
-                      } else if (options.length > 1) {
-                        fn([...options]);
-                        setShowOptions(false);
-                      } else {
-                        fn3(true);
-                      }
-                    }}
+                    onClick={handleNormalSearch}
                     className="bg-[#ee6b2f] hover:bg-[#da471b] py-[12.600px] px-[21px] inline-block rounded-[5px] w-full h-12 disabled:bg-cyan-400 disabled:cursor-not-allowed"
                     style={{
                       backgroundImage: 'url("/assets/searchbtn.png")',

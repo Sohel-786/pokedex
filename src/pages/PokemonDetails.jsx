@@ -51,8 +51,6 @@ function PokemonDetails() {
       }
     }
 
-    const type_data = await typeData(info.types);
-
     const { data: evolutionInfo } = await axios.get(
       species.evolution_chain.url
     );
@@ -80,40 +78,9 @@ function PokemonDetails() {
       images,
       desc,
       category,
-      type_data,
       chain: evolutionInfo.chain,
       stats,
     });
-  }
-
-  async function typeData(data) {
-    let temp = {};
-    data.forEach(async (el) => {
-      const { data: typeInfo } = await axios.get(el.type.url);
-      var double = [],
-        zero = [],
-        half = [];
-
-      typeInfo["damage_relations"].double_damage_from.forEach((el) => {
-        double.push(el.name);
-      });
-      typeInfo["damage_relations"].half_damage_from.forEach((el) => {
-        half.push(el.name);
-      });
-      typeInfo["damage_relations"].no_damage_from.forEach((el) => {
-        zero.push(el.name);
-      });
-
-      temp[`${el.type.name}`] = {
-        defense: {
-          half,
-          double,
-          zero,
-        },
-      };
-    });
-
-    return temp;
   }
 
   async function handleAbilities(data) {
@@ -374,7 +341,7 @@ function PokemonDetails() {
               </p>
 
               <div className="w-full mt-[8px] flex flex-wrap gap-1 text-[16px] leading-8">
-                {Object.keys(allDetails.type_data).map((el) => (
+                {pokemonData[id - 1]?.types.map((el) => (
                   <PokemonType
                     key={nanoid(4)}
                     width={"32%"}
