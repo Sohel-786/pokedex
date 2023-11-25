@@ -7,7 +7,7 @@ import PokemonType from "./PokemonType";
 import { FaWeightHanging } from "react-icons/fa";
 import { ImTextHeight } from "react-icons/im";
 
-function SearchPokemon({ setPokemons, setSortedData, setShowError, order }) {
+function SearchPokemon({ setSortedData, setShowError }) {
   const [searchConditions, setsearchConditions] = useState({
     search: "",
     type: [],
@@ -281,46 +281,10 @@ function SearchPokemon({ setPokemons, setSortedData, setShowError, order }) {
       }
     }
 
-    const loadPokemon = document.getElementById("loadPokemon");
-    if (loadPokemon) {
-      loadPokemon.style.display = "none";
-    }
-
     if (result.length > 0) {
-      handleSorting(result);
+      setSortedData(result);
     } else {
       setShowError(true);
-    }
-  }
-
-  function handleSorting(data){
-    if(order === 'Lowest Number (First)'){
-      setPokemons(data);
-    }
-    if(order === 'Highest Number (First)'){
-      setPokemons([...data].reverse());
-    }
-    if(order === 'A-Z'){
-      let sortedDataAsc = [...data].sort((a,b) => {
-        let x = a.name;
-        let y = b.name;
-
-        if(x>y){return 1;}
-        if(y>x){return -1;}
-        return 0;
-      })
-      setPokemons([...sortedDataAsc]);
-    }
-    if(order === 'Z-A'){
-      let sortedDataDes = [...data].sort((a,b) => {
-        let x = a.name;
-        let y = b.name;
-
-        if(x>y){return -1;}
-        if(y>x){return 1;}
-        return 0;
-      })
-      setPokemons([...sortedDataDes]);
     }
   }
 
@@ -349,29 +313,23 @@ function SearchPokemon({ setPokemons, setSortedData, setShowError, order }) {
       },
       ability: "all",
     });
-    const loadPokemon = document.getElementById("loadPokemon");
     const search = document.getElementById("searchIt");
     search.value = "";
-    if (loadPokemon) {
-      loadPokemon.style.display = "block";
-    }
+
   }
 
   function handleNormalSearch() {
-    const loadPokemon = document.getElementById("loadPokemon");
     if (searchConditions.search === "") {
       setSortedData(pokemonData);
       setShowError(false);
-      loadPokemon.style.display = "block";
       return;
     }
-    loadPokemon.style.display = "none";
 
     if (options.length === 1) {
-      handleSorting(options);
+      setSortedData(options);
       setShowOptions(false);
     } else if (options.length > 1) {
-      handleSorting(options);
+      setSortedData(options);
       setShowOptions(false);
     } else {
       setShowError(true);

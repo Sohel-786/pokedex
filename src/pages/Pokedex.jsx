@@ -79,13 +79,29 @@ function Pokedex() {
 
   function handleSorting(sort){
     if(sort === 'Lowest Number (First)'){
-      setSortedData(pokemonData);
+      let sortedDataAsc = [...sortedData].sort((a,b) => {
+        let x = a.id;
+        let y = b.id;
+
+        if(x>y){return 1;}
+        if(y>x){return -1;}
+        return 0;
+      })
+      setSortedData([...sortedDataAsc]);
     }
     if(sort === 'Highest Number (First)'){
-      setSortedData([...pokemonData].reverse());
+      let sortedDataDes = [...sortedData].sort((a,b) => {
+        let x = a.id;
+        let y = b.id;
+
+        if(x>y){return -1;}
+        if(y>x){return 1;}
+        return 0;
+      })
+      setSortedData([...sortedDataDes]);
     }
     if(sort === 'A-Z'){
-      let sortedDataAsc = [...pokemonData].sort((a,b) => {
+      let sortedDataAsc = [...sortedData].sort((a,b) => {
         let x = a.name;
         let y = b.name;
 
@@ -96,7 +112,7 @@ function Pokedex() {
       setSortedData([...sortedDataAsc]);
     }
     if(sort === 'Z-A'){
-      let sortedDataDes = [...pokemonData].sort((a,b) => {
+      let sortedDataDes = [...sortedData].sort((a,b) => {
         let x = a.name;
         let y = b.name;
 
