@@ -58,6 +58,11 @@ function PokemonDetails() {
       }
     }
 
+    var forms = [];
+    if(species.varieties.length > 1){
+        forms = await handleForms(species.varieties);
+    }
+
     const { data: evolutionInfo } = await axios.get(
       species.evolution_chain.url
     );
@@ -88,6 +93,18 @@ function PokemonDetails() {
       chain: evolutionInfo.chain,
       stats,
     });
+  }
+
+  async function handleForms(data){
+    let temp = [];
+    for(let i = 0; i < data.length ; i++){
+      let res = await handleFormsInfo(data[i]);
+    }
+  }
+
+  async function handleFormsInfo(data){
+    let { data : pokemonInfo} = await axios.get(data.pokemon.url);
+    
   }
 
   async function handleAbilities(data) {
