@@ -177,14 +177,18 @@ function PokemonDetails() {
     };
   }
 
-  async function handleFormName(url){
+  async function handleFormName(url) {
     const { data } = await axios.get(url);
     let temp;
-    for(let i = 0; i < data.names.length ; i++){
-      if(data.names[i].language.name === 'en'){
-        temp = data.names[i].name;
-        break;
+    if (data.names.length > 0) {
+      for (let i = 0; i < data.names.length; i++) {
+        if (data.names[i].language.name === "en") {
+          temp = data.names[i].name;
+          break;
+        }
       }
+    } else {
+      temp = data.name;
     }
 
     return temp;
@@ -332,20 +336,20 @@ function PokemonDetails() {
                       return (
                         <li
                           onClick={() => {
-                            setCurrentPoke(el.name.replaceAll('-', " "));
+                            setCurrentPoke(el.name.replaceAll("-", " "));
                             setShoworderList(false);
                             setAllDetails({
                               ...allDetails,
-                              abilities : el.abilities,
-                              height : el.height,
-                              weight : el.weight,
-                              images : el.images,
-                              desc : el.desc,
-                              category : el.category,
-                              types : el.types,
-                              weakness : el.weakness,
-                              stats : el.stats
-                            })
+                              abilities: el.abilities,
+                              height: el.height,
+                              weight: el.weight,
+                              images: el.images,
+                              desc: el.desc,
+                              category: el.category,
+                              types: el.types,
+                              weakness: el.weakness,
+                              stats: el.stats,
+                            });
                           }}
                           key={nanoid(4)}
                           className="p-[10px] text-[16px] leading-5 capitalize cursor-pointer hover:bg-[#313131]"
@@ -353,7 +357,7 @@ function PokemonDetails() {
                             fontFamily: "sans-serif",
                           }}
                         >
-                          {el.name.replaceAll('-', " ")}
+                          {el.name.replaceAll("-", " ")}
                         </li>
                       );
                     })}
