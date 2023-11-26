@@ -155,6 +155,8 @@ function PokemonDetails() {
     var type_data = await handleTypeData(pokemonInfo.types);
     var weakness = handleWeakness(type_data);
 
+    var name = await handleFormName(pokemonInfo.forms[0].url);
+
     return {
       abilities,
       height: [
@@ -164,7 +166,7 @@ function PokemonDetails() {
             12
         ),
       ],
-      name: pokemonInfo.name,
+      name,
       weight: pokemonInfo.weight,
       images,
       desc,
@@ -173,6 +175,19 @@ function PokemonDetails() {
       types,
       weakness,
     };
+  }
+
+  async function handleFormName(url){
+    const { data } = await axios.get(url);
+    let temp;
+    for(let i = 0; i < data.names.length ; i++){
+      if(data.names[i].language.name === 'en'){
+        temp = data.names[i].name;
+        break;
+      }
+    }
+
+    return temp;
   }
 
   async function handleAbilities(data) {
@@ -216,6 +231,8 @@ function PokemonDetails() {
             <div
               onClick={() => {
                 setAllDetails(null);
+                setSearchArrow(false);
+                setShoworderList(false);
                 if (allDetails.id === 1) {
                   navigate(`/pokedex/${1010}`);
                 } else {
@@ -244,6 +261,8 @@ function PokemonDetails() {
             <div
               onClick={() => {
                 setAllDetails(null);
+                setSearchArrow(false);
+                setShoworderList(false);
                 if (allDetails.id === 1010) {
                   navigate(`/pokedex/${1}`);
                 } else {
@@ -284,7 +303,7 @@ function PokemonDetails() {
             </div>
           </div>
 
-          {true ? (
+          {allDetails.forms.length > 0 ? (
             <div className="w-full mx-auto flex justify-center items-center pt-4 pb-3">
               <div
                 onClick={() => {
@@ -308,13 +327,25 @@ function PokemonDetails() {
                   )}
                 </h1>
                 {showOrderList && (
-                  <ul className="w-full list-none flex flex-col absolute z-40 bg-[#616161] text-white top-10 left-0 rounded-b-[5px]">
+                  <ul className="w-full pt-2 text-center list-none flex flex-col absolute z-40 bg-[#616161] text-white top-10 left-0 rounded-b-[5px]">
                     {allDetails.forms.map((el) => {
                       return (
                         <li
                           onClick={() => {
-                            setCurrentPoke(el.name);
+                            setCurrentPoke(el.name.replaceAll('-', " "));
                             setShoworderList(false);
+                            setAllDetails({
+                              ...allDetails,
+                              abilities : el.abilities,
+                              height : el.height,
+                              weight : el.weight,
+                              images : el.images,
+                              desc : el.desc,
+                              category : el.category,
+                              types : el.types,
+                              weakness : el.weakness,
+                              stats : el.stats
+                            })
                           }}
                           key={nanoid(4)}
                           className="p-[10px] text-[16px] leading-5 capitalize cursor-pointer hover:bg-[#313131]"
@@ -322,7 +353,7 @@ function PokemonDetails() {
                             fontFamily: "sans-serif",
                           }}
                         >
-                          {el.name}
+                          {el.name.replaceAll('-', " ")}
                         </li>
                       );
                     })}
@@ -340,13 +371,14 @@ function PokemonDetails() {
             <div className="w-[49%] flex flex-col">
               <div className="w-full rounded-[5px] bg-[#F2F2F2] h-[457.089px]">
                 <img
+                  key={allDetails.images.official}
                   src={
                     allDetails.images.official
                       ? allDetails.images.official
                       : allDetails.images.svg
                   }
                   alt="demo"
-                  className="w-full pb-[30px]"
+                  className="w-full pb-[30px] animate-opacity"
                 />
               </div>
 
@@ -391,7 +423,8 @@ function PokemonDetails() {
 
             <div className="w-[49%] flex flex-col">
               <p
-                className="my-[9px] text-[#212121] text-lg leading-[27px] tracking-wide font-medium"
+                key={allDetails.desc}
+                className="my-[9px] text-[#212121] text-lg leading-[27px] tracking-wide font-medium animate-opacity"
                 style={{ fontFamily: "sans-serif" }}
               >
                 {allDetails.desc ? allDetails.desc : "Ecology under analysis."}
