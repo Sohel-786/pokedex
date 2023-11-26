@@ -435,7 +435,8 @@ function PokemonDetails() {
               </p>
 
               <div
-                className="w-full rounded-[10px] bg-[#30a7d7] text-white grid grid-cols-2 text-[17px] leading-[17px] mt-5 relative"
+                key={allDetails.weight} 
+                className="w-full rounded-[10px] bg-[#30a7d7] text-white grid grid-cols-2 text-[17px] leading-[17px] mt-5 relative animate-opacity"
                 style={{
                   fontFamily: "sans-serif",
                 }}
