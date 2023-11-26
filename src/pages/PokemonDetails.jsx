@@ -11,6 +11,7 @@ import PokemonType from "../Components/PokemonType";
 import { nanoid } from "nanoid";
 import EvolutionChain from "../Components/EvolutionChain";
 import Loading from "../Components/Loading";
+import { handleTypeData, handleWeakness } from "../helper/common";
 
 function PokemonDetails() {
   const { both, male, female, pokemonData } = useSelector((s) => s?.pokedex);
@@ -59,8 +60,8 @@ function PokemonDetails() {
     }
 
     var forms = [];
-    if(species.varieties.length > 1){
-        forms = await handleForms(species.varieties);
+    if (species.varieties.length > 1) {
+      forms = await handleForms(species.varieties);
     }
 
     const { data: evolutionInfo } = await axios.get(
@@ -92,19 +93,81 @@ function PokemonDetails() {
       category,
       chain: evolutionInfo.chain,
       stats,
+      types: [],
+      weakness: [],
+      forms,
     });
   }
 
-  async function handleForms(data){
+  async function handleForms(data) {
     let temp = [];
-    for(let i = 0; i < data.length ; i++){
+    for (let i = 0; i < data.length; i++) {
       let res = await handleFormsInfo(data[i]);
+      temp.push(res);
     }
+
+    return temp;
   }
 
-  async function handleFormsInfo(data){
-    let { data : pokemonInfo} = await axios.get(data.pokemon.url);
-    
+  async function handleFormsInfo(data) {
+    let { data: pokemonInfo } = await axios.get(data.pokemon.url);
+
+    const abilities = await handleAbilities(pokemonInfo.abilities);
+    const images = {
+      svg: pokemonInfo?.sprites?.other?.dream_world?.front_default,
+      official:
+        pokemonInfo?.sprites?.other?.["official-artwork"]?.front_default,
+    };
+
+    var desc;
+    const { data: species } = await axios.get(pokemonInfo.species.url);
+    for (let i = 0; i < species.flavor_text_entries.length; i++) {
+      if (species?.flavor_text_entries[i]?.language?.name === "en") {
+        desc = (species.flavor_text_entries[i]?.flavor_text).replaceAll(
+          "\n",
+          " "
+        );
+        break;
+      }
+    }
+
+    var category;
+    for (let i = 0; i < species.genera.length; i++) {
+      if (species?.genera[i]?.language?.name === "en") {
+        category = species.genera[i]?.genus;
+        break;
+      }
+    }
+
+    const stats = pokemonInfo.stats.map((el) => {
+      return [el.stat.name, el.base_stat];
+    });
+
+    let types = (pokemonInfo?.types).map((el) => {
+      return el.type.name;
+    });
+
+    var type_data = await handleTypeData(pokemonInfo.types);
+    var weakness = handleWeakness(type_data);
+
+    return {
+      abilities,
+      height: [
+        Math.floor(pokemonInfo.height / 3.048),
+        Math.round(
+          Number(((pokemonInfo.height / 3.048) % 1).toString().substring(1)) *
+            12
+        ),
+      ],
+      name: pokemonInfo.name,
+      weight: pokemonInfo.weight,
+      images,
+      desc,
+      category,
+      stats,
+      types,
+      weakness,
+    };
   }
 
   async function handleAbilities(data) {
@@ -430,14 +493,23 @@ function PokemonDetails() {
               </p>
 
               <div className="w-full mt-[8px] flex flex-wrap gap-1 text-[16px] leading-8">
-                {pokemonData[id - 1]?.types.map((el) => (
-                  <PokemonType
-                    key={nanoid(4)}
-                    width={"32%"}
-                    type={el}
-                    rounded={"5px"}
-                  />
-                ))}
+                {allDetails.types.length > 0
+                  ? allDetails.types.map((el) => (
+                      <PokemonType
+                        key={nanoid(4)}
+                        width={"32%"}
+                        type={el}
+                        rounded={"5px"}
+                      />
+                    ))
+                  : pokemonData[id - 1]?.types.map((el) => (
+                      <PokemonType
+                        key={nanoid(4)}
+                        width={"32%"}
+                        type={el}
+                        rounded={"5px"}
+                      />
+                    ))}
               </div>
 
               <h1
@@ -450,14 +522,23 @@ function PokemonDetails() {
               </h1>
 
               <div className="w-full mt-[8px] flex flex-wrap gap-1 gap-y-2 text-[16px] leading-8">
-                {pokemonData[id - 1]?.weakness.map((el) => (
-                  <PokemonType
-                    key={nanoid(4)}
-                    width={"32%"}
-                    type={el}
-                    rounded={"5px"}
-                  />
-                ))}
+                {allDetails.weakness.length > 0
+                  ? allDetails.weakness.map((el) => (
+                      <PokemonType
+                        key={nanoid(4)}
+                        width={"32%"}
+                        type={el}
+                        rounded={"5px"}
+                      />
+                    ))
+                  : pokemonData[id - 1]?.weakness.map((el) => (
+                      <PokemonType
+                        key={nanoid(4)}
+                        width={"32%"}
+                        type={el}
+                        rounded={"5px"}
+                      />
+                    ))}
               </div>
             </div>
           </div>
