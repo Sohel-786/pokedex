@@ -12,6 +12,7 @@ import { nanoid } from "nanoid";
 import EvolutionChain from "../Components/EvolutionChain";
 import Loading from "../Components/Loading";
 import { handleTypeData, handleWeakness } from "../helper/common";
+import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 
 function PokemonDetails() {
   const { both, male, female, pokemonData } = useSelector((s) => s?.pokedex);
@@ -21,7 +22,9 @@ function PokemonDetails() {
   const [allDetails, setAllDetails] = useState(null);
   const [abilityInfo, setAbilityInfo] = useState();
   const [showAbility, setShowAbility] = useState();
-
+  const [searchArrow, setSearchArrow] = useState(false);
+  const [showOrderList, setShoworderList] = useState(false);
+  const [currentPoke, setCurrentPoke] = useState();
   useEffect(() => {
     handlePokemonInfo(id);
     setShowAbility(false);
@@ -76,6 +79,8 @@ function PokemonDetails() {
     const stats = info.stats.map((el) => {
       return [el.stat.name, el.base_stat];
     });
+
+    setCurrentPoke(info.name);
 
     setAllDetails({
       abilities,
@@ -279,13 +284,67 @@ function PokemonDetails() {
             </div>
           </div>
 
-          <div className="w-full mx-auto pt-4 pb-[50px]"></div>
+          {true ? (
+            <div className="w-full mx-auto flex justify-center items-center pt-4 pb-3">
+              <div
+                onClick={() => {
+                  setSearchArrow(!searchArrow);
+                  setShoworderList(!showOrderList);
+                }}
+                className="pl-4 bg-[#313131] py-[6px] rounded-[5px] cursor-pointer relative select-none w-[43%]"
+              >
+                <h1 className="text-white font-roboto text-[16px] leading-[29px] flex items-center relative advanceSearchBtn capitalize">
+                  {currentPoke}
+                  {searchArrow ? (
+                    <FiChevronUp
+                      size={"25px"}
+                      className="absolute right-[6px] z-[2]"
+                    />
+                  ) : (
+                    <FiChevronDown
+                      size={"25px"}
+                      className="absolute right-[6px] z-[2]"
+                    />
+                  )}
+                </h1>
+                {showOrderList && (
+                  <ul className="w-full list-none flex flex-col absolute z-40 bg-[#616161] text-white top-10 left-0 rounded-b-[5px]">
+                    {allDetails.forms.map((el) => {
+                      return (
+                        <li
+                          onClick={() => {
+                            setCurrentPoke(el.name);
+                            setShoworderList(false);
+                          }}
+                          key={nanoid(4)}
+                          className="p-[10px] text-[16px] leading-5 capitalize cursor-pointer hover:bg-[#313131]"
+                          style={{
+                            fontFamily: "sans-serif",
+                          }}
+                        >
+                          {el.name}
+                        </li>
+                      );
+                    })}
+                  </ul>
+                )}
+              </div>
+            </div>
+          ) : (
+            <div className="w-full mx-auto flex justify-center items-center pt-4 pb-10">
+              {" "}
+            </div>
+          )}
 
           <div className="w-full py-4 flex justify-between">
             <div className="w-[49%] flex flex-col">
               <div className="w-full rounded-[5px] bg-[#F2F2F2] h-[457.089px]">
                 <img
-                  src={allDetails.images.official}
+                  src={
+                    allDetails.images.official
+                      ? allDetails.images.official
+                      : allDetails.images.svg
+                  }
                   alt="demo"
                   className="w-full pb-[30px]"
                 />
