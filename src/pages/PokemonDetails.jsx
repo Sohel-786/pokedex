@@ -108,10 +108,16 @@ function PokemonDetails() {
     let temp = [];
     for (let i = 0; i < data.length; i++) {
       let res = await handleFormsInfo(data[i]);
-      temp.push(res);
+      if(res.images.official !== null || res.images.svg !== null){
+        temp.push(res);
+      }
     }
 
-    return temp;
+    if(temp.length > 1){
+      return temp;
+    }else{
+      return [];
+    }
   }
 
   async function handleFormsInfo(data) {
@@ -351,7 +357,7 @@ function PokemonDetails() {
                               stats: el.stats,
                             });
                           }}
-                          key={nanoid(4)}
+                          key={nanoid(5)}
                           className="p-[10px] text-[16px] leading-5 capitalize cursor-pointer hover:bg-[#313131]"
                           style={{
                             fontFamily: "sans-serif",
@@ -397,25 +403,25 @@ function PokemonDetails() {
                 </h1>
 
                 <ul className="relative w-full list-none font-roboto font-bold tracking-wide">
-                  {allDetails.stats.map(([key, value], i) => {
+                  {allDetails.stats.map(([keyE, value], i) => {
                     if (i === 0) {
                       return (
                         <li
-                          key={nanoid(5)}
+                          key={nanoid(4)}
                           className="mb-[20px] ml-[31.157px] mr-[6.713px] w-[12.95%] float-left"
                         >
-                          <StatsLi data_value={value / 15} name={key} />
+                          <StatsLi data_value={value / 15} name={keyE} />
                         </li>
                       );
                     } else {
                       return (
                         <li
-                          key={nanoid(5)}
+                          key={nanoid(4)}
                           className="mb-[20px] mr-[6.713px] w-[12.95%] float-left"
                         >
                           <StatsLi
                             data_value={Math.floor(value / 15)}
-                            name={key}
+                            name={keyE}
                           />
                         </li>
                       );
