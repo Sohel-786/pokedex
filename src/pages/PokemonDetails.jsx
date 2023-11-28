@@ -33,6 +33,8 @@ function PokemonDetails() {
       info: "",
       hidden: false,
     });
+    const title = document.getElementById('title');
+    title.innerText = pokemonData[id - 1]?.name.slice(0,1).toUpperCase() + pokemonData[id - 1]?.name.slice(1) + " | " + "Pokédex";
   }, [both, id]);
 
   async function handlePokemonInfo(id) {
