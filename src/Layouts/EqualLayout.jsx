@@ -30,6 +30,7 @@ function EqualLayout({ children }) {
                 fetchpriority="high"
                 src="/assets/pokemonlogo.png"
                 alt="pokeLogo"
+                className="h-full aspect-auto"
               />
             </a>
           </li>
@@ -37,8 +38,8 @@ function EqualLayout({ children }) {
           <li className="pr-[10px] pt-[9px] pb-[8px]">
             <a className="h-full" href="#">
               <img
-                className="h-full"
-                src="/assets/pikachu.png"
+                className="h-full aspect-auto"
+                src="/assets/pikachu.svg"
                 alt="pokeLogo"
               />
             </a>
@@ -49,7 +50,7 @@ function EqualLayout({ children }) {
               <img
                 rel="preload"
                 fetchpriority="high"
-                className="h-full"
+                className="h-full aspect-auto"
                 src="/assets/aboutUs.png"
                 alt="pokeLogo"
               />
