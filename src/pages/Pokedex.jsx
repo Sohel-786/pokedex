@@ -36,7 +36,7 @@ function Pokedex() {
     if (requestMade) {
       window.addEventListener("scroll", handleAddPoke);
     }
-    const title = document.getElementById('title');
+    const title = document.getElementById("title");
     title.innerText = "Pokédex";
 
     return () => window.removeEventListener("scroll", handleAddPoke);

@@ -33,8 +33,12 @@ function PokemonDetails() {
       info: "",
       hidden: false,
     });
-    const title = document.getElementById('title');
-    title.innerText = pokemonData[id - 1]?.name.slice(0,1).toUpperCase() + pokemonData[id - 1]?.name.slice(1) + " | " + "Pokédex";
+    const title = document.getElementById("title");
+    title.innerText =
+      pokemonData[id - 1]?.name.slice(0, 1).toUpperCase() +
+      pokemonData[id - 1]?.name.slice(1) +
+      " | " +
+      "Pokédex";
   }, [both, id]);
 
   async function handlePokemonInfo(id) {
@@ -110,14 +114,14 @@ function PokemonDetails() {
     let temp = [];
     for (let i = 0; i < data.length; i++) {
       let res = await handleFormsInfo(data[i]);
-      if(res.images.official !== null || res.images.svg !== null){
+      if (res.images.official !== null || res.images.svg !== null) {
         temp.push(res);
       }
     }
 
-    if(temp.length > 1){
+    if (temp.length > 1) {
       return temp;
-    }else{
+    } else {
       return [];
     }
   }
@@ -443,7 +447,7 @@ function PokemonDetails() {
               </p>
 
               <div
-                key={allDetails.weight} 
+                key={allDetails.weight}
                 className="w-full rounded-[10px] bg-[#30a7d7] text-white grid grid-cols-2 text-[17px] leading-[17px] mt-5 relative animate-opacity"
                 style={{
                   fontFamily: "sans-serif",
