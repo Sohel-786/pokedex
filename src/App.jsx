@@ -12,7 +12,13 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getAllpokemonData());
+    const id = setTimeout(() => {
+      dispatch(getAllpokemonData());
+    }, 3000);
+
+    return () => {
+      clearTimeout(id);
+    }
   }, []);
 
   return (
