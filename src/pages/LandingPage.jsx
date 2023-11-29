@@ -39,7 +39,7 @@ function LandingPage() {
                   fetchpriority="medium"
                   src="/assets/ESRB.jpg"
                   alt="ESRB"
-                  className="w-[148px] h-[73px]"
+                  className="w-[148px] aspect-auto"
                 />
               </div>
             </div>
