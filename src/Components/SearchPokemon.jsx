@@ -359,8 +359,12 @@ function SearchPokemon({ setSortedData, setShowError, order }) {
                     id="searchIt"
                     name="search"
                     onKeyDown={(e) => {
-                      if (e.key === "Enter") {
+                      if (e.key === "Enter" && !showAdvance) {
                         handleNormalSearch();
+                        scrollBy({
+                          top : 340,
+                          behavior : "smooth"
+                        })
                       }
                     }}
                     className="p-[10px] font-roboto text-[16px] leading-[24px] rounded-[5px] w-full"
