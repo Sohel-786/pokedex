@@ -16,7 +16,7 @@ function App() {
   }, []);
 
   return (
-    <>
+    <div className="mx-auto">
       <Routes>
         <Route path="/home" element={<LandingPage />} />
         <Route path="/" element={<LandingPage />} />
@@ -63,7 +63,7 @@ function App() {
           }
         />
       </Routes>
-    </>
+    </div>
   );
 }
 
