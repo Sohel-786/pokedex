@@ -50,7 +50,7 @@ function EqualLayout({ children }) {
               <img
                 rel="preload"
                 fetchpriority="high"
-                className="h-full aspect-auto"
+                className="w-[78.99px] aspect-auto"
                 src="/assets/aboutUs.png"
                 alt="pokeLogo"
               />
