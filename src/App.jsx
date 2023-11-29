@@ -18,34 +18,8 @@ function App() {
   return (
     <>
       <Routes>
-        <Route
-          path="/home"
-          element={
-            <Suspense
-              fallback={
-                <div className="w-full h-[95vh] flex justify-center items-center">
-                  <Loading />
-                </div>
-              }
-            >
-              <LandingPage />
-            </Suspense>
-          }
-        />
-        <Route
-          path="/"
-          element={
-            <Suspense
-              fallback={
-                <div className="w-full h-[90vh] flex justify-center items-center">
-                  <Loading />
-                </div>
-              }
-            >
-              <LandingPage />
-            </Suspense>
-          }
-        />
+        <Route path="/home" element={<LandingPage />} />
+        <Route path="/" element={<LandingPage />} />
         <Route
           path="/pokedex"
           element={
