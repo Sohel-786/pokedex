@@ -1,6 +1,12 @@
+import { useEffect } from "react";
 import EqualLayout from "../Layouts/EqualLayout";
 
 function LandingPage() {
+
+  useEffect(() => {
+    const title = document.getElementById("title");
+    title.innerText = "Pokédex";
+  }, [])
   return (
     <EqualLayout>
       <section className="w-[77%] bg-white flex justify-between px-[14.5px] pt-[37px] pb-[10px]">
