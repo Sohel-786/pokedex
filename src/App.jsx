@@ -23,7 +23,7 @@ function App() {
           element={
             <Suspense
               fallback={
-                <div className="w-full h-[90vh] flex justify-center items-center">
+                <div className="w-full h-[95vh] flex justify-center items-center">
                   <Loading />
                 </div>
               }
