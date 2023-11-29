@@ -23,14 +23,14 @@ function EqualLayout({ children }) {
     <div>
       <div className="flex justify-center items-center w-full border-b-[1.852px] border-[#dedede] bg-[#f5f5f5]">
         <ul className="flex relative left-[-28px] overflow-hidden">
-          <li className="mx-[10px] p-[10px] pt-[9px] pb-[8px] shadow-EqualNav">
+          <li className="mx-[10px] pt-[9px] pb-[8px] shadow-EqualNav">
             <a className="" href="#">
               <img
                 rel="preload"
                 fetchpriority="high"
-                src="/assets/pokemonlogo.png"
+                src="/assets/pokemonLogo.svg"
                 alt="pokeLogo"
-                className="h-full aspect-auto"
+                className="w-[98px] aspect-auto"
               />
             </a>
           </li>
