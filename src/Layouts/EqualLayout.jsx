@@ -1,6 +1,6 @@
 import Footer from "../Components/Footer";
 import Pikachu from "/icons/pikachu.png";
-import Pokeball from "/icons/pokeball.png";
+import Pokeball from "/icons/pokeball.svg";
 import Game from "/icons/game.png";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";

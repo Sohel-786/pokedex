@@ -176,7 +176,7 @@ function Pokedex() {
                 <h1 className="text-white font-roboto text-[16px] leading-[24px] flex items-center relative advanceSearchBtn">
                   <img
                     className="h-[28.9988px] aspect-auto mr-[12px]"
-                    src="/icons/pokeball.png"
+                    src="/icons/pokeball.svg"
                     alt="pokeball"
                   />{" "}
                   {sortOrder}
