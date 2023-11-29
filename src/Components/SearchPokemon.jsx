@@ -422,14 +422,14 @@ function SearchPokemon({ setSortedData, setShowError, order }) {
               </div>
 
               <p className="text-white mb-[24px] font-roboto text-[16px] leading-[20px]">
-                Use the Advanced Search to explore Pokémon by type, weakness,
+                Use the Advanced Search to explore Pokemon by type, weakness,
                 Ability, and more!
               </p>
             </div>
 
             <div className="w-[48.8%] bg-[#4dad5b] rounded-[5px] mt-[32px] mb-[8px] pb-[8px] h-fit">
               <h1 className="my-[15px] ml-[20px] mr-[10px] font-openSans text-[20px] text-white leading-[25px]">
-                Search for a Pokémon by name or using its National Pokédex
+                Search for a Pokemon by name or using its National Pokedex
                 number.
               </h1>
             </div>

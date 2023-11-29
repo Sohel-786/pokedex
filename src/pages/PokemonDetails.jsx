@@ -38,7 +38,7 @@ function PokemonDetails() {
       pokemonData[id - 1]?.name.slice(0, 1).toUpperCase() +
       pokemonData[id - 1]?.name.slice(1) +
       " | " +
-      "Pokédex";
+      "Pokedex";
   }, [both, id]);
 
   async function handlePokemonInfo(id) {

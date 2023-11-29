@@ -172,7 +172,7 @@ function EqualLayout({ children }) {
               />
             </span>
 
-            <span className="my-[5px] text-sm w-full text-center">Pokédex</span>
+            <span className="my-[5px] text-sm w-full text-center">Pokedex</span>
           </li>
 
           <li className="hover:bg-[#f98955] flex flex-col cursor-pointer w-[127.853px] h-full relative after:h-[6px] after:content-[' '] after:absolute after:w-full after:bottom-[-6px] after:z-[1] after:bg-[#f98955] hover:text-white transition-colors duration-100 ease-in">
@@ -228,7 +228,7 @@ function EqualLayout({ children }) {
             </span>
 
             <span className="my-[5px] text-sm w-full text-center">
-              Pokémon TV
+              Pokemon TV
             </span>
           </li>
 
@@ -247,7 +247,7 @@ function EqualLayout({ children }) {
             </span>
 
             <span className="my-[5px] text-sm leading-[14.5px] w-full text-center">
-              Play! Pokémon Events
+              Play! Pokemon Events
             </span>
           </li>
 

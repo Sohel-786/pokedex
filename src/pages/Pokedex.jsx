@@ -37,7 +37,7 @@ function Pokedex() {
       window.addEventListener("scroll", handleAddPoke);
     }
     const title = document.getElementById("title");
-    title.innerText = "Pokédex";
+    title.innerText = "Pokedex";
 
     return () => window.removeEventListener("scroll", handleAddPoke);
   }, [requestMade]);
@@ -147,7 +147,7 @@ function Pokedex() {
     <EqualLayout>
       <section className="w-[77%] bg-white flex flex-col justify-between px-[14.5px] pb-[10px]">
         <h1 className="font-openSans text-[30px] text-[#919191] leading-[37.5px] mt-[25px] mb-[16px]">
-          Pokédex
+          Pokedex
         </h1>
         <SearchPokemon
           order={setSortOrder}
@@ -232,11 +232,11 @@ function Pokedex() {
             }}
           >
             <h3 className="my-[10px] px-[20px] text-[#E3350D] text-[125%] leading-[125%]">
-              No Pokémon Matched Your Search!
+              No Pokemon Matched Your Search!
             </h3>
 
             <p className="text-[#919191] text-[100%] leading-[125%] my-2 mx-4 tracking-wide">
-              <strong>Try these suggestions to find a Pokémon:</strong>
+              <strong>Try these suggestions to find a Pokemon:</strong>
             </p>
 
             <ul className="m-2 text-[#616161] relative left-6 text-[100%] leading-[125%] tracking-wide list-disc">
@@ -247,7 +247,7 @@ function Pokedex() {
               </li>
               <li>
                 <p className="my-2 mx-4 text-[#919191]">
-                  Search for only one Pokémon type at a time
+                  Search for only one Pokemon type at a time
                 </p>
               </li>
               <li>
@@ -301,7 +301,7 @@ function Pokedex() {
                       }}
                       className="pt-[12px] pb-[10.800px] px-[20px] bg-[#30a7d7] text-white rounded-[5px] font-openSans text-[16px] leading-[20px] font-semibold hover:bg-[#1b82b1] mx-auto my-5 mt-10"
                     >
-                      Load more Pokémon
+                      Load more Pokemon
                     </button>
                   )
                 }

@@ -4,7 +4,7 @@ import EqualLayout from "../Layouts/EqualLayout";
 function LandingPage() {
   useEffect(() => {
     const title = document.getElementById("title");
-    title.innerText = "Pokédex";
+    title.innerText = "Pokedex";
   }, []);
   return (
     <EqualLayout>
@@ -26,8 +26,8 @@ function LandingPage() {
                 Is Coming December 14, 2023
               </h1>
               <p className="ml-[20px] mr-[8px] mt-[8px] max-w-[398px] min-h-[50px] text-[#cccccc] font-roboto text-[16px] leading-5">
-                Continue your <em>Pokémon Scarlet</em> and{" "}
-                <em>Pokémon Violet</em> adventure with Part 2 of{" "}
+                Continue your <em>Pokemon Scarlet</em> and{" "}
+                <em>Pokemon Violet</em> adventure with Part 2 of{" "}
                 <em>The Hidden Treasure of Area Zero</em> DLC! Learn more at the
                 official site.
               </p>
@@ -65,7 +65,7 @@ function LandingPage() {
               />
               <div className="pb-[8px] w-full">
                 <h1 className="py-[16.500px] ml-[22px] mr-[11px] text-white text-[22px] leading-[27.5px]">
-                  Celebrate Day of the Dead in Pokémon GO
+                  Celebrate Day of the Dead in Pokemon GO
                 </h1>
               </div>
             </div>
@@ -81,7 +81,7 @@ function LandingPage() {
             />
             <div className="pb-[8px] w-full">
               <h1 className="py-[16.500px] ml-[22px] mr-[11px] text-white text-[22px] leading-[27.5px]">
-                Pokémon TCG: <em>Scarlet & Violet—Paradox Rift </em> Preview
+                Pokemon TCG: <em>Scarlet & Violet—Paradox Rift </em> Preview
               </h1>
             </div>
           </div>
@@ -108,7 +108,7 @@ function LandingPage() {
             </div>
             <div className="pb-[8px] w-[60%]">
               <h1 className="py-[16.500px] ml-[22px] mr-[11px] text-white text-[22px] leading-[27.5px] tracking-wide">
-                Pokémon Center Holiday Plush
+                Pokemon Center Holiday Plush
               </h1>
             </div>
           </div>
