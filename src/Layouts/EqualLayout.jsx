@@ -62,7 +62,7 @@ function EqualLayout({ children }) {
                 rel="preload"
                 fetchpriority="high"
                 className="h-full"
-                src="/assets/pokeCard.png"
+                src="/assets/pokeCard.svg"
                 alt="pokeLogo"
               />
             </a>
@@ -74,7 +74,7 @@ function EqualLayout({ children }) {
                 rel="preload"
                 fetchpriority="high"
                 className="h-full"
-                src="/assets/scarlet.jpg"
+                src="/assets/scarlet.svg"
                 alt="pokeLogo"
               />
             </a>
@@ -86,7 +86,7 @@ function EqualLayout({ children }) {
                 rel="preload"
                 fetchpriority="high"
                 className="h-full"
-                src="/assets/pokeCommunity.png"
+                src="/assets/pokeCommunity.svg"
                 alt="pokeLogo"
               />
             </a>
