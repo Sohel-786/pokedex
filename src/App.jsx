@@ -14,7 +14,7 @@ function App() {
   useEffect(() => {
     const id = setTimeout(() => {
       dispatch(getAllpokemonData());
-    }, 4000);
+    }, 5000);
 
     return () => {
       clearTimeout(id);
