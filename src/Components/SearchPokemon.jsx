@@ -41,34 +41,42 @@ function SearchPokemon({ setSortedData, setShowError, order }) {
     var timer;
 
     return (e) => {
-      clearTimeout(timer);
-      timer = setTimeout(() => {
-        const { name, value } = e.target;
-        setsearchConditions({
-          ...searchConditions,
-          [name]: value,
-        });
-
-        setShowOptions(true);
-        if (!Number(value) && value.length > 0) {
-          handleOptionsData(
-            Number(searchConditions.range.from) - 1,
-            Number(searchConditions.range.to),
-            value
-          );
-        } else {
-          setOptions([]);
-          if (Number(value)) {
-            if (pokemonData[value - 1]) {
-              setOptions([pokemonData[value - 1]]);
-            }
-          }
-        }
-      }, time);
+      if(Number(e.target.value)){
+        handleSearchInput(e)
+      }else{
+        clearTimeout(timer);
+        timer = setTimeout(() => {
+          handleSearchInput(e)
+        }, time);
+      }
     };
   }
 
   var handleChange = debounce(300);
+
+  function handleSearchInput(e){
+    const { name, value } = e.target;
+    setsearchConditions({
+      ...searchConditions,
+      [name]: value,
+    });
+
+    setShowOptions(true);
+    if (!Number(value) && value.length > 0) {
+      handleOptionsData(
+        Number(searchConditions.range.from) - 1,
+        Number(searchConditions.range.to),
+        value
+      );
+    } else {
+      setOptions([]);
+      if (Number(value)) {
+        if (pokemonData[value - 1]) {
+          setOptions([pokemonData[value - 1]]);
+        }
+      }
+    }
+  }
 
   function handleOptionsData(from, to, value) {
     const options = [];
@@ -321,16 +329,14 @@ function SearchPokemon({ setSortedData, setShowError, order }) {
   }
 
   function handleNormalSearch() {
+    setShowError(false);
     if (searchConditions.search === "") {
       setSortedData(pokemonData);
       setShowError(false);
       return;
     }
 
-    if (options.length === 1) {
-      setSortedData(options);
-      setShowOptions(false);
-    } else if (options.length > 1) {
+    if (options.length > 0) {
       setSortedData(options);
       setShowOptions(false);
     } else {
@@ -360,12 +366,12 @@ function SearchPokemon({ setSortedData, setShowError, order }) {
                     name="search"
                     onKeyDown={(e) => {
                       if (e.key === "Enter" && !showAdvance) {
-                        handleNormalSearch();
-                        scrollBy({
-                          top : 340,
-                          behavior : "smooth"
-                        })
-                      }
+                          scrollBy({
+                            top : 340,
+                            behavior : "smooth"
+                          });
+                          handleNormalSearch();
+                        }
                     }}
                     className="p-[10px] font-roboto text-[16px] leading-[24px] rounded-[5px] w-full"
                   />
