@@ -11,15 +11,15 @@ const PokemonDetails = lazy(() => import("./pages/PokemonDetails"));
 function App() {
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   const id = setTimeout(() => {
-  //     dispatch(getAllpokemonData());
-  //   }, 3000);
+  useEffect(() => {
+    const id = setTimeout(() => {
+      dispatch(getAllpokemonData());
+    }, 9000);
 
-  //   return () => {
-  //     clearTimeout(id);
-  //   }
-  // }, []);
+    return () => {
+      clearTimeout(id);
+    }
+  }, []);
 
   return (
     <div className="mx-auto">
