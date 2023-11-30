@@ -22,7 +22,7 @@ function LandingPage() {
       <section className="w-[77%] bg-white flex justify-between px-[14.5px] pt-[37px] pb-[10px]">
         <div className="w-[66%] float-left">
           <div className="w-full cursor-pointer relative hover:scale-105 transition-all duration-300 ease-in-out bg-[#313131] hover:bg-[#202020] rounded-[5px] overflow-hidden">
-            <div className="w-full">
+            <div className="w-full min-h-[325.451px]">
               {showImages ? (
                 <img
                   rel="preload"
@@ -64,7 +64,7 @@ function LandingPage() {
 
           <div className="w-full flex justify-between items-center">
             <div className="mt-[16px] mr-[18.067px] w-[48.4375%] rounded-[5px] overflow-hidden cursor-pointer hover:scale-105 transition-all duration-300 ease-in-out bg-[#4dad5b] rounded-b-[5px] hover:bg-[#3a8845]">
-              <div className="w-full">
+              <div className="w-full min-h-[157.616px]">
                 {showImages ? (
                   <img
                     className="w-full aspect-auto"
@@ -87,7 +87,7 @@ function LandingPage() {
               </div>
             </div>
             <div className="mt-[16px] w-[48.4375%] rounded-[5px] overflow-hidden cursor-pointer  hover:scale-105 transition-all duration-300 ease-in-out bg-[#ee6b2f] rounded-b-[5px] hover:bg-[#d2602b]">
-              <div className="w-full">
+              <div className="w-full min-h-[157.616px]">
                 {showImages ? (
                   <img
                     className="w-full aspect-auto rounded-[5px]"
@@ -139,7 +139,7 @@ function LandingPage() {
             </div>
           </div>
           <div className="w-full mt-[16px] rounded-[5px] overflow-hidden cursor-pointer hover:scale-105 transition-all duration-300 ease-in-out bg-[#ff90c4]  rounded-b-[5px] hover:bg-[#ec75ad] ">
-            <div className="w-full">
+            <div className="w-full min-h-[159.271px]">
               {showImages ? (
                 <img
                   className="w-full aspect-auto rounded-[5px]"
@@ -163,7 +163,7 @@ function LandingPage() {
           </div>
 
           <div className="w-full mt-[16px] flex rounded-[5px] overflow-hidden cursor-pointer hover:scale-105 transition-all duration-300 ease-in-out bg-[#c7aa79] rounded-b-[5px] hover:bg-[#e5bf7d]">
-            <div className="w-[40%]">
+            <div className="w-[40%] min-h-[150.145px]">
               {showImages ? (
                 <img
                   className="w-full aspect-auto rounded-[5px] block"
