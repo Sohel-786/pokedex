@@ -27,7 +27,7 @@ function LandingPage() {
                 <img
                   rel="preload"
                   fetchpriority="high"
-                  className="w-full aspect-auto"
+                  className="w-full aspect-auto animate-opacity"
                   src="/assets/scarlet-violet-169-en.png"
                   alt="Image"
                 />
@@ -56,7 +56,7 @@ function LandingPage() {
                 <img
                   src="/assets/ESRB.jpg"
                   alt="ESRB"
-                  className="w-[148px] aspect-auto"
+                  className="w-[148px] aspect-auto animate-opacity"
                 />
               </div>
             </div>
@@ -67,7 +67,7 @@ function LandingPage() {
               <div className="w-full min-h-[157.616px]">
                 {showImages ? (
                   <img
-                    className="w-full aspect-auto"
+                    className="w-full aspect-auto animate-opacity"
                     src="/assets/pokemon-go-169.png"
                     alt="PokemonGo"
                   />
@@ -90,7 +90,7 @@ function LandingPage() {
               <div className="w-full min-h-[157.616px]">
                 {showImages ? (
                   <img
-                    className="w-full aspect-auto rounded-[5px]"
+                    className="w-full aspect-auto rounded-[5px] animate-opacity"
                     src="/assets/pokemonGo.png"
                     alt="PokemonGo"
                   />
@@ -119,7 +119,7 @@ function LandingPage() {
                 <img
                   rel="preload"
                   fetchpriority="high"
-                  className="w-full aspect-auto rounded-[5px]"
+                  className="w-full aspect-auto rounded-[5px] animate-opacity"
                   src="/assets/preview-card.png"
                   alt="PokemonGo"
                 />
@@ -142,7 +142,7 @@ function LandingPage() {
             <div className="w-full min-h-[159.271px]">
               {showImages ? (
                 <img
-                  className="w-full aspect-auto rounded-[5px]"
+                  className="w-full aspect-auto rounded-[5px] animate-opacity"
                   src="/assets/preview-card2.png"
                   alt="PokemonGo"
                 />
@@ -166,7 +166,7 @@ function LandingPage() {
             <div className="w-[40%] min-h-[150.145px]">
               {showImages ? (
                 <img
-                  className="w-full aspect-auto rounded-[5px] block"
+                  className="w-full aspect-auto rounded-[5px] block animate-opacity"
                   src="/assets/pokemonCenter.png"
                   alt="PokemonGo"
                 />
