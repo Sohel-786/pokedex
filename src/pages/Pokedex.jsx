@@ -63,7 +63,7 @@ function Pokedex() {
     console.log(w, d);
 
     if (w === d || w - 1 === d || w + 1 === d) {
-      setShowLoading(true);
+      setShowLoading(function (s) { return true});
 
       console.log("done");
       setPokemons([
@@ -76,7 +76,7 @@ function Pokedex() {
         offset: offsetLimit.offset + 12,
         positionLimit: offsetLimit.positionLimit + 12,
       });
-      setShowLoading(false);
+      setShowLoading(function (s) { return false});
     }
   }
 
