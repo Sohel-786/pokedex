@@ -75,6 +75,8 @@ function LandingPage() {
         <div className="w-[32.3%]">
           <div className="w-full rounded-[5px] overflow-hidden cursor-pointer hover:scale-105 transition-all duration-300 ease-in-out bg-[#B38AEA] rounded-b-[5px] hover:bg-[#8c6cb5]">
             <img
+              rel="preload"
+              fetchpriority="high"
               className="w-full aspect-auto rounded-[5px]"
               src="/assets/preview-card.png"
               alt="PokemonGo"
