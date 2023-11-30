@@ -10,8 +10,8 @@ function LandingPage() {
     <EqualLayout>
       <section className="w-[77%] bg-white flex justify-between px-[14.5px] pt-[37px] pb-[10px]">
         <div className="w-[66%] float-left">
-          <div className="w-full cursor-pointer relative hover:scale-105 transition-all duration-300 ease-in-out bg-[#313131] hover:bg-[#202020] rounded-bl-[5px]">
-            <div className="w-full">
+          <div className="w-full cursor-pointer relative hover:scale-105 transition-all duration-300 ease-in-out bg-[#313131] hover:bg-[#202020] rounded-[5px]">
+            <div className="w-full min-h-[325.451px]">
               <img
                 rel="preload"
                 fetchpriority="high"
@@ -44,12 +44,13 @@ function LandingPage() {
 
           <div className="w-full flex justify-between items-center">
             <div className="mt-[16px] mr-[18.067px] w-[48.4375%] rounded-[5px] overflow-hidden cursor-pointer hover:scale-105 transition-all duration-300 ease-in-out bg-[#4dad5b] rounded-b-[5px] hover:bg-[#3a8845]">
+            <div className="w-full min-h-[157.616px]">
               <img
-                
                 className="w-full aspect-auto"
                 src="/assets/pokemon-go-169.png"
                 alt="PokemonGo"
               />
+            </div>
               <div className="pb-[8px] w-full">
                 <h1 className="py-[16.500px] ml-[22px] mr-[11px] text-white text-[22px] leading-[27.5px]">
                   Walking in a Wooper Wonderland
@@ -57,12 +58,13 @@ function LandingPage() {
               </div>
             </div>
             <div className="mt-[16px] w-[48.4375%] rounded-[5px] overflow-hidden cursor-pointer  hover:scale-105 transition-all duration-300 ease-in-out bg-[#ee6b2f] rounded-b-[5px] hover:bg-[#d2602b]">
+            <div className="w-full min-h-[157.616px]">
               <img
-                
                 className="w-full aspect-auto rounded-[5px]"
                 src="/assets/pokemonGo.png"
                 alt="PokemonGo"
               />
+            </div>
               <div className="pb-[8px] w-full">
                 <h1 className="py-[16.500px] ml-[22px] mr-[11px] text-white text-[22px] leading-[27.5px]">
                   Celebrate Day of the Dead in Pokemon GO
@@ -74,6 +76,7 @@ function LandingPage() {
 
         <div className="w-[32.3%]">
           <div className="w-full rounded-[5px] overflow-hidden cursor-pointer hover:scale-105 transition-all duration-300 ease-in-out bg-[#B38AEA] rounded-b-[5px] hover:bg-[#8c6cb5]">
+            <div className="w-full min-h-[159.271px]">
             <img
               rel="preload"
               fetchpriority="high"
@@ -81,6 +84,7 @@ function LandingPage() {
               src="/assets/preview-card.png"
               alt="PokemonGo"
             />
+            </div>
             <div className="pb-[8px] w-full">
               <h1 className="py-[16.500px] ml-[22px] mr-[11px] text-white text-[22px] leading-[27.5px]">
                 Pokemon TCG: <em>Scarlet & Violet—Paradox Rift </em> Preview
@@ -88,11 +92,13 @@ function LandingPage() {
             </div>
           </div>
           <div className="w-full mt-[16px] rounded-[5px] overflow-hidden cursor-pointer hover:scale-105 transition-all duration-300 ease-in-out bg-[#ff90c4]  rounded-b-[5px] hover:bg-[#ec75ad] ">
+          <div className="w-full min-h-[159.271px]"> 
             <img
               className="w-full aspect-auto rounded-[5px]"
               src="/assets/preview-card2.png"
               alt="PokemonGo"
             />
+          </div>
             <div className="pb-[8px] w-full">
               <h1 className="py-[16.500px] ml-[22px] mr-[11px] text-white text-[22px] leading-[27.5px] tracking-wide">
                 Hisuian Typhlosion Heats Up Tera Raid Battles
@@ -101,7 +107,7 @@ function LandingPage() {
           </div>
 
           <div className="w-full mt-[16px] flex rounded-[5px] overflow-hidden cursor-pointer hover:scale-105 transition-all duration-300 ease-in-out bg-[#c7aa79] rounded-b-[5px] hover:bg-[#e5bf7d]">
-            <div className="w-[40%]">
+            <div className="w-[40%] min-h-[150.145px]">
               <img
                 className="w-full aspect-auto rounded-[5px] block"
                 src="/assets/pokemonCenter.png"
