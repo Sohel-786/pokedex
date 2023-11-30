@@ -42,4 +42,7 @@ Pokedex is an app where user can search for any Pokemon by their name or pokedex
 ## End Notes
 
 This project is not responsive for tablet and mobile screens.
+
+```
+
 ```
