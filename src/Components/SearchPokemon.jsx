@@ -381,10 +381,10 @@ function SearchPokemon({ setSortedData, setShowError, order }) {
               {/* Normal Search Option - Section */}
               <div className="pt-[13px] mb-[10px] w-full flex items-center gap-5 relative">
                 <span
-                  ref={wrapperRef}
                   className="border-[2.96296px] z-40 bg-white border-[#616161] inline-block rounded-[5px] w-[80.5425%]"
                 >
                   <input
+                    ref={wrapperRef}
                     autoComplete="off"
                     onChange={handleChange}
                     type="text"
