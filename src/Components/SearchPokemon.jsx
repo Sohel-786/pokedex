@@ -421,7 +421,7 @@ function SearchPokemon({ setSortedData, setShowError, order }) {
                 <div className="w-[79.3%] absolute z-30 bg-white top-[61px] left-[2px]">
                   {options && showOptions && (
                     <>
-                      <ul className="w-full list-none flex flex-col">
+                      <ul ref={wrapperRef} className="w-full list-none flex flex-col">
                         {options.slice(0, 5).map((el) => {
                           return (
                             <li
