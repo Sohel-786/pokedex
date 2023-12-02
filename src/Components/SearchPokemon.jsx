@@ -1,5 +1,5 @@
 import { nanoid } from "nanoid";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 import { useSelector } from "react-redux";
 import AnimateHeight from "react-animate-height";
@@ -34,6 +34,7 @@ function SearchPokemon({ setSortedData, setShowError, order }) {
   const [showAdvance, setShowAdvance] = useState(false);
   const [advanceSearchArrow, setAdvanceSearchArrow] = useState(false);
   const [showAbility, setShowAbility] = useState(false);
+  const wrapperRef = useRef("searchOptions");
 
   const { pokemonData, abilities } = useSelector((s) => s.pokedex);
 
@@ -53,6 +54,28 @@ function SearchPokemon({ setSortedData, setShowError, order }) {
   }
 
   var handleChange = debounce(300);
+
+  function handleSearchOptions(ref, useClickOutside) {
+    useEffect(() => {
+      function handleClickoutside(e) {
+          if (ref.current && !ref.current.contains(e.target)) {
+            useClickOutside();
+          }else{
+            setShowOptions(true);
+          }
+      }
+
+      document.addEventListener("mousedown", handleClickoutside);
+
+      return () => {
+        document.removeEventListener("mousedown", handleClickoutside);
+      };
+    }, [ref, useClickOutside]);
+  }
+
+  handleSearchOptions(wrapperRef, () => {
+    setShowOptions(false);
+  });
 
   function handleSearchInput(e){
     const { name, value } = e.target;
@@ -358,8 +381,9 @@ function SearchPokemon({ setSortedData, setShowError, order }) {
 
               {/* Normal Search Option - Section */}
               <div className="pt-[13px] mb-[10px] w-full flex items-center gap-5 relative">
-                <span className="border-[2.96296px] z-40 bg-white border-[#616161] inline-block rounded-[5px] w-[80.5425%]">
+                <span ref={wrapperRef} className="border-[2.96296px] z-40 bg-white border-[#616161] inline-block rounded-[5px] w-[80.5425%]">
                   <input
+                    autoComplete="off"
                     onChange={handleChange}
                     type="text"
                     id="searchIt"
