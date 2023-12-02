@@ -58,8 +58,10 @@ function SearchPokemon({ setSortedData, setShowError, order }) {
   function handleSearchOptions(ref, useClickOutside) {
     useEffect(() => {
       function handleClickoutside(e) {
-        if (ref.current && !ref.current.contains(e.target)) {
+        if (ref.current && !ref.current.contains(e.target) && e.target.id !== "searchOption") {
           useClickOutside();
+        } else if (ref.current && ref.current.contains(e.target)){
+          setShowOptions(true);
         }
       }
 
@@ -419,10 +421,11 @@ function SearchPokemon({ setSortedData, setShowError, order }) {
                 <div className="w-[79.3%] absolute z-30 bg-white top-[61px] left-[2px]">
                   {options && showOptions && (
                     <>
-                      <ul ref={wrapperRef} className="w-full list-none flex flex-col">
+                      <ul className="w-full list-none flex flex-col">
                         {options.slice(0, 5).map((el) => {
                           return (
                             <li
+                            id="searchOption"
                               onClick={() => {
                                 const input =
                                   document.getElementById("searchIt");
