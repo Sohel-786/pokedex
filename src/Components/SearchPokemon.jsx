@@ -60,8 +60,6 @@ function SearchPokemon({ setSortedData, setShowError, order }) {
       function handleClickoutside(e) {
         if (ref.current && !ref.current.contains(e.target)) {
           useClickOutside();
-        } else {
-          setShowOptions(true);
         }
       }
 
