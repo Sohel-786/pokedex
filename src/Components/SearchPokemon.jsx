@@ -42,12 +42,12 @@ function SearchPokemon({ setSortedData, setShowError, order }) {
     var timer;
 
     return (e) => {
-      if(Number(e.target.value)){
-        handleSearchInput(e)
-      }else{
+      if (Number(e.target.value)) {
+        handleSearchInput(e);
+      } else {
         clearTimeout(timer);
         timer = setTimeout(() => {
-          handleSearchInput(e)
+          handleSearchInput(e);
         }, time);
       }
     };
@@ -58,11 +58,11 @@ function SearchPokemon({ setSortedData, setShowError, order }) {
   function handleSearchOptions(ref, useClickOutside) {
     useEffect(() => {
       function handleClickoutside(e) {
-          if (ref.current && !ref.current.contains(e.target)) {
-            useClickOutside();
-          }else{
-            setShowOptions(true);
-          }
+        if (ref.current && !ref.current.contains(e.target)) {
+          useClickOutside();
+        } else {
+          setShowOptions(true);
+        }
       }
 
       document.addEventListener("mousedown", handleClickoutside);
@@ -77,7 +77,7 @@ function SearchPokemon({ setSortedData, setShowError, order }) {
     setShowOptions(false);
   });
 
-  function handleSearchInput(e){
+  function handleSearchInput(e) {
     const { name, value } = e.target;
     setsearchConditions({
       ...searchConditions,
@@ -348,7 +348,6 @@ function SearchPokemon({ setSortedData, setShowError, order }) {
     });
     const search = document.getElementById("searchIt");
     search.value = "";
-
   }
 
   function handleNormalSearch() {
@@ -381,7 +380,10 @@ function SearchPokemon({ setSortedData, setShowError, order }) {
 
               {/* Normal Search Option - Section */}
               <div className="pt-[13px] mb-[10px] w-full flex items-center gap-5 relative">
-                <span ref={wrapperRef} className="border-[2.96296px] z-40 bg-white border-[#616161] inline-block rounded-[5px] w-[80.5425%]">
+                <span
+                  ref={wrapperRef}
+                  className="border-[2.96296px] z-40 bg-white border-[#616161] inline-block rounded-[5px] w-[80.5425%]"
+                >
                   <input
                     autoComplete="off"
                     onChange={handleChange}
@@ -390,12 +392,12 @@ function SearchPokemon({ setSortedData, setShowError, order }) {
                     name="search"
                     onKeyDown={(e) => {
                       if (e.key === "Enter" && !showAdvance) {
-                          scrollBy({
-                            top : 340,
-                            behavior : "smooth"
-                          });
-                          handleNormalSearch();
-                        }
+                        scrollBy({
+                          top: 340,
+                          behavior: "smooth",
+                        });
+                        handleNormalSearch();
+                      }
                     }}
                     className="p-[10px] font-roboto text-[16px] leading-[24px] rounded-[5px] w-full"
                   />
