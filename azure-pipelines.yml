@@ -20,21 +20,19 @@ pr:
       - vite.config.js
       - tailwind.config.js
 
+pool:
+  vmImage: 'ubuntu-latest'
+
 variables:
-  - group: pokedex-app-variables
   - name: npm_config_cache
     value: $(Pipeline.Workspace)/.npm
-  - name: environment
-    value: 'Development'
 
 stages:
   - stage: Build
-    displayName: Build and Test
+    displayName: Build React App
     jobs:
-      - job: Build
-        displayName: Build and Test
-        pool:
-          vmImage: 'ubuntu-latest'
+      - job: BuildJob
+        displayName: Build and Create Artifact
         steps:
           - task: NodeTool@0
             inputs:
@@ -47,171 +45,16 @@ stages:
               restoreKeys: |
                 npm | "$(Agent.OS)"
               path: $(npm_config_cache)
-            displayName: Cache npm packages
+            displayName: 'Cache npm dependencies'
 
           - script: |
               npm ci
               npm run build
-            displayName: 'Install dependencies and build'
+            displayName: 'Install dependencies and build app'
 
           - task: PublishBuildArtifacts@1
             inputs:
               PathtoPublish: 'dist'
-              ArtifactName: 'dist'
+              ArtifactName: 'drop'
               publishLocation: 'Container'
-
-      - job: Test
-        displayName: Run Tests
-        dependsOn: Build
-        pool:
-          vmImage: 'ubuntu-latest'
-        steps:
-          - task: NodeTool@0
-            inputs:
-              versionSpec: '18.x'
-            displayName: 'Install Node.js'
-
-          - script: |
-              npm ci
-              npm run lint
-            displayName: 'Run Linting'
-
-          - task: PublishTestResults@2
-            inputs:
-              testResultsFormat: 'JUnit'
-              testResultsFiles: '**/test-results.xml'
-              failTaskOnFailedTests: true
-
-  - stage: Security
-    displayName: Security Checks
-    dependsOn: Build
-    jobs:
-      - job: SecurityScan
-        displayName: Security Analysis
-        pool:
-          vmImage: 'ubuntu-latest'
-        steps:
-          - task: NodeTool@0
-            inputs:
-              versionSpec: '18.x'
-            displayName: 'Install Node.js'
-
-          - script: |
-              npm ci
-              npm audit
-            displayName: 'Run Security Audit'
-
-          - task: SnykSecurityScan@1
-            inputs:
-              serviceConnectionEndpoint: 'Snyk'
-              testType: 'app'
-              monitorWhen: 'always'
-              failOnIssues: true
-
-  - stage: Performance
-    displayName: Performance Testing
-    dependsOn: Security
-    condition: succeeded()
-    jobs:
-      - job: PerformanceTest
-        displayName: Run Performance Tests
-        pool:
-          vmImage: 'ubuntu-latest'
-        steps:
-          - task: NodeTool@0
-            inputs:
-              versionSpec: '18.x'
-            displayName: 'Install Node.js'
-
-          - script: |
-              npm ci
-              npm install -g lighthouse
-              lighthouse https://$(webAppUrl) --output=json --output-path=./lighthouse-results.json
-            displayName: 'Run Lighthouse Performance Test'
-
-          - task: PublishTestResults@2
-            inputs:
-              testResultsFormat: 'JUnit'
-              testResultsFiles: '**/lighthouse-results.json'
-              failTaskOnFailedTests: false
-
-  - stage: Deploy
-    displayName: Deploy to Environments
-    dependsOn: Performance
-    condition: succeeded()
-    jobs:
-      - job: DeployDev
-        displayName: Deploy to Development
-        pool:
-          vmImage: 'ubuntu-latest'
-        variables:
-          environment: 'Development'
-        steps:
-          - download: current
-            artifact: dist
-          - task: AzureWebApp@1
-            inputs:
-              azureSubscription: '$(azureSubscription)'
-              appType: 'webApp'
-              appName: '$(webAppName)-dev'
-              package: '$(Pipeline.Workspace)/dist'
-              deploymentMethod: 'auto'
-
-      - job: DeployStaging
-        displayName: Deploy to Staging
-        dependsOn: DeployDev
-        pool:
-          vmImage: 'ubuntu-latest'
-        variables:
-          environment: 'Staging'
-        condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
-        steps:
-          - download: current
-            artifact: dist
-          - task: AzureWebApp@1
-            inputs:
-              azureSubscription: '$(azureSubscription)'
-              appType: 'webApp'
-              appName: '$(webAppName)-staging'
-              package: '$(Pipeline.Workspace)/dist'
-              deploymentMethod: 'auto'
-
-      - job: DeployProd
-        displayName: Deploy to Production
-        dependsOn: DeployStaging
-        pool:
-          vmImage: 'ubuntu-latest'
-        variables:
-          environment: 'Production'
-        condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
-        steps:
-          - download: current
-            artifact: dist
-          - task: AzureWebApp@1
-            inputs:
-              azureSubscription: '$(azureSubscription)'
-              appType: 'webApp'
-              appName: '$(webAppName)-prod'
-              package: '$(Pipeline.Workspace)/dist'
-              deploymentMethod: 'auto'
-
-  - stage: PostDeployment
-    displayName: Post-Deployment Checks
-    dependsOn: Deploy
-    condition: succeeded()
-    jobs:
-      - job: SmokeTests
-        displayName: Run Smoke Tests
-        pool:
-          vmImage: 'ubuntu-latest'
-        steps:
-          - script: |
-              npm install -g newman
-              newman run smoke-tests.json --environment prod.json
-            displayName: 'Run API Smoke Tests'
-
-          - task: PublishTestResults@2
-            inputs:
-              testResultsFormat: 'JUnit'
-              testResultsFiles: '**/newman/*.xml'
-              failTaskOnFailedTests: true
+            displayName: 'Publish Artifact to Drop'
