@@ -25,6 +25,10 @@ pool: Default
 variables:
   - name: npm_config_cache
     value: $(Pipeline.Workspace)/.npm
+  - name: NETLIFY_AUTH_TOKEN   # Add this as a secret pipeline variable in Azure DevOps
+    value: $(NETLIFY_AUTH_TOKEN)
+  - name: NETLIFY_SITE_ID      # Add this as a secret pipeline variable in Azure DevOps
+    value: $(NETLIFY_SITE_ID)
 
 stages:
   - stage: Build
@@ -57,3 +61,35 @@ stages:
               ArtifactName: 'drop'
               publishLocation: 'Container'
             displayName: 'Publish Artifact to Drop'
+
+  - stage: Deploy
+    displayName: Deploy to Netlify
+    dependsOn: Build
+    condition: succeeded()
+    jobs:
+      - job: DeployJob
+        displayName: Deploy to Netlify
+        steps:
+          - task: NodeTool@0
+            inputs:
+              versionSpec: '18.x'
+            displayName: 'Install Node.js'
+
+          - script: npm install -g netlify-cli
+            displayName: 'Install Netlify CLI'
+
+          - task: DownloadBuildArtifacts@0
+            inputs:
+              buildType: 'current'
+              downloadType: 'single'
+              artifactName: 'drop'
+              downloadPath: '$(Pipeline.Workspace)'
+            displayName: 'Download Build Artifact'
+
+          - script: |
+              netlify deploy \
+                --dir=$(Pipeline.Workspace)/drop \
+                --site=$(NETLIFY_SITE_ID) \
+                --auth=$(NETLIFY_AUTH_TOKEN) \
+                --prod
+            displayName: 'Deploy to Netlify'
