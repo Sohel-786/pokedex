@@ -25,10 +25,6 @@ pool: Default
 variables:
   - name: npm_config_cache
     value: $(Pipeline.Workspace)/.npm
-  - name: NETLIFY_AUTH_TOKEN   # Add this as a secret pipeline variable in Azure DevOps
-    value: $(NETLIFY_AUTH_TOKEN)
-  - name: NETLIFY_SITE_ID      # Add this as a secret pipeline variable in Azure DevOps
-    value: $(NETLIFY_SITE_ID)
 
 stages:
   - stage: Build
