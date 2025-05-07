@@ -20,8 +20,7 @@ pr:
       - vite.config.js
       - tailwind.config.js
 
-pool:
-  vmImage: 'ubuntu-latest'
+pool: Default
 
 variables:
   - name: npm_config_cache
