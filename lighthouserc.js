@@ -1,9 +1,5 @@
 export default {
     "ci": {
-      "collect": {
-        staticDistDir: 'dist',
-        "numberOfRuns": 3
-      },
       "assert": {
         "assertions": {
           "categories:performance": ["error", { "minScore": 0.7 }],
