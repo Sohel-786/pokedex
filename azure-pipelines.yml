@@ -46,16 +46,10 @@ stages:
               path: $(npm_config_cache)
             displayName: 'Cache npm dependencies'
 
-          - script: npm install -g @lhci/cli
-            displayName: 'Install Lighthouse CI'
-
           - script: |
               npm ci
               npm run build
             displayName: 'Install dependencies and build app'
-
-          - script: lhci autorun
-            displayName: 'Run Lighthouse CI'
 
           - task: PublishBuildArtifacts@1
             inputs:
@@ -63,6 +57,27 @@ stages:
               ArtifactName: 'drop'
               publishLocation: 'Container'
             displayName: 'Publish Artifact to Drop'
+
+  - stage: Lighthouse
+    displayName: Run Lighthouse CI
+    dependsOn: Build
+    condition: succeeded()
+    jobs:
+      - job: LighthouseJob
+        displayName: Run Lighthouse CI
+        steps:
+          - task: NodeTool@0
+            inputs:
+              versionSpec: '22.x'
+            displayName: 'Install Node.js'
+
+          - script: |
+              npm install -g @lhci/cli
+            displayName: 'Install Lighthouse CI'
+
+          - script: |
+              lhci autorun
+            displayName: 'Run Lighthouse CI'
 
   - stage: Deploy
     displayName: Deploy to Netlify
