@@ -68,7 +68,7 @@ stages:
         steps:
           - task: NodeTool@0
             inputs:
-              versionSpec: '18.x'
+              versionSpec: '22.x'
             displayName: 'Install Node.js'
 
           - script: npm install -g netlify-cli
@@ -83,9 +83,10 @@ stages:
             displayName: 'Download Build Artifact'
 
           - script: |
+              npm install --include=dev
               netlify deploy \
-                --dir=$(Pipeline.Workspace)/drop \
-                --site=$(NETLIFY_SITE_ID) \
-                --auth=$(NETLIFY_AUTH_TOKEN) \
+                --dir="$(Pipeline.Workspace)/drop" \
+                --site="$(NETLIFY_SITE_ID)" \
+                --auth="$(NETLIFY_AUTH_TOKEN)" \
                 --prod
-            displayName: 'Deploy to Netlify'
+            displayName: 'Install dependencies and deploy to Netlify'
