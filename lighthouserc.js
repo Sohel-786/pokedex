@@ -1,9 +1,5 @@
 export default {
     "ci": {
-        collect: {
-            staticDistDir: './drop',
-            url: ['http://localhost/index.html']
-          },
       "assert": {
         "assertions": {
           "categories:performance": ["error", { "minScore": 0.7 }],
