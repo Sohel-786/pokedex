@@ -72,11 +72,8 @@ stages:
             displayName: 'Install Node.js'
 
           - script: |
-              npm install -g @lhci/cli
-            displayName: 'Install Lighthouse CI'
-
-          - script: |
-              lhci autorun
+             npm install -g @lhci/cli
+             lhci autorun --config=lighthouserc.js
             displayName: 'Run Lighthouse CI'
 
   - stage: Deploy
