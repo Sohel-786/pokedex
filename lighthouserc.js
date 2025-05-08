@@ -1,7 +1,7 @@
 export default {
     "ci": {
       "collect": {
-        "staticDistDir": "./dist",
+        staticDistDir: 'dist',
         "numberOfRuns": 3
       },
       "assert": {
