@@ -51,6 +51,11 @@ stages:
               npm run build
             displayName: 'Install dependencies and build app'
 
+          - script: |
+              npm install -g @lhci/cli
+              lhci autorun --config=lighthouserc.js
+            displayName: 'Run Lighthouse CI'
+
           - task: PublishBuildArtifacts@1
             inputs:
               PathtoPublish: 'dist'
@@ -58,27 +63,9 @@ stages:
               publishLocation: 'Container'
             displayName: 'Publish Artifact to Drop'
 
-  - stage: Lighthouse
-    displayName: Run Lighthouse CI
-    dependsOn: Build
-    condition: succeeded()
-    jobs:
-      - job: LighthouseJob
-        displayName: Run Lighthouse CI
-        steps:
-          - task: NodeTool@0
-            inputs:
-              versionSpec: '22.x'
-            displayName: 'Install Node.js'
-
-          - script: |
-             npm install -g @lhci/cli
-             lhci autorun --config=lighthouserc.js
-            displayName: 'Run Lighthouse CI'
-
   - stage: Deploy
     displayName: Deploy to Netlify
-    dependsOn: Lighthouse
+    dependsOn: Build
     condition: succeeded()
     jobs:
       - job: DeployJob
