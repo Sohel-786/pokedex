@@ -81,7 +81,7 @@ stages:
 
   - stage: Deploy
     displayName: Deploy to Netlify
-    dependsOn: Build
+    dependsOn: Lighthouse
     condition: succeeded()
     jobs:
       - job: DeployJob
