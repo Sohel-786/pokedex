@@ -46,10 +46,16 @@ stages:
               path: $(npm_config_cache)
             displayName: 'Cache npm dependencies'
 
+          - script: npm install -g @lhci/cli
+            displayName: 'Install Lighthouse CI'
+
           - script: |
               npm ci
               npm run build
             displayName: 'Install dependencies and build app'
+
+          - script: lhci autorun
+            displayName: 'Run Lighthouse CI'
 
           - task: PublishBuildArtifacts@1
             inputs:
